@@ -14,23 +14,39 @@ import sys
 # Add the parent directory to the path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from core.database_optimization import (
-    get_optimized_database_manager,
-    close_optimized_database_manager,
-    CacheConfig
-)
-from mesh.optimized_mesh_storage import (
-    get_mesh_storage,
-    close_mesh_storage,
-    MeshStorageConfig
-)
-from mesh.Mesh_Network.Advanced_Node_Discovery import (
-    AdvancedMeshNode,
-    GeoLocation,
-    NetworkMetrics,
-    NodeCapabilities,
-    NodeType
-)
+try:
+    from core.database_optimization import (
+        get_optimized_database_manager,
+        close_optimized_database_manager,
+        CacheConfig
+    )
+except ImportError as e:
+    print(f"Error importing database optimization: {e}")
+    print("Please ensure Redis and required dependencies are installed")
+    sys.exit(1)
+
+try:
+    from mesh.optimized_mesh_storage import (
+        get_mesh_storage,
+        close_mesh_storage,
+        MeshStorageConfig
+    )
+except ImportError as e:
+    print(f"Error importing mesh storage: {e}")
+    print("Please ensure MongoDB and required dependencies are installed")
+    sys.exit(1)
+
+try:
+    from mesh.Mesh_Network.Advanced_Node_Discovery import (
+        AdvancedMeshNode,
+        GeoLocation,
+        NetworkMetrics,
+        NodeCapabilities,
+        NodeType
+    )
+except ImportError as e:
+    print(f"Error importing mesh network components: {e}")
+    sys.exit(1)
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
