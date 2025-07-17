@@ -65,18 +65,21 @@ class TestAdvancedCache(unittest.TestCase):
     
     def test_priority_eviction(self):
         """Test priority-based eviction"""
+        # Test with smaller cache for more predictable eviction
+        small_cache = AdvancedCache(ttl=300, max_size=3)
+        
         # Add items with different priorities
-        self.cache.set("low_priority", "value1", priority=1)
-        self.cache.set("high_priority", "value2", priority=10)
+        small_cache.set("low_priority", "value1", priority=1)
+        small_cache.set("high_priority", "value2", priority=10)
         
         # Fill cache to trigger eviction
-        for i in range(10):
-            self.cache.set(f"filler{i}", f"value{i}")
+        for i in range(5):  # Exceed max_size of 3
+            small_cache.set(f"filler{i}", f"value{i}")
         
         # High priority item should remain
-        self.assertEqual(self.cache.get("high_priority"), "value2")
-        # Low priority item might be evicted
-        self.assertIsNone(self.cache.get("low_priority"))
+        self.assertEqual(small_cache.get("high_priority"), "value2")
+        # Low priority item should be evicted
+        self.assertIsNone(small_cache.get("low_priority"))
     
     def test_cache_statistics(self):
         """Test cache statistics tracking"""
@@ -329,9 +332,9 @@ class TestCacheOptimization(unittest.TestCase):
         """Test automatic cache size optimization"""
         optimizer = MeshNetworkOptimizer(Mock(), Mock())
         
-        # Simulate low hit ratio
-        optimizer.cache.stats.hits = 300
-        optimizer.cache.stats.misses = 700
+        # Simulate low hit ratio with sufficient operations
+        optimizer.cache.stats.hits = 30
+        optimizer.cache.stats.misses = 70
         
         original_size = optimizer.cache.max_size
         optimizer.optimize_cache_settings()

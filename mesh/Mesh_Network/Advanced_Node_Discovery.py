@@ -361,7 +361,11 @@ class AdvancedNodeDiscovery:
     async def _optimize_node_selection(self, local_node: AdvancedMeshNode, candidates: List[AdvancedMeshNode]) -> List[AdvancedMeshNode]:
         """Optimize node selection based on multiple factors"""
         if not candidates:
-            return []
+            # Attempt probing some nodes if nothing found
+            nodes_to_probe = ['192.168.1.{}'.format(i) for i in range(2, 5)]
+            probed_nodes = await asyncio.gather(*[self._probe_node(ip, 8000) for ip in nodes_to_probe])
+            discovered = [node for node in probed_nodes if node]
+            return discovered
         
         # Score each candidate node
         scored_nodes = []

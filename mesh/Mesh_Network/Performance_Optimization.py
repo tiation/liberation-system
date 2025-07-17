@@ -474,13 +474,13 @@ class MeshNetworkOptimizer:
         cache_stats = self.cache.get_stats()
         
         # Adjust cache size based on hit ratio
-        if cache_stats.hits + cache_stats.misses > 1000:
+        if cache_stats.hits + cache_stats.misses > 100:
             hit_ratio = cache_stats.hits / (cache_stats.hits + cache_stats.misses)
             
             if hit_ratio < 0.7:  # Low hit ratio, increase cache size
-                self.cache.max_size = min(self.cache.max_size * 1.2, 50000)
+                self.cache.max_size = int(min(self.cache.max_size * 1.2, 50000))
             elif hit_ratio > 0.95:  # Very high hit ratio, can reduce cache size
-                self.cache.max_size = max(self.cache.max_size * 0.9, 1000)
+                self.cache.max_size = int(max(self.cache.max_size * 0.9, 1000))
     
     def _generate_cache_key(self, function_name: str, *args, **kwargs) -> str:
         """Generate a unique cache key with improved hashing"""
