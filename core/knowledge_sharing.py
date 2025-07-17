@@ -761,11 +761,49 @@ class KnowledgeShareManager:
             stats['average_confidence'] = sum(e.confidence_score for e in self.knowledge_base.values()) / len(self.knowledge_base)
         
         return stats
+    
+    def _get_cached_stats(self) -> Dict[str, Any]:
+        """Get cached statistics for display (synchronous)"""
+        stats = {
+            'total_knowledge_entries': len(self.knowledge_base),
+            'active_learning_sessions': len([s for s in self.learning_sessions.values() if s.status == 'active']),
+            'pending_problems': len([p for p in self.problem_contexts.values() if p.status == 'analyzing']),
+            'solved_problems': len([p for p in self.problem_contexts.values() if p.status == 'solution_generated']),
+            'knowledge_by_type': {},
+            'knowledge_by_status': {},
+            'average_confidence': 0.0,
+            'total_insights_generated': sum(s.insights_generated for s in self.learning_sessions.values())
+        }
+        
+        # Calculate knowledge by type and status
+        for entry in self.knowledge_base.values():
+            # By type
+            type_key = entry.knowledge_type.value
+            stats['knowledge_by_type'][type_key] = stats['knowledge_by_type'].get(type_key, 0) + 1
+            
+            # By status
+            status_key = entry.status.value
+            stats['knowledge_by_status'][status_key] = stats['knowledge_by_status'].get(status_key, 0) + 1
+        
+        # Calculate average confidence
+        if self.knowledge_base:
+            stats['average_confidence'] = sum(e.confidence_score for e in self.knowledge_base.values()) / len(self.knowledge_base)
+        
+        return stats
 
     def display_knowledge_stats(self):
         """Display knowledge sharing statistics"""
         try:
-            stats = asyncio.run(self.get_knowledge_stats())
+            # Check if we're in an event loop
+            try:
+                loop = asyncio.get_running_loop()
+                # If we're in a running loop, create a task
+                task = asyncio.create_task(self.get_knowledge_stats())
+                # For display purposes, we'll use the cached stats
+                stats = self._get_cached_stats()
+            except RuntimeError:
+                # Not in a running loop, safe to use asyncio.run
+                stats = asyncio.run(self.get_knowledge_stats())
             
             # Create main stats table
             table = Table(title="Knowledge Sharing System Status", style="cyan")

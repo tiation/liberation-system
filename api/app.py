@@ -9,6 +9,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from api.routers import resource
+from core.knowledge_sharing import KnowledgeShareManager, KnowledgeType
 
 # Create FastAPI app with comprehensive configuration
 app = FastAPI(
@@ -28,6 +29,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Initialize Knowledge Sharing system
+knowledge_system = KnowledgeShareManager()
 
 # Include API routers
 app.include_router(resource.router, prefix="/api/v1", tags=["resources"])
@@ -62,6 +66,133 @@ async def startup_event():
     print("🚀 Liberation System API starting up...")
     print("📡 Trust by default - Maximum accessibility")
     print("🌐 API Documentation available at /docs")
+    
+    # Initialize knowledge sharing system
+    await knowledge_system.initialize()
+    print("📚 Knowledge Sharing System initialized")
+
+# Knowledge Sharing Endpoints
+
+@app.get("/api/v1/knowledge", tags=["knowledge"])
+async def get_knowledge_stats():
+    """Get knowledge sharing system statistics"""
+    stats = await knowledge_system.get_knowledge_stats()
+    return {
+        "success": True,
+        "data": stats,
+        "timestamp": datetime.now().isoformat()
+    }
+
+@app.post("/api/v1/knowledge/add", tags=["knowledge"])
+async def add_knowledge(request: dict):
+    """Add a new knowledge entry"""
+    title = request.get("title", "")
+    content = request.get("content", "")
+    knowledge_type = request.get("knowledge_type", "technical")
+    author = request.get("author", "api_user")
+    tags = request.get("tags", [])
+    
+    try:
+        entry_id = await knowledge_system.add_knowledge(
+            title=title,
+            content=content,
+            knowledge_type=KnowledgeType(knowledge_type.upper()),
+            author=author,
+            tags=tags
+        )
+        
+        return {
+            "success": True,
+            "entry_id": entry_id,
+            "message": "Knowledge entry added successfully",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.get("/api/v1/knowledge/search", tags=["knowledge"])
+async def search_knowledge(query: str):
+    """Search knowledge base"""
+    try:
+        results = await knowledge_system.search_knowledge(query)
+        return {
+            "success": True,
+            "results": [{
+                "id": entry.id,
+                "title": entry.title,
+                "content": entry.content[:200] + "..." if len(entry.content) > 200 else entry.content,
+                "knowledge_type": entry.knowledge_type.value,
+                "author": entry.author,
+                "tags": entry.tags,
+                "confidence_score": entry.confidence_score,
+                "effectiveness_rating": entry.effectiveness_rating
+            } for entry in results],
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/v1/knowledge/session", tags=["knowledge"])
+async def start_learning_session(request: dict):
+    """Start a collaborative learning session"""
+    title = request.get("title", "")
+    description = request.get("description", "")
+    participants = request.get("participants", [])
+    
+    try:
+        session_id = await knowledge_system.start_learning_session(
+            title=title,
+            description=description,
+            participants=participants
+        )
+        
+        return {
+            "success": True,
+            "session_id": session_id,
+            "message": "Learning session started successfully",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.post("/api/v1/knowledge/problem", tags=["knowledge"])
+async def add_problem_context(request: dict):
+    """Add problem context for autonomous solving"""
+    problem_description = request.get("problem_description", "")
+    domain = request.get("domain", "general")
+    priority = request.get("priority", 1)
+    
+    try:
+        context_id = await knowledge_system.add_problem_context(
+            problem_description=problem_description,
+            domain=domain,
+            priority=priority
+        )
+        
+        return {
+            "success": True,
+            "context_id": context_id,
+            "message": "Problem context added for autonomous solving",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
 
 # Shutdown event
 @app.on_event("shutdown")

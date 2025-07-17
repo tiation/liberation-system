@@ -20,7 +20,31 @@ The system is designed to operate autonomously, with self-healing capabilities a
 
 ## 🏛️ Core Components
 
-### 1. Resource Distribution Engine
+### 1. Database Layer
+```python
+class DatabaseManager:
+    """Enterprise-grade data persistence with automatic failover."""
+    
+    def __init__(self, config: DatabaseConfig):
+        self.config = config
+        self.db: Optional[DatabaseInterface] = None
+        self.fallback_db: Optional[DatabaseInterface] = None
+        
+    async def initialize(self) -> None:
+        """Initialize database with automatic failover."""
+        if self.config.database_type == "postgresql":
+            self.db = PostgreSQLDatabase(self.config)
+            self.fallback_db = SQLiteDatabase(self.config)
+```
+
+**Key Features:**
+- Dual database support (PostgreSQL + SQLite)
+- Automatic failover and recovery
+- Enterprise connection pooling
+- Real-time performance monitoring
+- Custom functions for resource calculations
+
+### 2. Resource Distribution Engine
 ```python
 class ResourcePool:
     """Handles the $19T. Just flows where needed."""
@@ -181,6 +205,10 @@ Node Discovery → Connection Establishment → Data Routing → Self-Healing
 ```bash
 # Clone repository
 git clone https://github.com/tiation/liberation-system.git
+cd liberation-system
+
+# Start database infrastructure
+docker-compose up -d postgres redis
 
 # Install dependencies
 pip install -r requirements.txt
@@ -192,11 +220,13 @@ python core/automation-system.py
 
 ### Production Deployment
 ```bash
-# Build Docker image
-docker build -t liberation-system .
+# Start complete infrastructure
+docker-compose up -d
 
-# Run in production
-docker run -d -p 3000:3000 -p 8000:8000 liberation-system
+# Access management tools
+# PgAdmin: http://localhost:8080
+# Grafana: http://localhost:3000
+# Prometheus: http://localhost:9091
 ```
 
 ### Kubernetes Deployment

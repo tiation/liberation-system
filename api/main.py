@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import logging
 
-from .routes import resources, truth, mesh, system, websocket
+from .routes import resources, truth, mesh, system, websocket, notifications
 from .dependencies import initialize_database
 from ..realtime.websocket.manager import websocket_manager
 from ..realtime.events.system import event_system, WebSocketEventHandler
@@ -62,6 +62,7 @@ app.include_router(truth.router, prefix="/api/v1/truth", tags=["Truth"])
 app.include_router(mesh.router, prefix="/api/v1/mesh", tags=["Mesh"])
 app.include_router(system.router, prefix="/api/v1/system", tags=["System"])
 app.include_router(websocket.router, prefix="/api/v1/realtime", tags=["Real-time"])
+app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
 
 # Root endpoint
 @app.get("/")

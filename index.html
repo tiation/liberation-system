@@ -9,15 +9,23 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
     <style>
         :root {
+            --electric-blue: #0066ff;
             --neon-cyan: #00ffff;
-            --neon-purple: #8b5cf6;
-            --neon-pink: #ff0080;
-            --dark-bg: #0a0a0a;
-            --dark-card: #1a1a1a;
-            --dark-text: #e0e0e0;
-            --gradient-primary: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            --gradient-secondary: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-            --gradient-bg: linear-gradient(135deg, #0a0a0a, #1a0a1a, #0a0a0a);
+            --electric-purple: #6600ff;
+            --hot-pink: #ff0066;
+            --lime-green: #00ff88;
+            --pure-black: #000000;
+            --ultra-dark: #0d0d0d;
+            --dark-card: #111111;
+            --bright-white: #ffffff;
+            --high-contrast-text: #f0f0f0;
+            --accent-glow: #00ffff;
+            
+            --gradient-primary: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
+            --gradient-secondary: linear-gradient(135deg, var(--electric-purple), var(--hot-pink));
+            --gradient-accent: linear-gradient(135deg, var(--lime-green), var(--neon-cyan));
+            --gradient-bg: radial-gradient(ellipse at top, #0d1117, #000000);
+            --gradient-card: linear-gradient(145deg, #111111, #1a1a1a);
         }
 
         * {
@@ -28,11 +36,13 @@
 
         body {
             background: var(--gradient-bg);
-            color: var(--dark-text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--high-contrast-text);
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
+            font-weight: 400;
+            letter-spacing: 0.02em;
         }
 
         .container {
@@ -97,7 +107,7 @@
         }
 
         nav a {
-            color: var(--dark-text);
+            color: var(--high-contrast-text);
             text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 25px;
@@ -193,7 +203,7 @@
             background: rgba(26, 26, 26, 0.9);
             border-radius: 10px;
             padding: 1.5rem;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(102, 0, 255, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -211,12 +221,12 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: var(--neon-purple);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            border-color: var(--electric-purple);
+            box-shadow: 0 10px 30px rgba(102, 0, 255, 0.3);
         }
 
         .feature-card h3 {
-            color: var(--neon-purple);
+            color: var(--electric-purple);
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
         }
@@ -302,7 +312,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--neon-purple);
+            color: var(--electric-purple);
             text-shadow: 0 0 10px currentColor;
         }
 

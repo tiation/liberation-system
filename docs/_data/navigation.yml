@@ -3,6 +3,8 @@ main:
     url: /
   - title: "Architecture"
     url: /architecture
+  - title: "Database"
+    url: /database
   - title: "GitHub"
     url: https://github.com/tiation/liberation-system
   - title: "Documentation"

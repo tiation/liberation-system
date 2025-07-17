@@ -9,7 +9,7 @@ import asyncio
 from typing import Dict, List, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime
-from Advanced_Node_Discovery import (
+from Mesh_Network.Advanced_Node_Discovery import (
     AdvancedNodeDiscovery,
     AdvancedMeshNode,
     NetworkMetrics
@@ -57,7 +57,7 @@ class LoadBalancer:
 
         # Calculate current load based on node's metrics
         load_metric.current_load = (metrics.cpu_usage + metrics.memory_usage + metrics.network_load) / 3
-        load_metric.connections = sum(1 for conn in node.connections.values() if conn['status'] == 'connected')
+        load_metric.connections = sum(1 for conn in node.connections.values() if conn.get('status') == 'connected')
 
         # Log updated metrics
         self.logger.info(f"Node {node.id} updated: Load {load_metric.current_load:.1f}%, Connections: {load_metric.connections}")

@@ -205,8 +205,9 @@ class ProductionWebServer:
             
             message_id = await self.liberation_manager.core.truth_system.spreader.add_truth_message(
                 content, source, priority
-            )\n            \n            return web.json_response({"success": True, "message_id": message_id})
+            )
             
+            return web.json_response({"success": True, "message_id": message_id})
         except Exception as e:
             self.logger.error(f"Error adding truth message: {e}")
             return web.json_response({"error": str(e)}, status=500)

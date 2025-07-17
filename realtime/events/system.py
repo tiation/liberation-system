@@ -72,14 +72,17 @@ class EventSystem:
             "handlers_registered": 0
         }
     
-    def register_handler(self, event_type: EventType, handler: EventHandler):
+    def register_handler(self, event_type: EventType, handler):
         """Register an event handler for a specific event type"""
         if event_type not in self.handlers:
             self.handlers[event_type] = []
         
         self.handlers[event_type].append(handler)
         self.metrics["handlers_registered"] += 1
-        self.logger.info(f"Registered handler '{handler.name}' for event type '{event_type.value}'")
+        
+        # Handle both EventHandler instances and function handlers
+        handler_name = getattr(handler, 'name', getattr(handler, '__name__', 'unknown_handler'))
+        self.logger.info(f"Registered handler '{handler_name}' for event type '{event_type.value}'")
     
     def register_middleware(self, middleware: Callable):
         """Register middleware function that runs before event handling"""
@@ -121,18 +124,31 @@ class EventSystem:
             if tasks:
                 await asyncio.gather(*tasks, return_exceptions=True)
     
-    async def _handle_event_safely(self, handler: EventHandler, event: Event):
+    async def _handle_event_safely(self, handler, event: Event):
         """Handle an event with error handling"""
         try:
-            success = await handler.handle(event)
+            # Check if handler is an EventHandler instance or a function
+            if hasattr(handler, 'handle'):
+                # EventHandler instance
+                success = await handler.handle(event)
+                handler_name = getattr(handler, 'name', 'unknown_handler')
+            else:
+                # Function handler
+                success = await handler(event)
+                handler_name = getattr(handler, '__name__', 'unknown_function')
+                # For function handlers, assume success if no exception is raised
+                if success is None:
+                    success = True
+            
             if success:
                 self.metrics["events_handled"] += 1
             else:
                 self.metrics["events_failed"] += 1
-                self.logger.warning(f"Handler '{handler.name}' failed to handle event {event.id}")
+                self.logger.warning(f"Handler '{handler_name}' failed to handle event {event.id}")
         except Exception as e:
             self.metrics["events_failed"] += 1
-            self.logger.error(f"Handler '{handler.name}' raised exception: {e}")
+            handler_name = getattr(handler, 'name', getattr(handler, '__name__', 'unknown_handler'))
+            self.logger.error(f"Handler '{handler_name}' raised exception: {e}")
     
     def get_event_history(self, limit: int = 100, event_type: Optional[EventType] = None) -> List[Dict[str, Any]]:
         """Get recent event history"""
