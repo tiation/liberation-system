@@ -17,6 +17,7 @@ from core.dynamic_load_balancer import (
 )
 from core.resource_distribution import SystemCore as ResourceSystem
 from mesh.Mesh_Network.Mesh_Network import MeshNode, EnhancedMesh, NetworkMessage, MessageType
+from core.auto_node_discovery import AutoNodeDiscovery, NodeDiscoveryMethod
 
 from rich.console import Console
 from rich.table import Table
@@ -306,6 +307,7 @@ class LiberationSystemIntegrator:
         self.health_monitor = IntegratedHealthMonitor()
         self.task_executor = UnifiedTaskExecutor(self.health_monitor)
         self.enhanced_mesh = EnhancedMesh()
+        self.auto_discovery = AutoNodeDiscovery(system_integrator=self)
         
         # System state
         self.running = False
@@ -356,6 +358,9 @@ class LiberationSystemIntegrator:
             
             # Start integrated monitoring
             asyncio.create_task(self._run_integrated_monitoring())
+            
+            # Start auto node discovery
+            await self.auto_discovery.start_discovery_services()
             
             self.running = True
             self.console.print("✅ [green]Liberation System Integration initialized successfully[/green]")
@@ -535,6 +540,25 @@ class LiberationSystemIntegrator:
         except Exception as e:
             self.logger.error(f"Failed to submit system task: {e}")
             return None
+    
+    async def announce_node_to_network(self, node_info: Dict[str, Any], method: NodeDiscoveryMethod = NodeDiscoveryMethod.BROADCAST) -> bool:
+        """Announce a node to the network for automatic discovery"""
+        try:
+            await self.auto_discovery.announce_node(node_info, method)
+            self.console.print(f"📢 [cyan]Node {node_info['node_id']} announced to network[/cyan]")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Failed to announce node: {e}")
+            return False
+    
+    async def get_discovery_stats(self) -> Dict[str, Any]:
+        """Get node discovery statistics"""
+        return self.auto_discovery.get_discovery_statistics()
+    
+    def display_discovery_dashboard(self):
+        """Display node discovery dashboard"""
+        self.auto_discovery.display_discovery_dashboard()
     
     async def get_system_status(self) -> Dict[str, Any]:
         """Get comprehensive system status"""
