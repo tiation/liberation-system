@@ -1,0 +1,61 @@
+title: Liberation System
+description: A minimal system to flip everything on its head. One person, massive impact.
+url: https://tiation.github.io/liberation-system
+baseurl: /liberation-system
+
+# Theme configuration
+theme: jekyll-theme-midnight
+remote_theme: pages-themes/midnight@v0.2.0
+plugins:
+  - jekyll-remote-theme
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Custom configuration
+show_downloads: true
+github:
+  repository_url: https://github.com/tiation/liberation-system
+  
+# SEO
+author: Tiation
+twitter:
+  username: tiation
+  card: summary_large_image
+  
+# Social media
+social:
+  name: Liberation System
+  links:
+    - https://github.com/tiation/liberation-system
+    
+# Build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - node_modules
+  - package.json
+  - package-lock.json
+  - .gitignore
+  - .github
+  - tests
+  - core
+  - mesh
+  - security
+  - transformation
+  - "*.py"
+  - "*.js"
+  - "*.ts"
+  - "*.tsx"
+  - Dockerfile
+  - requirements.txt
+  - CONTRIBUTING.md

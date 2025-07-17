@@ -1,0 +1,11 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "Architecture"
+    url: /architecture
+  - title: "GitHub"
+    url: https://github.com/tiation/liberation-system
+  - title: "Documentation"
+    url: https://github.com/tiation/liberation-system/wiki
+  - title: "Contribute"
+    url: https://github.com/tiation/liberation-system/blob/main/CONTRIBUTING.md
