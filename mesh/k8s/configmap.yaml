@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mesh-network-config
+data:
+  TOTAL_SHARDS: "256"
+  REPLICATION_FACTOR: "3"
+  DASHBOARD_HOST: "0.0.0.0"
+  DASHBOARD_PORT: "8080"
+  LOG_LEVEL: "INFO"
+  MONITORING_ENABLED: "true"
+  CACHE_TTL: "60"

@@ -7,6 +7,7 @@ const nextConfig = {
   },
   images: {
     domains: ['localhost', 'img.shields.io'],
+    unoptimized: true,
   },
   env: {
     LIBERATION_MODE: process.env.LIBERATION_MODE || 'development',
@@ -30,6 +31,13 @@ const nextConfig = {
       },
     ];
   },
+  // GitHub Pages deployment configuration
+  ...(process.env.GITHUB_ACTIONS && {
+    basePath: '/liberation-system',
+    assetPrefix: '/liberation-system',
+    trailingSlash: true,
+    output: 'export',
+  }),
 };
 
 module.exports = nextConfig;

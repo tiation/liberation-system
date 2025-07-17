@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export"
   },
   "keywords": [
     "liberation",
@@ -23,17 +24,17 @@
   ],
   "author": {
     "name": "Tiation",
-    "url": "https://github.com/tiation-github"
+    "url": "https://github.com/tiation"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tiation-github/liberation-system.git"
+    "url": "https://github.com/tiation/liberation-system.git"
   },
   "bugs": {
-    "url": "https://github.com/tiation-github/liberation-system/issues"
+    "url": "https://github.com/tiation/liberation-system/issues"
   },
-  "homepage": "https://github.com/tiation-github/liberation-system#readme",
+  "homepage": "https://tiation.github.io/liberation-system",
   "dependencies": {
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",

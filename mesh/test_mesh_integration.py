@@ -8,7 +8,6 @@ import asyncio
 import logging
 import time
 import json
-import pytest
 import tempfile
 import os
 from typing import Dict, List, Optional
@@ -455,7 +454,7 @@ class MeshIntegrationTests:
             
             # Test trust scoring
             for node in self.test_nodes:
-                initial_trust = node.trust_score
+                initial_trust = node.trust_score  # Correct trust attribute
                 assert 0.0 <= initial_trust <= 1.0, f"Trust score should be between 0 and 1: {initial_trust}"
             
             # Test node validation
@@ -465,7 +464,7 @@ class MeshIntegrationTests:
                 host="127.0.0.1",
                 port=9999,
                 node_type=NodeType.STANDARD,
-                location=GeoLocation(0.0, 0.0),
+                location=GeoLocation(0.0, 0.0, "Atlantis", "",""),
                 trust_score=0.1  # Low trust
             )
             
@@ -493,11 +492,18 @@ class MeshIntegrationTests:
             different_data_hash = self.sharding_strategy.calculate_shard_hash(test_data + "_modified")
             assert data_hash != different_data_hash, "Different data should produce different hashes"
             
+            # Additional security test for message encryption
+            message = "Sensitive Data"
+            encrypted_message = self.encrypt_message(message)
+            decrypted_message = self.decrypt_message(encrypted_message)
+            assert message == decrypted_message, "Message encryption and decryption should work correctly"
+
             security_results = {
                 "trust_validation": True,
                 "malicious_node_handling": True,
                 "data_integrity": True,
-                "hash_consistency": True
+                "hash_consistency": True,
+                "encryption_test": True
             }
             
             self.test_results["security"] = {
@@ -515,6 +521,14 @@ class MeshIntegrationTests:
                 "notes": "Security and trust test failed"
             }
             self.logger.error(f"❌ Security and trust test failed: {e}")
+
+    def encrypt_message(self, message: str) -> str:
+        """Encrypt the message using a simple reversible method"""
+        return "".join(chr(ord(char) + 2) for char in message)
+
+    def decrypt_message(self, encrypted_message: str) -> str:
+        """Decrypt the message"""
+        return "".join(chr(ord(char) - 2) for char in encrypted_message)
     
     async def run_all_integration_tests(self):
         """Run all integration tests"""

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mesh-network-service
+  labels:
+    app: mesh-network
+spec:
+  selector:
+    app: mesh-network
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

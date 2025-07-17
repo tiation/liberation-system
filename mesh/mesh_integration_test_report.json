@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-07-18T00:36:16.331921",
+  "overall_success_rate": 0.0,
+  "passed_tests": 0,
+  "total_tests": 6,
+  "detailed_results": {
+    "sharding_strategy": {
+      "passed": false,
+      "error": "All data items should be assigned to at least one node",
+      "notes": "Sharding strategy integration test failed"
+    },
+    "node_discovery": {
+      "passed": false,
+      "error": "Node gateway_us_east should discover at least one other node",
+      "notes": "Node discovery integration test failed"
+    },
+    "cross_system": {
+      "passed": true,
+      "coordination_results": {
+        "gateway_us_east": {
+          "in_discovery": true,
+          "in_sharding": true,
+          "coordinated": true
+        },
+        "storage_us_west": {
+          "in_discovery": true,
+          "in_sharding": true,
+          "coordinated": true
+        },
+        "compute_eu_london": {
+          "in_discovery": true,
+          "in_sharding": true,
+          "coordinated": true
+        },
+        "relay_asia_tokyo": {
+          "in_discovery": true,
+          "in_sharding": true,
+          "coordinated": true
+        },
+        "bootstrap_au_sydney": {
+          "in_discovery": true,
+          "in_sharding": true,
+          "coordinated": true
+        }
+      },
+      "failover_tested": true,
+      "notes": "Cross-system integration working correctly"
+    },
+    "performance": {
+      "passed": false,
+      "error": "Average discovery time too high: 1.004s",
+      "notes": "Performance under load test failed"
+    },
+    "fault_tolerance": {
+      "passed": false,
+      "error": "Should still have nodes available after failures",
+      "notes": "Fault tolerance test failed"
+    },
+    "security": {
+      "passed": false,
+      "error": "'gateway_us_east'",
+      "notes": "Security and trust test failed"
+    }
+  }
+}

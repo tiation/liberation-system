@@ -8,6 +8,13 @@ on:
       - 'static/**'
       - 'assets/**'
       - 'docs/**'
+      - 'src/**'
+      - 'app/**'
+      - 'pages/**'
+      - 'public/**'
+      - 'package.json'
+      - 'next.config.js'
+      - 'tailwind.config.js'
   pull_request:
     branches: [ main ]
     paths:
@@ -15,6 +22,13 @@ on:
       - 'static/**'
       - 'assets/**'
       - 'docs/**'
+      - 'src/**'
+      - 'app/**'
+      - 'pages/**'
+      - 'public/**'
+      - 'package.json'
+      - 'next.config.js'
+      - 'tailwind.config.js'
   workflow_dispatch:
 
 permissions:
@@ -36,20 +50,28 @@ jobs:
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: 🏗️ Prepare static site
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: 📦 Install dependencies
+        run: npm ci
+        
+      - name: 🏗️ Build Next.js app
         run: |
+          npm run build
+          # Create _site directory and copy Next.js output
           mkdir -p _site
-          # Copy HTML files from root
+          cp -r out/* _site/
+          # Also copy static HTML files if they exist
           cp *.html _site/ || true
-          # Copy static assets
           cp -r static _site/ || true
           cp -r assets _site/ || true
-          # Copy docs folder content
           cp -r docs/* _site/ || true
-          # Ensure index.html exists
-          if [ ! -f _site/index.html ]; then
-            cp index.html _site/index.html || cp review.html _site/index.html
-          fi
+        env:
+          GITHUB_ACTIONS: true
           
       - name: 📤 Upload artifact
         uses: actions/upload-pages-artifact@v3
