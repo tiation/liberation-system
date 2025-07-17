@@ -4,10 +4,16 @@ on:
   push:
     branches: [ main ]
     paths:
+      - '*.html'
+      - 'static/**'
+      - 'assets/**'
       - 'docs/**'
   pull_request:
     branches: [ main ]
     paths:
+      - '*.html'
+      - 'static/**'
+      - 'assets/**'
       - 'docs/**'
 
 permissions:
@@ -29,11 +35,20 @@ jobs:
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: 🏗️ Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./docs
-          destination: ./_site
+      - name: 🏗️ Prepare static site
+        run: |
+          mkdir -p _site
+          # Copy HTML files from root
+          cp *.html _site/ || true
+          # Copy static assets
+          cp -r static _site/ || true
+          cp -r assets _site/ || true
+          # Copy docs folder content
+          cp -r docs/* _site/ || true
+          # Ensure index.html exists
+          if [ ! -f _site/index.html ]; then
+            cp index.html _site/index.html || cp review.html _site/index.html
+          fi
           
       - name: 📤 Upload artifact
         uses: actions/upload-pages-artifact@v3
