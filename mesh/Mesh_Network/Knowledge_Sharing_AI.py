@@ -8,8 +8,8 @@ import json
 import logging
 from typing import Dict, Any, List
 
-from Advanced_Node_Discovery import AdvancedMeshNode
-from Sharding_Strategy import ShardingStrategy
+from Mesh_Network.Advanced_Node_Discovery import AdvancedMeshNode
+from Mesh_Network.Sharding_Strategy import ShardingStrategy
 
 class AICapabilities:
     """Provides AI-powered insights and recommendations"""

@@ -31,8 +31,8 @@ except ImportError:
     import aiohttp
     from aiohttp import web
 
-from Advanced_Node_Discovery import AdvancedMeshNode, NodeType, NetworkMetrics
-from Sharding_Strategy import ShardingStrategy
+from Mesh_Network.Advanced_Node_Discovery import AdvancedMeshNode, NodeType, NetworkMetrics
+from Mesh_Network.Sharding_Strategy import ShardingStrategy
 
 class AlertSeverity(Enum):
     """Alert severity levels"""

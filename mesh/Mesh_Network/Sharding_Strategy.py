@@ -16,7 +16,7 @@ from enum import Enum
 from datetime import datetime
 import random
 
-from .Advanced_Node_Discovery import (
+from Mesh_Network.Advanced_Node_Discovery import (
     AdvancedMeshNode, 
     NodeType, 
     GeoLocation, 

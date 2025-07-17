@@ -616,8 +616,7 @@ async def main():
         from Mesh_Network.Advanced_Node_Discovery import AdvancedNodeDiscovery
         
         # Create sharding strategy
-        discovery = AdvancedNodeDiscovery()
-        sharding_strategy = ShardingStrategy(discovery)
+        sharding_strategy = ShardingStrategy(total_shards=16, replication_factor=2)
         
         # Create test nodes
         test_nodes = [
@@ -638,7 +637,7 @@ async def main():
         
         # Add nodes to sharding strategy
         for node in test_nodes:
-            sharding_strategy.add_node(node)
+            await sharding_strategy.add_node_to_shard(node)
         
         # Create automated scalability system
         config = AdaptiveConfiguration(

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-07-18T00:36:16.331921",
+  "timestamp": "2025-07-18T00:44:06.919415",
   "overall_success_rate": 0.0,
   "passed_tests": 0,
   "total_tests": 6,
@@ -48,7 +48,7 @@
     },
     "performance": {
       "passed": false,
-      "error": "Average discovery time too high: 1.004s",
+      "error": "Average discovery time too high: 16.009s",
       "notes": "Performance under load test failed"
     },
     "fault_tolerance": {
@@ -57,9 +57,15 @@
       "notes": "Fault tolerance test failed"
     },
     "security": {
-      "passed": false,
-      "error": "'gateway_us_east'",
-      "notes": "Security and trust test failed"
+      "passed": true,
+      "results": {
+        "trust_validation": true,
+        "malicious_node_handling": true,
+        "data_integrity": true,
+        "hash_consistency": true,
+        "encryption_test": true
+      },
+      "notes": "Security and trust tests passed"
     }
   }
 }
