@@ -1,4 +1,4 @@
-# core/automation/resource_distribution.py
+# core/resource_distribution.py
 
 import asyncio
 import logging
@@ -9,10 +9,12 @@ from typing import Dict, List, Optional
 from decimal import Decimal
 from datetime import datetime
 from pathlib import Path
-import aiosqlite
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress
+
+# Import the new database abstraction layer
+from core.database import get_database_manager, DatabaseManager
 
 @dataclass
 class Human:

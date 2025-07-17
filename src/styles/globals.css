@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #00ffff;
+  --secondary-color: #ff00ff;
+  --accent-color: #ffff00;
+  --background: #000000;
+  --surface: #1a1a1a;
+  --text: #ffffff;
+  --success: #00ff00;
+  --warning: #ff8800;
+  --error: #ff0000;
+  --gradient: linear-gradient(45deg, #00ffff, #ff00ff);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-dark-200 text-white font-mono;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    min-height: 100vh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-primary-500;
+  }
+}
+
+@layer components {
+  .neon-glow {
+    @apply border border-primary-500 shadow-neon;
+  }
+  
+  .neon-glow-pink {
+    @apply border border-secondary-500 shadow-neon-pink;
+  }
+  
+  .neon-glow-yellow {
+    @apply border border-accent-500 shadow-neon-yellow;
+  }
+  
+  .gradient-bg {
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .liberation-card {
+    @apply bg-surface-200 border border-primary-500/20 rounded-lg p-6 shadow-lg;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  }
+  
+  .liberation-button {
+    @apply bg-gradient-neon text-dark-200 font-bold py-2 px-4 rounded-lg;
+    @apply hover:shadow-neon transition-all duration-300;
+    @apply active:scale-95;
+  }
+  
+  .liberation-input {
+    @apply bg-surface-200 border border-primary-500/30 rounded-lg px-3 py-2;
+    @apply text-white placeholder-primary-500/50;
+    @apply focus:border-primary-500 focus:shadow-neon focus:outline-none;
+  }
+  
+  .metric-card {
+    @apply liberation-card;
+    @apply hover:border-primary-500/50 transition-colors duration-300;
+  }
+  
+  .status-indicator {
+    @apply w-3 h-3 rounded-full animate-pulse;
+  }
+  
+  .status-active {
+    @apply bg-success;
+  }
+  
+  .status-warning {
+    @apply bg-warning;
+  }
+  
+  .status-error {
+    @apply bg-error;
+  }
+  
+  .console-output {
+    @apply bg-dark-200 border border-primary-500/20 rounded-lg p-4;
+    @apply font-mono text-sm text-primary-500;
+    @apply overflow-auto max-h-96;
+  }
+  
+  .progress-bar {
+    @apply w-full bg-surface-200 rounded-full h-2;
+  }
+  
+  .progress-fill {
+    @apply bg-gradient-neon h-2 rounded-full transition-all duration-300;
+  }
+  
+  .sidebar-link {
+    @apply flex items-center px-4 py-2 text-primary-500 hover:bg-surface-200;
+    @apply hover:text-primary-400 transition-colors duration-200;
+    @apply border-l-2 border-transparent hover:border-primary-500;
+  }
+  
+  .sidebar-link-active {
+    @apply bg-surface-200 text-primary-400 border-primary-500;
+  }
+}
+
+@layer utilities {
+  .text-shadow-neon {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .animate-matrix {
+    animation: matrix 20s linear infinite;
+  }
+  
+  @keyframes matrix {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+  
+  .scrollbar-neon {
+    scrollbar-width: thin;
+    scrollbar-color: #00ffff #1a1a1a;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar-thumb {
+    background: #00ffff;
+    border-radius: 4px;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar-thumb:hover {
+    background: #ff00ff;
+  }
+}
+
+/* Custom animations */
+@keyframes pulse-neon {
+  0%, 100% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+  }
+  50% {
+    box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+  }
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+/* Matrix rain effect */
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.matrix-rain::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* Terminal-style text effects */
+.terminal-text {
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.terminal-cursor::after {
+  content: '█';
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

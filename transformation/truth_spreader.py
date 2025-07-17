@@ -4,14 +4,20 @@ import asyncio
 import logging
 import aiohttp
 import json
-from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, asdict
-from datetime import datetime
+import random
+import re
+from typing import Dict, List, Optional, Any, Tuple
+from dataclasses import dataclass, asdict, field
+from datetime import datetime, timedelta
 from pathlib import Path
 import aiofiles
 from rich.console import Console
 from rich.progress import Progress
 from rich.table import Table
+from rich.panel import Panel
+from rich.text import Text
+from rich.layout import Layout
+from rich.live import Live
 
 @dataclass
 class TruthMessage:
@@ -23,34 +29,61 @@ class TruthMessage:
     created_at: datetime = None
     spread_count: int = 0
     effectiveness_score: float = 0.0
+    viral_factor: float = 1.0
+    target_demographics: List[str] = field(default_factory=list)
+    conversion_metrics: Dict[str, float] = field(default_factory=dict)
     
     def __post_init__(self):
         if self.created_at is None:
             self.created_at = datetime.now()
 
 @dataclass
-class Channel:
-    """A communication channel to transform"""
+class MarketingChannel:
+    """A marketing channel to hijack and transform"""
     id: str
     name: str
-    type: str  # 'billboard', 'social', 'media', 'direct'
+    type: str  # 'billboard', 'social', 'media', 'direct', 'advertising', 'streaming'
     reach: int
     conversion_rate: float = 0.0
     last_message: Optional[TruthMessage] = None
     status: str = 'active'
+    hijack_success_rate: float = 0.85
+    original_content: str = "Marketing lies"
+    hijacked_content: str = "Truth revealed"
+    hijack_timestamp: Optional[datetime] = None
+    audience_demographics: Dict[str, float] = field(default_factory=dict)
     
-class TruthSpreader:
-    """Replace marketing with reality"""
+@dataclass
+class HijackOperation:
+    """A marketing channel hijack operation"""
+    channel_id: str
+    truth_message: TruthMessage
+    timestamp: datetime
+    success: bool
+    reach_achieved: int
+    conversion_rate: float
+    resistance_level: float = 0.0
+    recovery_time: timedelta = timedelta(hours=1)
+    
+class MarketingHijacker:
+    """Advanced marketing channel hijacking system"""
     
     def __init__(self):
         self.console = Console()
         self.logger = logging.getLogger(__name__)
-        self.channels: Dict[str, Channel] = {}
+        self.channels: Dict[str, MarketingChannel] = {}
         self.truth_messages: List[TruthMessage] = []
+        self.hijack_operations: List[HijackOperation] = []
         self.spread_count = 0
         self.total_reach = 0
         self.data_dir = Path('data')
         self.data_dir.mkdir(exist_ok=True)
+        
+        # Hijacking statistics
+        self.successful_hijacks = 0
+        self.failed_hijacks = 0
+        self.total_marketing_budget_redirected = 0.0
+        self.reality_conversion_rate = 0.0
         
     async def initialize(self):
         """Initialize the truth spreading system"""
