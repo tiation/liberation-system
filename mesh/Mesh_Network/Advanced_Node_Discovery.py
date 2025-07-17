@@ -508,6 +508,91 @@ class AdvancedNodeDiscovery:
             topology["network_health"] = total_quality / len(self.discovered_nodes)
         
         return topology
+    
+    async def start_periodic_updates(self):
+        """Start periodic updates of geolocation and system metrics"""
+        self.logger.info("Starting periodic updates for node metrics")
+        while True:
+            try:
+                # Update metrics for all discovered nodes
+                for node_id in list(self.discovered_nodes.keys()):
+                    await self.update_node_metrics(node_id)
+                
+                # Clean up stale nodes (nodes not seen for more than 10 minutes)
+                current_time = time.time()
+                stale_nodes = []
+                for node_id, node in self.discovered_nodes.items():
+                    if current_time - node.last_seen > 600:  # 10 minutes
+                        stale_nodes.append(node_id)
+                
+                for node_id in stale_nodes:
+                    self.logger.info(f"Removing stale node: {node_id}")
+                    del self.discovered_nodes[node_id]
+                
+                self.logger.info(f"Updated metrics for {len(self.discovered_nodes)} nodes")
+                
+            except Exception as e:
+                self.logger.error(f"Error during periodic updates: {e}")
+            
+            await asyncio.sleep(300)  # Update every 5 minutes
+    
+    async def start_connection_optimization(self, local_node: AdvancedMeshNode):
+        """Start periodic optimization of node connections"""
+        self.logger.info("Starting connection optimization")
+        while True:
+            try:
+                # Get all discovered nodes as candidates
+                candidates = list(self.discovered_nodes.values())
+                
+                # Optimize node selection
+                optimized_nodes = await self._optimize_node_selection(local_node, candidates)
+                
+                # Update local node's connections based on optimization
+                optimal_connections = {}
+                for node in optimized_nodes:
+                    optimal_connections[node.id] = {
+                        "host": node.host,
+                        "port": node.port,
+                        "latency": node.metrics.latency,
+                        "quality_score": node.metrics.calculate_quality_score(),
+                        "last_optimized": time.time()
+                    }
+                
+                # Update local node connections
+                local_node.connections.update(optimal_connections)
+                
+                self.logger.info(f"Optimized connections: {len(optimized_nodes)} nodes selected")
+                
+            except Exception as e:
+                self.logger.error(f"Error during connection optimization: {e}")
+            
+            await asyncio.sleep(600)  # Optimize every 10 minutes
+    
+    async def run_discovery_with_optimization(self, local_node: AdvancedMeshNode):
+        """Run discovery with continuous updates and optimization"""
+        self.logger.info("Starting advanced node discovery with optimization")
+        
+        # Initial discovery
+        await self.discover_nodes(local_node)
+        
+        # Start background tasks for continuous operation
+        tasks = [
+            asyncio.create_task(self.start_periodic_updates()),
+            asyncio.create_task(self.start_connection_optimization(local_node))
+        ]
+        
+        try:
+            await asyncio.gather(*tasks)
+        except asyncio.CancelledError:
+            self.logger.info("Discovery optimization stopped")
+        except Exception as e:
+            self.logger.error(f"Error in discovery optimization: {e}")
+        finally:
+            # Cancel any remaining tasks
+            for task in tasks:
+                if not task.done():
+                    task.cancel()
+
 
 # Example usage and testing
 async def main():

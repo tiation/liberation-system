@@ -13,6 +13,7 @@ from pathlib import Path
 try:
     from core.config import get_config, ConfigManager
     from core.resource_distribution import SystemCore as ResourceSystem
+    from core.knowledge_sharing import KnowledgeShareManager, KnowledgeType
     from transformation.truth_spreader import TruthSystem
     from security.trust_default import AntiSecurity
 except ImportError as e:
@@ -51,6 +52,7 @@ class LiberationCore:
         self.resource_system: Optional[ResourceSystem] = None
         self.truth_system: Optional[TruthSystem] = None
         self.security_system: Optional[AntiSecurity] = None
+        self.knowledge_system: Optional[KnowledgeShareManager] = None
         
         # System metrics
         self.metrics = {
@@ -59,7 +61,10 @@ class LiberationCore:
             'errors_handled': 0,
             'resources_distributed': 0,
             'truth_messages_sent': 0,
-            'mesh_nodes_active': 0
+            'mesh_nodes_active': 0,
+            'knowledge_entries': 0,
+            'learning_sessions': 0,
+            'problems_solved': 0
         }
         
     async def initialize_all_systems(self):
@@ -93,6 +98,15 @@ class LiberationCore:
                 self.logger.error(f"Security system initialization failed: {e}")
                 self.console.print(f"[yellow]⚠️  Security system unavailable: {e}[/yellow]")
             
+            # Initialize knowledge sharing system
+            try:
+                self.knowledge_system = KnowledgeShareManager()
+                await self.knowledge_system.initialize()
+                self.console.print("[green]✅ Knowledge Sharing System initialized[/green]")
+            except Exception as e:
+                self.logger.error(f"Knowledge system initialization failed: {e}")
+                self.console.print(f"[yellow]⚠️  Knowledge system unavailable: {e}[/yellow]")
+            
             self.console.print("[bold green]🌟 Core systems initialized![/bold green]")
             
         except Exception as e:
@@ -109,8 +123,9 @@ class LiberationCore:
         """Setup the core system tasks"""
         await self.add_task("distribute_resources", self.distribute_resources, priority=1)
         await self.add_task("spread_truth", self.spread_truth, priority=2)
-        await self.add_task("monitor_system", self.monitor_system_health, priority=3)
-        await self.add_task("update_metrics", self.update_metrics, priority=4)
+        await self.add_task("share_knowledge", self.share_knowledge, priority=3)
+        await self.add_task("monitor_system", self.monitor_system_health, priority=4)
+        await self.add_task("update_metrics", self.update_metrics, priority=5)
         
     async def distribute_resources(self):
         """Keep resources flowing to everyone"""
@@ -149,6 +164,45 @@ class LiberationCore:
             self.logger.error(f"Truth spreading failed: {e}")
             self.metrics['errors_handled'] += 1
             
+    async def share_knowledge(self):
+        """Keep knowledge flowing and learning active"""
+        try:
+            if self.knowledge_system:
+                # Get current knowledge stats
+                stats = await self.knowledge_system.get_knowledge_stats()
+                
+                # Update metrics
+                self.metrics['knowledge_entries'] = stats.get('total_knowledge_entries', 0)
+                self.metrics['learning_sessions'] = stats.get('active_learning_sessions', 0)
+                self.metrics['problems_solved'] = stats.get('solved_problems', 0)
+                
+                # Add system insights based on current metrics
+                if self.metrics['tasks_completed'] > 0 and self.metrics['tasks_completed'] % 50 == 0:
+                    await self.knowledge_system.add_knowledge(
+                        title=f"System Performance Insight #{self.metrics['tasks_completed']}",
+                        content=f"System has completed {self.metrics['tasks_completed']} tasks with {self.metrics['errors_handled']} errors handled. "
+                                f"Resources distributed: ${self.metrics['resources_distributed']:,.2f}, "
+                                f"Truth messages sent: {self.metrics['truth_messages_sent']}",
+                        knowledge_type=KnowledgeType.INSIGHT,
+                        author="liberation_core",
+                        tags=["system", "performance", "metrics", "insight"]
+                    )
+                
+                # Check for common problems and add solutions
+                if self.metrics['errors_handled'] > 10:
+                    await self.knowledge_system.add_problem_context(
+                        problem_description=f"System experiencing high error rate: {self.metrics['errors_handled']} errors",
+                        domain="system_reliability",
+                        priority=2
+                    )
+                    
+            else:
+                self.logger.warning("Knowledge system not available")
+                
+        except Exception as e:
+            self.logger.error(f"Knowledge sharing failed: {e}")
+            self.metrics['errors_handled'] += 1
+            
     async def monitor_system_health(self):
         """Monitor overall system health"""
         try:
@@ -156,7 +210,8 @@ class LiberationCore:
             health_checks = {
                 'resource_system': self.resource_system is not None,
                 'truth_system': self.truth_system is not None,
-                'security_system': self.security_system is not None
+                'security_system': self.security_system is not None,
+                'knowledge_system': self.knowledge_system is not None
             }
             
             # Log health status
@@ -233,6 +288,9 @@ class LiberationCore:
             self.resource_system.stop()
         if self.truth_system:
             self.truth_system.stop()
+        if self.knowledge_system:
+            # Knowledge system doesn't need explicit shutdown, it's async-based
+            pass
             
         self.console.print("[green]✅ Liberation System shutdown complete[/green]")
         
@@ -248,6 +306,7 @@ class LiberationCore:
             # Add system components
             table.add_row("Resource Distribution", "🟢 Active", f"${self.metrics['resources_distributed']:,.2f} distributed")
             table.add_row("Truth Spreading", "🟢 Active", f"{self.metrics['truth_messages_sent']} messages sent")
+            table.add_row("Knowledge Sharing", "🟢 Active", f"{self.metrics['knowledge_entries']} entries, {self.metrics['problems_solved']} solved")
             table.add_row("Security", "🟢 Trusted", "No barriers, maximum access")
             
             # Add metrics
