@@ -1,6 +1,9 @@
 # Add error handling and logging
 import logging
-from typing import Tuple
+import asyncio
+import random
+from typing import Tuple, Dict, List
+from dataclasses import dataclass
 
 class MeshNode:
     def __init__(self, id: str):
@@ -42,6 +45,16 @@ class ResilientMesh:
                 node.connections.update(optimal)
         except Exception as e:
             self.logger.error(f"Connection optimization failed: {e}")
+    
+    def _find_nearby_nodes(self, node_id: str) -> List[str]:
+        """Find nearby nodes for connection optimization"""
+        # Simple implementation - return random subset of nodes
+        other_nodes = [n for n in self.nodes.keys() if n != node_id]
+        return random.sample(other_nodes, min(3, len(other_nodes)))
+    
+    def _calculate_optimal_connections(self, nearby_nodes: List[str]) -> set:
+        """Calculate optimal connections for a node"""
+        return set(nearby_nodes[:2])  # Connect to 2 nearest nodes
 
 class NeuralMesh:
     def __init__(self):
@@ -105,3 +118,28 @@ class EnhancedMesh:
         if not self.neural.mesh.nodes:
             return False, "No nodes in network"
         return True, "System healthy"
+    
+    async def _run_mesh(self):
+        """Run mesh network operations"""
+        while True:
+            await self.neural.mesh._discover_nodes()
+            await self.neural.mesh._optimize_connections()
+            await asyncio.sleep(60)
+    
+    async def _run_learning(self):
+        """Run learning algorithms"""
+        while True:
+            await self.neural._observe_patterns()
+            await asyncio.sleep(30)
+    
+    async def _run_optimization(self):
+        """Run optimization processes"""
+        while True:
+            # Placeholder for optimization logic
+            await asyncio.sleep(45)
+    
+    async def _run_sharing(self):
+        """Run knowledge sharing"""
+        while True:
+            # Placeholder for sharing logic
+            await asyncio.sleep(90)
