@@ -108,22 +108,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Create materialized view for human statistics
-CREATE MATERIALIZED VIEW IF NOT EXISTS human_stats AS
-SELECT 
-    COUNT(*) as total_humans,
-    COUNT(CASE WHEN status = 'active' THEN 1 END) as active_humans,
-    COUNT(CASE WHEN status = 'inactive' THEN 1 END) as inactive_humans,
-    COUNT(CASE WHEN status = 'suspended' THEN 1 END) as suspended_humans,
-    AVG(total_received) as avg_total_received,
-    SUM(total_received) as total_distributed,
-    MAX(total_received) as max_received,
-    MIN(total_received) as min_received,
-    COUNT(CASE WHEN last_distribution > CURRENT_TIMESTAMP - INTERVAL '7 days' THEN 1 END) as recent_distributions
-FROM humans;
-
--- Create index on materialized view
-CREATE UNIQUE INDEX IF NOT EXISTS idx_human_stats_unique ON human_stats ((1));
+-- Note: Materialized view will be created after tables are created by the application
 
 -- Create function to refresh human stats
 CREATE OR REPLACE FUNCTION refresh_human_stats()
@@ -180,28 +165,7 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO liberation_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO liberation_user;
 GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO liberation_user;
 
--- Set up row level security (RLS) for enhanced security
-ALTER TABLE humans ENABLE ROW LEVEL SECURITY;
-ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE system_stats ENABLE ROW LEVEL SECURITY;
-
--- Create policy for liberation_user (allow all operations)
-CREATE POLICY liberation_user_policy ON humans FOR ALL TO liberation_user USING (true);
-CREATE POLICY liberation_user_policy ON transactions FOR ALL TO liberation_user USING (true);
-CREATE POLICY liberation_user_policy ON system_stats FOR ALL TO liberation_user USING (true);
-
--- Create indexes for full-text search
-CREATE INDEX IF NOT EXISTS idx_humans_metadata_gin ON humans USING gin (metadata);
-CREATE INDEX IF NOT EXISTS idx_transactions_metadata_gin ON transactions USING gin (metadata);
-CREATE INDEX IF NOT EXISTS idx_system_stats_metadata_gin ON system_stats USING gin (metadata);
-
--- Create partial indexes for common queries
-CREATE INDEX IF NOT EXISTS idx_humans_active ON humans(created_at) WHERE status = 'active';
-CREATE INDEX IF NOT EXISTS idx_transactions_recent ON transactions(timestamp) WHERE timestamp > CURRENT_TIMESTAMP - INTERVAL '30 days';
-CREATE INDEX IF NOT EXISTS idx_transactions_completed ON transactions(human_id, amount) WHERE status = 'completed';
-
--- Create expression index for case-insensitive searches
-CREATE INDEX IF NOT EXISTS idx_humans_id_lower ON humans(LOWER(id));
+-- Note: Row level security and indexes will be created after tables are created by the application
 
 -- Optimize PostgreSQL settings for the liberation system
 ALTER SYSTEM SET shared_preload_libraries = 'pg_stat_statements';
@@ -215,43 +179,7 @@ ALTER SYSTEM SET log_lock_waits = on;
 -- Create scheduled job to refresh statistics (if pg_cron is available)
 -- SELECT cron.schedule('refresh-human-stats', '0 */6 * * *', 'SELECT refresh_human_stats()');
 
--- Insert initial system configuration
-INSERT INTO system_stats (metric_name, metric_value, metadata) VALUES 
-('system_initialized', 1, '{"version": "1.0.0", "timestamp": "' || CURRENT_TIMESTAMP || '"}'),
-('database_version', 1, '{"postgres_version": "' || version() || '"}')
-ON CONFLICT DO NOTHING;
-
--- Create a view for easy access to human summary
-CREATE OR REPLACE VIEW human_summary AS
-SELECT 
-    h.id,
-    h.status,
-    h.created_at,
-    h.last_distribution,
-    h.total_received,
-    h.weekly_flow,
-    h.housing_credit,
-    h.investment_pool,
-    COALESCE(t.transaction_count, 0) as transaction_count,
-    COALESCE(t.last_transaction, NULL) as last_transaction_date,
-    CASE 
-        WHEN h.last_distribution > CURRENT_TIMESTAMP - INTERVAL '7 days' THEN 'recent'
-        WHEN h.last_distribution > CURRENT_TIMESTAMP - INTERVAL '30 days' THEN 'stale'
-        ELSE 'inactive'
-    END as distribution_status
-FROM humans h
-LEFT JOIN (
-    SELECT 
-        human_id,
-        COUNT(*) as transaction_count,
-        MAX(timestamp) as last_transaction
-    FROM transactions
-    WHERE status = 'completed'
-    GROUP BY human_id
-) t ON h.id = t.human_id;
-
--- Grant permissions on the new view
-GRANT SELECT ON human_summary TO liberation_user;
+-- Note: Initial configuration and views will be created after tables are created by the application
 
 -- Log successful initialization
 INSERT INTO audit_log (table_name, operation, new_values)

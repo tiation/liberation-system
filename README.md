@@ -3,6 +3,12 @@
 <div align="center">
 
 ![Liberation System Logo](https://img.shields.io/badge/Liberation-System-00ffff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSIjMDBmZmZmIi8+Cjwvc3ZnPgo=)
+
+[![CI/CD Pipeline](https://github.com/tiation-github/liberation-system/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tiation-github/liberation-system/actions/workflows/ci.yml)
+[![GitHub Pages](https://github.com/tiation-github/liberation-system/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/tiation-github/liberation-system/actions/workflows/pages.yml)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-Enterprise-00ffff?style=flat-square)](https://github.com/tiation-github/liberation-system)
+[![Security](https://img.shields.io/badge/Security-Bandit%20Scanned-00ffff?style=flat-square)](https://github.com/tiation-github/liberation-system)
+
 [![GitHub](https://img.shields.io/badge/GitHub-tiation--github-00ffff?style=for-the-badge&logo=github)](https://github.com/tiation-github/liberation-system)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-00ffff?style=for-the-badge&logo=github)](https://tiation-github.github.io/liberation-system)
 [![License](https://img.shields.io/badge/License-MIT-00ffff?style=for-the-badge)](LICENSE)
@@ -11,7 +17,7 @@
 
 **A minimal system to flip everything on its head. One person, massive impact.**
 
-[📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation.github.io/liberation-system)
+[📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation-github.github.io/liberation-system)
 
 </div>
 
@@ -70,9 +76,27 @@ pip install -r requirements.txt
 # Install Node.js dependencies
 npm install
 
-# Run the system
+# Run the backend system
 python core/automation-system.py
+
+# In another terminal, run the web interface
+npm run dev
 ```
+
+### Web Interface Access
+
+Once running, access the Liberation System dashboard at:
+- **Web Interface**: http://localhost:3000
+- **API Endpoint**: http://localhost:8000
+
+### Features Available
+
+- **🎨 Dark Neon Theme**: Cyan/magenta gradient with professional dark styling
+- **📊 Real-time Dashboard**: Live system metrics and resource distribution
+- **💰 Resource Management**: $19T distribution tracking and controls
+- **📡 System Monitoring**: Live console output and health metrics
+- **🔄 Automation Controls**: Manual trigger controls for all system functions
+- **📱 Responsive Design**: Works on desktop, tablet, and mobile devices
 
 ### Basic Usage
 
@@ -117,7 +141,7 @@ liberation-system/
 ![Truth Network](assets/screenshots/truth-network.png)
 
 ### System Architecture Diagram
-![Architecture](assets/diagrams/system-architecture.png)
+![Architecture](assets/diagrams/system-architecture.svg)
 
 </div>
 

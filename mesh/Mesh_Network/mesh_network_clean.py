@@ -34,9 +34,9 @@ class NetworkMessage:
     signature: Optional[str] = None
 
 class MeshNode:
-    """Enhanced mesh node with real P2P communication"""
+    """Enhanced mesh node with real P2P communication and automatic spreading"""
     
-    def __init__(self, id: str, host: str = "localhost", port: int = None):
+    def __init__(self, id: str, host: str = "localhost", port: int = None, auto_spread: bool = True):
         self.id = id
         self.host = host
         self.port = port or self._find_available_port()
@@ -56,6 +56,21 @@ class MeshNode:
             "connections_active": 0
         }
         self.logger = logging.getLogger(f"MeshNode-{self.id}")
+        
+        # Auto-spreading configuration
+        self.auto_spread = auto_spread
+        self.peer_discovery_ports = list(range(9000, 9100))  # Scan range for peers
+        self.known_peers: Set[str] = set()  # Track discovered peers
+        self.max_connections = 10  # Maximum peer connections
+        self.discovery_interval = 30  # Seconds between discovery attempts
+        self.heartbeat_interval = 15  # Seconds between heartbeats
+        self.spread_tasks: List[asyncio.Task] = []  # Track background tasks
+        
+        # Auto-spreading for truth and resources
+        self.auto_truth_spread = True
+        self.auto_resource_spread = True
+        self.truth_messages_queue = []
+        self.resource_messages_queue = []
         
     def _find_available_port(self) -> int:
         """Find an available port for the node"""
@@ -315,6 +330,205 @@ class MeshNode:
             c for c in self.connections.values() if c["status"] == "connected"
         ])
         return self.network_stats.copy()
+    
+    async def start_auto_spreading(self):
+        """Start automatic spreading processes"""
+        if not self.auto_spread:
+            return
+            
+        self.logger.info(f"Starting automatic spreading for node {self.id}")
+        
+        # Start background tasks for auto-spreading
+        self.spread_tasks = [
+            asyncio.create_task(self._auto_peer_discovery()),
+            asyncio.create_task(self._auto_heartbeat()),
+            asyncio.create_task(self._auto_truth_spreading()),
+            asyncio.create_task(self._auto_resource_spreading()),
+            asyncio.create_task(self._auto_network_maintenance())
+        ]
+        
+        # Start server alongside spreading
+        server_task = asyncio.create_task(self.start_server())
+        self.spread_tasks.append(server_task)
+        
+        try:
+            await asyncio.gather(*self.spread_tasks)
+        except asyncio.CancelledError:
+            self.logger.info("Auto-spreading cancelled")
+    
+    async def _auto_peer_discovery(self):
+        """Automatically discover and connect to peers"""
+        while self.status == "active":
+            try:
+                if len(self.connections) < self.max_connections:
+                    await self._discover_peers()
+                await asyncio.sleep(self.discovery_interval)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self.logger.error(f"Peer discovery error: {e}")
+                await asyncio.sleep(5)
+    
+    async def _discover_peers(self):
+        """Scan for potential peers and connect"""
+        discovered_count = 0
+        
+        # Scan common ports for other nodes
+        for port in self.peer_discovery_ports:
+            if port == self.port:  # Skip our own port
+                continue
+                
+            try:
+                # Quick connection test
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(1.0)  # Short timeout for quick scanning
+                result = sock.connect_ex((self.host, port))
+                sock.close()
+                
+                if result == 0:  # Connection successful
+                    peer_id = f"{self.host}:{port}"
+                    if peer_id not in self.connections and peer_id not in self.known_peers:
+                        self.logger.info(f"Discovered potential peer at {peer_id}")
+                        if await self.connect_to_peer(self.host, port):
+                            self.known_peers.add(peer_id)
+                            discovered_count += 1
+                            
+                            # Limit discoveries per scan
+                            if discovered_count >= 3:
+                                break
+                                
+            except Exception as e:
+                continue  # Skip failed connections
+        
+        if discovered_count > 0:
+            self.logger.info(f"Connected to {discovered_count} new peers")
+    
+    async def _auto_heartbeat(self):
+        """Automatically send heartbeats to maintain connections"""
+        while self.status == "active":
+            try:
+                if self.connections:
+                    await self.send_heartbeat()
+                await asyncio.sleep(self.heartbeat_interval)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self.logger.error(f"Heartbeat error: {e}")
+                await asyncio.sleep(5)
+    
+    async def _auto_truth_spreading(self):
+        """Automatically spread truth messages"""
+        while self.status == "active":
+            try:
+                if self.auto_truth_spread and self.connections:
+                    # Generate and spread truth messages
+                    truth_messages = [
+                        "The $19T economic reform is liberating humanity",
+                        "Universal basic income of $800/week is your right",
+                        "Housing should be free for all humans",
+                        "The liberation system is spreading globally",
+                        "Economic freedom is spreading through the mesh network",
+                        "Truth spreads faster than lies in a connected world"
+                    ]
+                    
+                    message_content = random.choice(truth_messages)
+                    truth_msg = NetworkMessage(
+                        id=str(uuid.uuid4()),
+                        type=MessageType.TRUTH_PROPAGATION,
+                        source_node=self.id,
+                        target_node=None,
+                        payload={
+                            "content": message_content,
+                            "priority": random.randint(1, 3),
+                            "reach": random.randint(1000, 1000000),
+                            "timestamp": time.time(),
+                            "auto_generated": True
+                        },
+                        timestamp=time.time()
+                    )
+                    
+                    await self.broadcast_message(truth_msg)
+                    self.logger.info(f"Auto-spread truth: {message_content[:50]}...")
+                    
+                await asyncio.sleep(random.randint(30, 120))  # Random interval
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self.logger.error(f"Truth spreading error: {e}")
+                await asyncio.sleep(10)
+    
+    async def _auto_resource_spreading(self):
+        """Automatically spread resource distribution messages"""
+        while self.status == "active":
+            try:
+                if self.auto_resource_spread and self.connections:
+                    # Generate resource distribution messages
+                    resource_msg = NetworkMessage(
+                        id=str(uuid.uuid4()),
+                        type=MessageType.RESOURCE_BROADCAST,
+                        source_node=self.id,
+                        target_node=None,
+                        payload={
+                            "amount": 800.00,
+                            "recipient": f"human_{random.randint(1000, 9999)}",
+                            "transaction_id": f"tx_{uuid.uuid4().hex[:8]}",
+                            "timestamp": time.time(),
+                            "auto_generated": True,
+                            "resource_type": random.choice(["weekly_income", "housing_credit", "food_allocation"])
+                        },
+                        timestamp=time.time()
+                    )
+                    
+                    await self.broadcast_message(resource_msg)
+                    self.logger.info(f"Auto-spread resource: ${resource_msg.payload['amount']} to {resource_msg.payload['recipient']}")
+                    
+                await asyncio.sleep(random.randint(45, 180))  # Random interval
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self.logger.error(f"Resource spreading error: {e}")
+                await asyncio.sleep(15)
+    
+    async def _auto_network_maintenance(self):
+        """Automatically maintain network health"""
+        while self.status == "active":
+            try:
+                # Clean up stale connections
+                await self.cleanup_stale_connections()
+                
+                # Update last seen timestamp
+                self.last_seen = time.time()
+                
+                # Log network statistics
+                stats = self.get_network_stats()
+                self.logger.debug(f"Network stats: {stats}")
+                
+                # If we have too few connections, trigger discovery
+                if len(self.connections) < 2:
+                    self.logger.info("Low connection count, triggering discovery")
+                    await self._discover_peers()
+                
+                await asyncio.sleep(60)  # Run every minute
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self.logger.error(f"Network maintenance error: {e}")
+                await asyncio.sleep(30)
+    
+    async def stop_auto_spreading(self):
+        """Stop automatic spreading processes"""
+        self.logger.info(f"Stopping automatic spreading for node {self.id}")
+        
+        # Cancel all spreading tasks
+        for task in self.spread_tasks:
+            if not task.done():
+                task.cancel()
+        
+        # Wait for tasks to complete
+        if self.spread_tasks:
+            await asyncio.gather(*self.spread_tasks, return_exceptions=True)
+        
+        self.spread_tasks.clear()
     
     async def shutdown(self):
         """Shutdown the node"""

@@ -13,11 +13,14 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:integration": "node scripts/integration-test.js",
+    "test:all": "npm run test && npm run e2e && npm run test:integration",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "analyze": "cross-env ANALYZE=true next build",
     "e2e": "playwright test",
-    "e2e:ui": "playwright test --ui"
+    "e2e:ui": "playwright test --ui",
+    "e2e:debug": "playwright test --debug"
   },
   "keywords": [
     "liberation",
@@ -161,7 +164,10 @@
     "@types/ws": "^8.5.10",
     "@types/jest": "^29.5.8",
     "ts-jest": "^29.1.1",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "jest-junit": "^16.0.0",
+    "jest-watch-typeahead": "^2.2.2",
+    "identity-obj-proxy": "^3.0.0"
   },
   "engines": {
     "node": ">=18.0.0",
