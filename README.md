@@ -237,6 +237,35 @@ python -m core.automation_system --dev
 - [ ] Global synchronization
 - [ ] Complete system transformation
 
+## 🚀 Deployment
+
+### Docker Deployment
+
+Ensure Docker is installed and running.
+
+```bash
+# Build Docker image
+docker build -t liberation-system .
+
+# Run Docker container
+docker run -d -p 3000:3000 -p 8000:8000 liberation-system
+
+# Check logs
+docker logs -f $(docker ps -q -f "ancestor=liberation-system")
+```
+
+### Environment Configuration
+
+Environment variables can be configured in a `.env` file or through the Docker command line.
+
+```env
+# .env file
+LIBERATION_MODE=production
+TRUST_LEVEL=maximum
+RESOURCE_POOL=19000000000000
+NODE_ENV=production
+```
+
 ## 🆘 Support
 
 - **Documentation**: [Wiki](https://github.com/tiation-github/liberation-system/wiki)
