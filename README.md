@@ -4,20 +4,20 @@
 
 ![Liberation System Logo](https://img.shields.io/badge/Liberation-System-00ffff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSIjMDBmZmZmIi8+Cjwvc3ZnPgo=)
 
-[![CI/CD Pipeline](https://github.com/tiation-github/liberation-system/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tiation-github/liberation-system/actions/workflows/ci.yml)
-[![GitHub Pages](https://github.com/tiation-github/liberation-system/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/tiation-github/liberation-system/actions/workflows/pages.yml)
-[![Code Quality](https://img.shields.io/badge/Code%20Quality-Enterprise-00ffff?style=flat-square)](https://github.com/tiation-github/liberation-system)
-[![Security](https://img.shields.io/badge/Security-Bandit%20Scanned-00ffff?style=flat-square)](https://github.com/tiation-github/liberation-system)
+[![CI/CD Pipeline](https://github.com/tiation/liberation-system/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tiation/liberation-system/actions/workflows/ci.yml)
+[![GitHub Pages](https://github.com/tiation/liberation-system/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/tiation/liberation-system/actions/workflows/pages.yml)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-Enterprise-00ffff?style=flat-square)](https://github.com/tiation/liberation-system)
+[![Security](https://img.shields.io/badge/Security-Bandit%20Scanned-00ffff?style=flat-square)](https://github.com/tiation/liberation-system)
 
-[![GitHub](https://img.shields.io/badge/GitHub-tiation--github-00ffff?style=for-the-badge&logo=github)](https://github.com/tiation-github/liberation-system)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-00ffff?style=for-the-badge&logo=github)](https://tiation-github.github.io/liberation-system)
+[![GitHub](https://img.shields.io/badge/GitHub-tiation-00ffff?style=for-the-badge&logo=github)](https://github.com/tiation/liberation-system)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-00ffff?style=for-the-badge&logo=github)](https://tiation.github.io/liberation-system)
 [![License](https://img.shields.io/badge/License-MIT-00ffff?style=for-the-badge)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.9+-00ffff?style=for-the-badge&logo=python)](https://python.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-00ffff?style=for-the-badge&logo=typescript)](https://typescriptlang.org)
 
 **A minimal system to flip everything on its head. One person, massive impact.**
 
-[📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation-github.github.io/liberation-system)
+[📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation.github.io/liberation-system)
 
 </div>
 
@@ -37,6 +37,7 @@ The Liberation System is a radical transformation framework built on four core p
 - **Universal Basic Resources**: $800 weekly flow + $104K community pools
 - **Zero Verification**: Trust-based allocation system
 - **Real-time Tracking**: Live resource mapping and distribution
+- **Enterprise Database**: PostgreSQL with automatic SQLite failover
 
 ### 🌐 Truth Spreading Network
 - **Marketing Channel Hijacking**: Replace ads with reality
@@ -73,8 +74,11 @@ The Liberation System is a radical transformation framework built on four core p
 
 ```bash
 # Clone the repository
-git clone https://github.com/tiation-github/liberation-system.git
+git clone https://github.com/tiation/liberation-system.git
 cd liberation-system
+
+# Start enterprise database infrastructure
+docker-compose up -d postgres redis pgadmin prometheus grafana
 
 # Install Python dependencies
 pip install -r requirements.txt
@@ -93,7 +97,12 @@ npm run dev
 
 Once running, access the Liberation System dashboard at:
 - **Web Interface**: http://localhost:3000
-- **API Endpoint**: http://localhost:8000
+- **REST API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+- **Interactive API**: http://localhost:8000/redoc
+- **Database Management**: http://localhost:8080 (PgAdmin)
+- **System Monitoring**: http://localhost:3000 (Grafana)
+- **Metrics**: http://localhost:9091 (Prometheus)
 
 ### Features Available
 
@@ -107,11 +116,37 @@ Once running, access the Liberation System dashboard at:
 ### Basic Usage
 
 ```python
-# Just run it
+# Core System
 await System.transform()
 
-# Everything else is automatic
+# REST API Server
+python3 run_api.py
+
+# Run Tests
+python3 simple_test.py
 ```
+
+### 🌐 REST API
+
+The Liberation System provides a comprehensive REST API for external integration:
+
+```bash
+# Start the API server
+python3 run_api.py
+
+# API will be available at:
+# 🌐 API: http://localhost:8000
+# 📚 Documentation: http://localhost:8000/docs
+# 🔄 Interactive API: http://localhost:8000/redoc
+```
+
+#### Key API Endpoints:
+- `GET /api/v1/humans` - List all humans
+- `POST /api/v1/humans` - Create new human
+- `POST /api/v1/distribute` - Distribute resources
+- `GET /api/v1/stats` - System statistics
+- `POST /api/v1/security/check` - Access validation
+- `GET /api/v1/automation/stats` - Automation metrics
 
 ## 🏗️ Architecture
 
@@ -122,15 +157,22 @@ liberation-system/
 │   ├── resource_distribution.py # Resource allocation system
 │   ├── knowledge_sharing.py   # Knowledge sharing & learning system
 │   └── data/                   # Data management
-├── 🌐 interface/               # User interfaces
+├── 🌐 api/                     # REST API
+│   ├── app.py                  # FastAPI application
+│   ├── models/                 # Pydantic models
+│   └── routers/                # API endpoints
+├── 🖥️ interface/               # User interfaces
 │   ├── web/                    # React/TypeScript frontend
-│   └── mobile/                 # Mobile-responsive web interface (React, not React Native)
+│   └── mobile/                 # Mobile-responsive web interface
 ├── 🔄 mesh/                    # Mesh networking
 │   └── Mesh_Network/           # Decentralized communication
 ├── 🔒 security/                # Trust-based security
 │   └── trust_default.py        # Minimal security layer
 ├── 🚀 transformation/          # System transformation
 │   └── truth_spreader.py       # Truth distribution engine
+├── 🧪 tests/                   # Testing framework
+│   ├── test_api.py            # API integration tests
+│   └── simple_test.py         # Basic system tests
 └── 📚 docs/                    # Documentation
 ```
 
@@ -193,6 +235,15 @@ ETHICAL_PRINCIPLES = [
 ## 🧪 Testing
 
 ```bash
+# Run integration tests
+python3 simple_test.py
+
+# Test REST API
+python3 test_api.py
+
+# Quick API validation
+python3 quick_api_test.py
+
 # Run all tests
 pytest tests/
 
@@ -203,9 +254,6 @@ pytest tests/security/
 
 # Run with coverage
 pytest --cov=liberation_system tests/
-
-# Test knowledge sharing integration
-python test_knowledge_integration.py
 ```
 
 ## 📈 Performance
@@ -307,9 +355,9 @@ NODE_ENV=production
 
 ## 🆘 Support
 
-- **Documentation**: [Wiki](https://github.com/tiation-github/liberation-system/wiki)
-- **Issues**: [GitHub Issues](https://github.com/tiation-github/liberation-system/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/tiation-github/liberation-system/discussions)
+- **Documentation**: [Wiki](https://github.com/tiation/liberation-system/wiki)
+- **Issues**: [GitHub Issues](https://github.com/tiation/liberation-system/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/tiation/liberation-system/discussions)
 - **Security**: [Security Policy](SECURITY.md)
 
 ## 📄 License
@@ -329,8 +377,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **"We're not building software. We're creating transformation."**
 
-[![GitHub Stars](https://img.shields.io/github/stars/tiation-github/liberation-system?style=social)](https://github.com/tiation-github/liberation-system/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/tiation-github/liberation-system?style=social)](https://github.com/tiation-github/liberation-system/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/tiation-github/liberation-system?style=social)](https://github.com/tiation-github/liberation-system/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/tiation/liberation-system?style=social)](https://github.com/tiation/liberation-system/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/tiation/liberation-system?style=social)](https://github.com/tiation/liberation-system/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/tiation/liberation-system?style=social)](https://github.com/tiation/liberation-system/issues)
 
 </div>
