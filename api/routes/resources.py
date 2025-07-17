@@ -204,6 +204,18 @@ async def distribute_resources(
             try:
                 await resource_pool.record_distribution(db, human[1], amount_per_human)
                 successful_distributions += 1
+                
+                # Publish resource distribution event for each human
+                await event_system.publish(
+                    event_type=EventType.RESOURCE_DISTRIBUTED,
+                    data={
+                        "human_id": human[1],
+                        "amount": amount_per_human,
+                        "distribution_type": request.distribution_type,
+                        "distribution_id": distribution_id
+                    },
+                    source="resources_api"
+                )
             except Exception as e:
                 print(f"Failed to distribute to {human[1]}: {e}")
                 continue
@@ -290,6 +302,19 @@ async def create_community(
         await db.commit()
         
         community_id = cursor.lastrowid
+        
+        # Publish community creation event
+        await event_system.publish(
+            event_type=EventType.COMMUNITY_CREATED,
+            data={
+                "community_id": str(community_id),
+                "name": request.name,
+                "member_count": request.member_count,
+                "total_pool_amount": total_pool_amount,
+                "governance_type": request.governance_type
+            },
+            source="resources_api"
+        )
         
         return CommunityResponse(
             id=str(community_id),
@@ -409,6 +434,19 @@ async def allocate_housing_credit(
             )
         )
         await db.commit()
+        
+        # Publish housing allocation event
+        await event_system.publish(
+            event_type=EventType.HOUSING_ALLOCATED,
+            data={
+                "allocation_id": allocation_id,
+                "human_id": request.human_id,
+                "amount": float(request.amount),
+                "community_id": community_id,
+                "purpose": request.purpose
+            },
+            source="resources_api"
+        )
         
         return HousingAllocationResponse(
             id=allocation_id,

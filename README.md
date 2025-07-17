@@ -3,8 +3,8 @@
 <div align="center">
 
 ![Liberation System Logo](https://img.shields.io/badge/Liberation-System-00ffff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSIjMDBmZmZmIi8+Cjwvc3ZnPgo=)
-[![GitHub](https://img.shields.io/badge/GitHub-tiation--github-00ffff?style=for-the-badge&logo=github)](https://github.com/tiation/liberation-system)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-00ffff?style=for-the-badge&logo=github)](https://tiation.github.io/liberation-system)
+[![GitHub](https://img.shields.io/badge/GitHub-tiation--github-00ffff?style=for-the-badge&logo=github)](https://github.com/tiation-github/liberation-system)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-00ffff?style=for-the-badge&logo=github)](https://tiation-github.github.io/liberation-system)
 [![License](https://img.shields.io/badge/License-MIT-00ffff?style=for-the-badge)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.9+-00ffff?style=for-the-badge&logo=python)](https://python.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-00ffff?style=for-the-badge&logo=typescript)](https://typescriptlang.org)

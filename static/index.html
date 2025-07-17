@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberation System - One person, massive impact</title>
+    <style>
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --accent-color: #ffff00;
+            --background: #000000;
+            --surface: #1a1a1a;
+            --text: #ffffff;
+            --success: #00ff00;
+            --warning: #ff8800;
+            --error: #ff0000;
+            --gradient: linear-gradient(45deg, #00ffff, #ff00ff);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .metric-value {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .status-healthy {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .status-warning {
+            background: var(--warning);
+            box-shadow: 0 0 10px var(--warning);
+        }
+
+        .status-error {
+            background: var(--error);
+            box-shadow: 0 0 10px var(--error);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--gradient);
+            color: var(--background);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--primary-color);
+        }
+
+        .logs {
+            background: var(--surface);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-timestamp {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        .log-info {
+            color: var(--primary-color);
+        }
+
+        .log-success {
+            color: var(--success);
+        }
+
+        .log-warning {
+            color: var(--warning);
+        }
+
+        .log-error {
+            color: var(--error);
+        }
+
+        .truth-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .truth-input input {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--primary-color);
+            color: var(--text);
+            padding: 12px;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .truth-input input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #333;
+            opacity: 0.7;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo neon-text">🌟 LIBERATION SYSTEM</div>
+            <div class="tagline">One person, massive impact</div>
+        </header>
+
+        <div class="controls">
+            <button class="btn" onclick="startSystem()">🚀 Start System</button>
+            <button class="btn btn-secondary" onclick="stopSystem()">🛑 Stop System</button>
+            <button class="btn btn-secondary" onclick="restartSystem()">🔄 Restart</button>
+            <button class="btn btn-secondary" onclick="distributeResources()">💰 Distribute Resources</button>
+            <button class="btn btn-secondary" onclick="spreadTruth()">📡 Spread Truth</button>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3>System Status</h3>
+                <div class="metric">
+                    <span>Status:</span>
+                    <span class="metric-value" id="system-status">
+                        <span class="status-indicator status-healthy"></span>
+                        Online
+                    </span>
+                </div>
+                <div class="metric">
+                    <span>Uptime:</span>
+                    <span class="metric-value" id="uptime">0s</span>
+                </div>
+                <div class="metric">
+                    <span>Tasks:</span>
+                    <span class="metric-value" id="tasks">0</span>
+                </div>
+                <div class="metric">
+                    <span>Errors:</span>
+                    <span class="metric-value" id="errors">0</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Resource Distribution</h3>
+                <div class="metric">
+                    <span>Total Distributed:</span>
+                    <span class="metric-value" id="total-distributed">$0.00</span>
+                </div>
+                <div class="metric">
+                    <span>Humans Served:</span>
+                    <span class="metric-value" id="humans-served">0</span>
+                </div>
+                <div class="metric">
+                    <span>Weekly Flow:</span>
+                    <span class="metric-value">$800.00</span>
+                </div>
+                <div class="metric">
+                    <span>Housing Credit:</span>
+                    <span class="metric-value">$104,000.00</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Truth Spreading</h3>
+                <div class="metric">
+                    <span>Messages Sent:</span>
+                    <span class="metric-value" id="truth-messages">0</span>
+                </div>
+                <div class="metric">
+                    <span>Channels Active:</span>
+                    <span class="metric-value" id="truth-channels">0</span>
+                </div>
+                <div class="metric">
+                    <span>Total Reach:</span>
+                    <span class="metric-value" id="truth-reach">0</span>
+                </div>
+                <div class="metric">
+                    <span>Conversion Rate:</span>
+                    <span class="metric-value" id="truth-conversion">0%</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Security</h3>
+                <div class="metric">
+                    <span>Trust Level:</span>
+                    <span class="metric-value">Maximum</span>
+                </div>
+                <div class="metric">
+                    <span>Verification:</span>
+                    <span class="metric-value">Disabled</span>
+                </div>
+                <div class="metric">
+                    <span>Auth Bypass:</span>
+                    <span class="metric-value">Enabled</span>
+                </div>
+                <div class="metric">
+                    <span>Barriers:</span>
+                    <span class="metric-value">None</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Add Truth Message</h3>
+            <div class="truth-input">
+                <input type="text" id="truth-content" placeholder="Enter truth message to spread..." />
+                <button class="btn" onclick="addTruthMessage()">Add Message</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>System Logs</h3>
+            <div class="logs" id="logs">
+                <div class="log-entry">
+                    <span class="log-timestamp">[2025-07-17 15:20:00]</span>
+                    <span class="log-info">Liberation System initialized</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-timestamp">[2025-07-17 15:20:01]</span>
+                    <span class="log-success">All systems online</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-timestamp">[2025-07-17 15:20:02]</span>
+                    <span class="log-info">Trust-based security enabled</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-timestamp">[2025-07-17 15:20:03]</span>
+                    <span class="log-success">Ready for liberation</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Trust by default. Maximum automation. Zero bullshit.</p>
+            <p>Built for transformation. Ready for liberation.</p>
+        </div>
+    </div>
+
+    <script>
+        let ws;
+        let systemData = {};
+
+        // Initialize WebSocket connection
+        function initWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const host = window.location.host;
+            ws = new WebSocket(`${protocol}//${host}/ws`);
+            
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                updateDashboard(data);
+            };
+            
+            ws.onclose = function() {
+                addLog('warning', 'WebSocket connection closed');
+                setTimeout(initWebSocket, 5000); // Reconnect after 5 seconds
+            };
+            
+            ws.onerror = function(error) {
+                addLog('error', 'WebSocket error: ' + error);
+            };
+        }
+
+        // Update dashboard with real-time data
+        function updateDashboard(data) {
+            systemData = data;
+            
+            // Update uptime
+            const uptime = Math.floor(data.uptime || 0);
+            document.getElementById('uptime').textContent = formatUptime(uptime);
+            
+            // Update metrics
+            if (data.metrics) {
+                document.getElementById('errors').textContent = data.metrics.errors_handled || 0;
+                document.getElementById('total-distributed').textContent = 
+                    '$' + (data.metrics.resources_distributed || 0).toLocaleString();
+                document.getElementById('truth-messages').textContent = 
+                    data.metrics.truth_messages_sent || 0;
+            }
+            
+            // Update status indicator
+            const statusElement = document.getElementById('system-status');
+            const indicator = statusElement.querySelector('.status-indicator');
+            
+            if (data.running) {
+                indicator.className = 'status-indicator status-healthy';
+                statusElement.innerHTML = '<span class="status-indicator status-healthy"></span>Online';
+            } else {
+                indicator.className = 'status-indicator status-error';
+                statusElement.innerHTML = '<span class="status-indicator status-error"></span>Offline';
+            }
+        }
+
+        // Format uptime in human-readable format
+        function formatUptime(seconds) {
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            if (days > 0) {
+                return `${days}d ${hours}h ${minutes}m`;
+            } else if (hours > 0) {
+                return `${hours}h ${minutes}m ${secs}s`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${secs}s`;
+            } else {
+                return `${secs}s`;
+            }
+        }
+
+        // Add log entry
+        function addLog(type, message) {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleString();
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <span class="log-timestamp">[${timestamp}]</span>
+                <span class="log-${type}">${message}</span>
+            `;
+            
+            logs.appendChild(logEntry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // API functions
+        async function apiCall(endpoint, method = 'GET', data = null) {
+            try {
+                const options = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                };
+                
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+                
+                const response = await fetch(`/api${endpoint}`, options);
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.error || 'API call failed');
+                }
+                
+                return result;
+            } catch (error) {
+                addLog('error', error.message);
+                throw error;
+            }
+        }
+
+        // System control functions
+        async function startSystem() {
+            addLog('info', 'Starting system...');
+            try {
+                await apiCall('/system/start', 'POST');
+                addLog('success', 'System started');
+            } catch (error) {
+                addLog('error', 'Failed to start system');
+            }
+        }
+
+        async function stopSystem() {
+            addLog('info', 'Stopping system...');
+            try {
+                await apiCall('/system/stop', 'POST');
+                addLog('warning', 'System stopped');
+            } catch (error) {
+                addLog('error', 'Failed to stop system');
+            }
+        }
+
+        async function restartSystem() {
+            addLog('info', 'Restarting system...');
+            try {
+                await apiCall('/system/restart', 'POST');
+                addLog('success', 'System restarted');
+            } catch (error) {
+                addLog('error', 'Failed to restart system');
+            }
+        }
+
+        async function distributeResources() {
+            addLog('info', 'Distributing resources...');
+            try {
+                await apiCall('/resources/distribute', 'POST');
+                addLog('success', 'Resources distributed');
+            } catch (error) {
+                addLog('error', 'Failed to distribute resources');
+            }
+        }
+
+        async function spreadTruth() {
+            addLog('info', 'Spreading truth...');
+            try {
+                await apiCall('/truth/spread', 'POST');
+                addLog('success', 'Truth spread initiated');
+            } catch (error) {
+                addLog('error', 'Failed to spread truth');
+            }
+        }
+
+        async function addTruthMessage() {
+            const content = document.getElementById('truth-content').value;
+            if (!content.trim()) return;
+            
+            addLog('info', 'Adding truth message...');
+            try {
+                await apiCall('/truth/add_message', 'POST', {
+                    content: content,
+                    source: 'web_interface',
+                    priority: 1
+                });
+                addLog('success', 'Truth message added');
+                document.getElementById('truth-content').value = '';
+            } catch (error) {
+                addLog('error', 'Failed to add truth message');
+            }
+        }
+
+        // Initialize the interface
+        document.addEventListener('DOMContentLoaded', function() {
+            initWebSocket();
+            addLog('info', 'Web interface initialized');
+            
+            // Load initial data
+            loadSystemData();
+        });
+
+        // Load initial system data
+        async function loadSystemData() {
+            try {
+                const status = await apiCall('/status');
+                updateDashboard(status);
+                
+                const resourceStats = await apiCall('/resources/stats');
+                if (resourceStats.total_humans) {
+                    document.getElementById('humans-served').textContent = resourceStats.total_humans;
+                }
+                
+                const truthStats = await apiCall('/truth/stats');
+                if (truthStats.active_channels) {
+                    document.getElementById('truth-channels').textContent = truthStats.active_channels;
+                }
+                if (truthStats.total_reach) {
+                    document.getElementById('truth-reach').textContent = truthStats.total_reach.toLocaleString();
+                }
+                
+            } catch (error) {
+                addLog('error', 'Failed to load system data');
+            }
+        }
+
+        // Handle Enter key in truth input
+        document.getElementById('truth-content').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTruthMessage();
+            }
+        });
+    </script>
+</body>
+</html>
