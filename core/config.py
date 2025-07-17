@@ -44,6 +44,91 @@ class SecurityConfig:
     log_all_access: bool = True
 
 @dataclass
+class DatabaseConfig:
+    """Database configuration for production"""
+    database_url: str = "postgresql://liberation_user:liberation_password@localhost:5432/liberation_system"
+    database_type: str = "postgresql"  # postgresql, sqlite
+    pool_size: int = 20
+    max_overflow: int = 30
+    pool_timeout: int = 30
+    pool_recycle: int = 3600
+    echo: bool = False  # Set to True for SQL query logging
+    
+    # Connection retry settings
+    retry_attempts: int = 3
+    retry_delay: int = 1
+    
+    # SSL settings for production
+    ssl_mode: str = "prefer"  # disable, allow, prefer, require
+    ssl_cert_path: Optional[str] = None
+    ssl_key_path: Optional[str] = None
+    ssl_ca_path: Optional[str] = None
+
+@dataclass
+class LoggingConfig:
+    """Logging configuration for production"""
+    level: str = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    format: str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file_path: Optional[str] = "logs/liberation_system.log"
+    max_file_size: int = 10 * 1024 * 1024  # 10MB
+    backup_count: int = 5
+    json_format: bool = True
+    
+    # Structured logging
+    include_extra_fields: bool = True
+    correlation_id: bool = True
+    request_id: bool = True
+    
+    # External logging services
+    elasticsearch_url: Optional[str] = None
+    elasticsearch_index: str = "liberation-system"
+    
+@dataclass
+class SecurityConfig:
+    """Enhanced security configuration"""
+    trust_by_default: bool = True
+    verification_required: bool = False
+    auth_bypass: bool = True
+    log_all_access: bool = True
+    
+    # Rate limiting
+    rate_limit_enabled: bool = True
+    rate_limit_requests: int = 100
+    rate_limit_window: int = 60  # seconds
+    
+    # CORS settings
+    cors_origins: List[str] = field(default_factory=lambda: ["*"])
+    cors_methods: List[str] = field(default_factory=lambda: ["*"])
+    cors_headers: List[str] = field(default_factory=lambda: ["*"])
+    
+    # Security headers
+    security_headers: bool = True
+    
+    # API Keys for external services
+    api_key_header: str = "X-API-Key"
+    admin_api_key: Optional[str] = None
+    
+@dataclass
+class MonitoringConfig:
+    """Monitoring and metrics configuration"""
+    metrics_enabled: bool = True
+    metrics_port: int = 9090
+    metrics_path: str = "/metrics"
+    
+    # Health check settings
+    health_check_enabled: bool = True
+    health_check_path: str = "/health"
+    health_check_interval: int = 30
+    
+    # Performance monitoring
+    performance_monitoring: bool = True
+    slow_query_threshold: float = 1.0  # seconds
+    
+    # External monitoring services
+    prometheus_enabled: bool = True
+    grafana_enabled: bool = False
+    
+@dataclass
 class SystemConfig:
     """Main system configuration"""
     # Core settings
@@ -60,6 +145,9 @@ class SystemConfig:
     truth: TruthConfig = field(default_factory=TruthConfig)
     mesh: MeshConfig = field(default_factory=MeshConfig)
     security: SecurityConfig = field(default_factory=SecurityConfig)
+    database: DatabaseConfig = field(default_factory=DatabaseConfig)
+    logging: LoggingConfig = field(default_factory=LoggingConfig)
+    monitoring: MonitoringConfig = field(default_factory=MonitoringConfig)
     
     # Ethical principles
     ethical_principles: List[str] = field(default_factory=lambda: [

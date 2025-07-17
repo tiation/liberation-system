@@ -629,8 +629,12 @@ class AILoadBalancer(LoadBalancer):
     async def display_ai_dashboard(self):
         """Display AI-enhanced dashboard"""
         try:
-            # Base dashboard
-            super().display_dashboard()
+            # Base dashboard (non-async call)
+            try:
+                base_stats = await self.get_statistics()
+                self.console.print(f"📊 Base load balancer stats: {len(base_stats)} metrics")
+            except Exception as e:
+                self.logger.warning(f"Base dashboard display issue: {e}")
             
             # AI-specific dashboard
             ai_table = Table(title="🤖 AI Load Balancer Status", style="cyan")

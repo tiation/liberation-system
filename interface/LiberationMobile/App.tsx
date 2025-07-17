@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LiberationProvider } from './src/contexts/LiberationContext';
@@ -10,6 +9,7 @@ import { DashboardScreen } from './src/screens/DashboardScreen';
 import { ResourcesScreen } from './src/screens/ResourcesScreen';
 import { TruthNetworkScreen } from './src/screens/TruthNetworkScreen';
 import { CommunityScreen } from './src/screens/CommunityScreen';
+import { GitHubPagesScreen } from './src/screens/GitHubPagesScreen';
 import { TabBar } from './src/components/TabBar';
 import { LiberationTheme } from './src/theme/colors';
 
@@ -60,6 +60,14 @@ export default function App() {
                   tabBarIcon: 'users',
                 }}
               />
+              <Tab.Screen 
+                name="GitHub" 
+                component={GitHubPagesScreen}
+                options={{
+                  title: 'GitHub Pages',
+                  tabBarIcon: 'github',
+                }}
+              />
             </Tab.Navigator>
           </View>
         </NavigationContainer>
@@ -73,5 +81,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: LiberationTheme.background,
   },
-});
 });

@@ -186,9 +186,9 @@ class OptimizedMeshStorage:
             self.logger.warning(f"Sharding setup failed (may not be configured): {e}")
     
     async def store_node(self, node: AdvancedMeshNode) -> bool:
-        """Store or update a mesh node with caching"""
+        """Store or update a mesh node with caching - Trust-by-default: All nodes accepted"""
         try:
-            # Prepare node document
+            # Prepare node document - Trust-by-default: No verification required
             node_doc = {
                 "node_id": node.id,
                 "host": node.host,
@@ -200,7 +200,7 @@ class OptimizedMeshStorage:
                 "connections": node.connections,
                 "last_seen": node.last_seen,
                 "status": node.status,
-                "trust_score": node.trust_score,
+                "trust_score": node.trust_score,  # Trust-first principle
                 "updated_at": datetime.utcnow(),
                 "version": 1
             }

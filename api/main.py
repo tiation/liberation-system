@@ -1,5 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_limiter import FastAPILimiter
+from fastapi_limiter.depends import RateLimiter
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 import logging
 
@@ -7,18 +10,19 @@ from .routes import resources, truth, mesh, system, websocket, notifications
 from .dependencies import initialize_database
 from ..realtime.websocket.manager import websocket_manager
 from ..realtime.events.system import event_system, WebSocketEventHandler
+from ..core.logging_system import get_logger
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+# API rate limiter and error logger
+logger = get_logger('liberation_system_api')
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan events for the FastAPI application"""
     # Startup
     logging.info("Starting Liberation System API...")
+    
+    # Initialize rate limiter
+    await FastAPILimiter.init(backend="memory://")  # Use Redis for production
     
     # Initialize database
     await initialize_database()
@@ -47,6 +51,17 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Exception handlers
+@app.exception_handler(HTTPException)
+async def unicorn_exception_handler(request: Request, exc: HTTPException):
+    logger.error(f"HTTP exception occurred: {exc.detail}", exc_info=True)
+    return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception occurred: {exc}", exc_info=True)
+    return JSONResponse(status_code=500, content={"detail": "Internal Server Error"})
+
 # Middleware for handling CORS
 app.add_middleware(
     CORSMiddleware,
@@ -66,6 +81,7 @@ app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["
 
 # Root endpoint
 @app.get("/")
+@RateLimiter(times=100, minutes=1)
 async def root():
     return {
         "message": "Welcome to the Liberation System API",

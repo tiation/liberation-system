@@ -174,7 +174,7 @@ class DatabaseOptimizer:
         try:
             self.console.print("[cyan]📊 Creating optimized database indexes...[/cyan]")
             
-            # Indexes for humans table
+            # Indexes for humans table - Trust-by-default: No verification checks, just optimization
             await self.db_manager.execute_query("""
                 CREATE INDEX IF NOT EXISTS idx_humans_status_created ON humans(status, created_at);
             """)

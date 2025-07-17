@@ -5,17 +5,17 @@ import logging
 import signal
 import sys
 from dataclasses import dataclass
-from typing import List, Dict, Callable, Optional
+from typing import Dict, Callable, Optional
 from datetime import datetime
 from pathlib import Path
 
-# Import our core components
+# Import core components needed for system initialization and configuration
 try:
-    from core.config import get_config, ConfigManager
-    from core.resource_distribution import SystemCore as ResourceSystem
-    from core.knowledge_sharing import KnowledgeShareManager, KnowledgeType
-    from transformation.truth_spreader import TruthSystem
-    from security.trust_default import AntiSecurity
+    from core.config import get_config, ConfigManager  # Configuration management
+    from core.resource_distribution import SystemCore as ResourceSystem  # Resource distribution
+    from core.knowledge_sharing import KnowledgeShareManager, KnowledgeType  # Knowledge sharing
+    from transformation.truth_spreader import TruthSystem  # Truth spreading
+    from security.trust_default import AntiSecurity  # Trust-based security model
 except ImportError as e:
     print(f"Warning: Could not import all modules: {e}")
     # We'll handle missing modules gracefully
@@ -23,9 +23,6 @@ except ImportError as e:
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-from rich.progress import Progress, SpinnerColumn, TextColumn
-from rich.layout import Layout
-from rich.live import Live
 
 @dataclass
 class SystemTask:
@@ -39,16 +36,21 @@ class SystemTask:
     status: str = "ready"  # ready, running, completed, failed
     
 class LiberationCore:
-    """Core automation system - the heart of liberation"""
+    """Core automation system that manages all components and tasks."""
     
     def __init__(self):
+        # Terminal output console
         self.console = Console()
+        # Logger for core system
         self.logger = logging.getLogger(__name__)
+        # Dictionary to store system tasks
         self.tasks: Dict[str, SystemTask] = {}
+        # System running flag
         self.running = True
+        # Start time for uptime calculation
         self.start_time = datetime.now()
         
-        # Initialize subsystems
+        # Initialize core system components
         self.resource_system: Optional[ResourceSystem] = None
         self.truth_system: Optional[TruthSystem] = None
         self.security_system: Optional[AntiSecurity] = None

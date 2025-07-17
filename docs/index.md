@@ -27,7 +27,7 @@ Not incremental change. Not working within broken systems. Complete transformati
 
 ### For Developers
 ```bash
-git clone https://github.com/tiation-github/liberation-system.git
+git clone https://github.com/tiation/liberation-system.git
 cd liberation-system
 pip install -r requirements.txt
 npm install
@@ -35,9 +35,9 @@ python core/automation-system.py
 ```
 
 ### For Contributors
-- Read our [Contributing Guide](https://github.com/tiation-github/liberation-system/blob/main/CONTRIBUTING.md)
-- Join [GitHub Discussions](https://github.com/tiation-github/liberation-system/discussions)
-- Check [Open Issues](https://github.com/tiation-github/liberation-system/issues)
+- Read our [Contributing Guide](https://github.com/tiation/liberation-system/blob/main/CONTRIBUTING.md)
+- Join [GitHub Discussions](https://github.com/tiation/liberation-system/discussions)
+- Check [Open Issues](https://github.com/tiation/liberation-system/issues)
 
 ### For Users
 - **No login required** - Trust by default
@@ -75,10 +75,11 @@ Every contribution helps create a world where:
 
 ## 🔗 Quick Links
 
-- **[GitHub Repository](https://github.com/tiation-github/liberation-system)** - Explore the code
-- **[Live Demo](https://tiation-github.github.io/liberation-system)** - See it in action
-- **[Documentation](https://github.com/tiation-github/liberation-system/wiki)** - Learn more
-- **[Issues](https://github.com/tiation-github/liberation-system/issues)** - Report problems or suggest features
+- **[GitHub Repository](https://github.com/tiation/liberation-system)** - Explore the code
+- **[Live Demo](https://tiation.github.io/liberation-system)** - See it in action
+- **[Documentation](https://github.com/tiation/liberation-system/wiki)** - Learn more
+- **[Issues](https://github.com/tiation/liberation-system/issues)** - Report problems or suggest features
+- **[How It Works](faq)** - Comprehensive system explanation
 
 ---
 

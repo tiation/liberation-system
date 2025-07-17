@@ -59,23 +59,27 @@ async def health_check():
         "uptime": "operational"
     }
 
-# Startup event
+# Startup event to initialize the API and Knowledge Sharing System
 @app.on_event("startup")
 async def startup_event():
-    """Initialize system on startup"""
-    print("🚀 Liberation System API starting up...")
-    print("📡 Trust by default - Maximum accessibility")
-    print("🌐 API Documentation available at /docs")
+    """Initializes the system on startup and ensures all components are ready."""
+    print("🚀 Liberation System API starting up...")  # Indicates API is starting
+    print("📡 Trust by default - Maximum accessibility")  # System philosophy
+    print("🌐 API Documentation available at /docs")  # API docs location
     
-    # Initialize knowledge sharing system
+    # Initialize the knowledge sharing subsystem
     await knowledge_system.initialize()
-    print("📚 Knowledge Sharing System initialized")
+    print("📚 Knowledge Sharing System initialized")  # Confirmation message
 
 # Knowledge Sharing Endpoints
 
 @app.get("/api/v1/knowledge", tags=["knowledge"])
 async def get_knowledge_stats():
-    """Get knowledge sharing system statistics"""
+    """
+    Get knowledge sharing system statistics.
+
+    Returns a dictionary with total knowledge entries, active sessions, solved problems, etc.
+    """
     stats = await knowledge_system.get_knowledge_stats()
     return {
         "success": True,
@@ -85,7 +89,15 @@ async def get_knowledge_stats():
 
 @app.post("/api/v1/knowledge/add", tags=["knowledge"])
 async def add_knowledge(request: dict):
-    """Add a new knowledge entry"""
+    """
+    Add a new knowledge entry.
+    
+    Args:
+        request (dict): Contains "title", "content", "knowledge_type", "author", "tags".
+
+    Returns:
+        dict: JSON response indicating success or failure with entry ID.
+    """
     title = request.get("title", "")
     content = request.get("content", "")
     knowledge_type = request.get("knowledge_type", "technical")
@@ -116,7 +128,15 @@ async def add_knowledge(request: dict):
 
 @app.get("/api/v1/knowledge/search", tags=["knowledge"])
 async def search_knowledge(query: str):
-    """Search knowledge base"""
+    """
+    Search knowledge base using text query.
+    
+    Args:
+        query (str): Search query string to find relevant knowledge entries.
+        
+    Returns:
+        dict: JSON response with matching knowledge entries, including their metadata.
+    """
     try:
         results = await knowledge_system.search_knowledge(query)
         return {
@@ -142,7 +162,15 @@ async def search_knowledge(query: str):
 
 @app.post("/api/v1/knowledge/session", tags=["knowledge"])
 async def start_learning_session(request: dict):
-    """Start a collaborative learning session"""
+    """
+    Start a collaborative learning session.
+    
+    Args:
+        request (dict): Contains "title", "description", and "participants" list.
+        
+    Returns:
+        dict: JSON response with session ID and confirmation message.
+    """
     title = request.get("title", "")
     description = request.get("description", "")
     participants = request.get("participants", [])
@@ -169,7 +197,15 @@ async def start_learning_session(request: dict):
 
 @app.post("/api/v1/knowledge/problem", tags=["knowledge"])
 async def add_problem_context(request: dict):
-    """Add problem context for autonomous solving"""
+    """
+    Add problem context for autonomous solving.
+    
+    Args:
+        request (dict): Contains "problem_description", "domain", and "priority".
+        
+    Returns:
+        dict: JSON response with context ID for the autonomous solver.
+    """
     problem_description = request.get("problem_description", "")
     domain = request.get("domain", "general")
     priority = request.get("priority", 1)

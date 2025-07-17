@@ -10,8 +10,7 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from enum import Enum
-import aiofiles
-import aiohttp
+# Removed unused imports: aiofiles, aiohttp
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel

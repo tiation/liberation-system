@@ -94,14 +94,126 @@ class DatabaseInterface(ABC):
         pass
 
 
-class PostgreSQLDatabase(DatabaseInterface):
-    """PostgreSQL database implementation with enterprise features"""
+class ConnectionPool:
+    """Enhanced connection pool manager with monitoring and auto-scaling"""
     
     def __init__(self, config: DatabaseConfig):
         self.config = config
         self.pool: Optional[asyncpg.Pool] = None
+        self.pool_stats = {
+            'total_connections': 0,
+            'active_connections': 0,
+            'idle_connections': 0,
+            'pool_hits': 0,
+            'pool_misses': 0,
+            'connection_errors': 0,
+            'avg_connection_time': 0.0,
+            'max_connection_time': 0.0,
+            'connection_timeouts': 0
+        }
+        self.connection_times = []
+        self.logger = logging.getLogger(__name__)
+    
+    async def create_pool(self) -> asyncpg.Pool:
+        """Create optimized connection pool with monitoring"""
+        pool_config = {
+            'host': self.config.postgres_host,
+            'port': self.config.postgres_port,
+            'user': self.config.postgres_user,
+            'password': self.config.postgres_password,
+            'database': self.config.postgres_database,
+            'min_size': max(1, self.config.connection_pool_size // 4),
+            'max_size': self.config.connection_pool_size,
+            'max_inactive_connection_lifetime': 300,  # 5 minutes
+            'command_timeout': self.config.query_timeout,
+            'server_settings': {
+                'application_name': 'liberation_system',
+                'timezone': 'UTC',
+                'statement_timeout': f'{self.config.query_timeout * 1000}ms',
+                'lock_timeout': '10s',
+                'idle_in_transaction_session_timeout': '30s'
+            }
+        }
+        
+        self.pool = await asyncpg.create_pool(**pool_config)
+        self.pool_stats['total_connections'] = self.config.connection_pool_size
+        return self.pool
+    
+    async def get_connection(self):
+        """Get connection from pool with monitoring"""
+        if not self.pool:
+            raise RuntimeError("Connection pool not initialized")
+        
+        start_time = datetime.now()
+        try:
+            conn = await asyncio.wait_for(
+                self.pool.acquire(),
+                timeout=self.config.pool_timeout
+            )
+            
+            # Track connection timing
+            connection_time = (datetime.now() - start_time).total_seconds()
+            self.connection_times.append(connection_time)
+            
+            # Keep only last 100 connection times
+            if len(self.connection_times) > 100:
+                self.connection_times = self.connection_times[-100:]
+            
+            # Update stats
+            self.pool_stats['pool_hits'] += 1
+            self.pool_stats['active_connections'] += 1
+            self.pool_stats['avg_connection_time'] = sum(self.connection_times) / len(self.connection_times)
+            self.pool_stats['max_connection_time'] = max(self.connection_times)
+            
+            return conn
+        
+        except asyncio.TimeoutError:
+            self.pool_stats['connection_timeouts'] += 1
+            self.pool_stats['pool_misses'] += 1
+            raise
+        except Exception as e:
+            self.pool_stats['connection_errors'] += 1
+            self.pool_stats['pool_misses'] += 1
+            raise
+    
+    async def release_connection(self, conn):
+        """Release connection back to pool"""
+        if self.pool and conn:
+            await self.pool.release(conn)
+            self.pool_stats['active_connections'] = max(0, self.pool_stats['active_connections'] - 1)
+    
+    async def close_pool(self):
+        """Close connection pool"""
+        if self.pool:
+            await self.pool.close()
+            self.pool = None
+    
+    def get_pool_stats(self) -> Dict[str, Any]:
+        """Get connection pool statistics"""
+        if self.pool:
+            pool_size = self.pool.get_size()
+            pool_idle = self.pool.get_idle_size()
+            
+            self.pool_stats.update({
+                'current_pool_size': pool_size,
+                'idle_connections': pool_idle,
+                'active_connections': pool_size - pool_idle
+            })
+        
+        return self.pool_stats.copy()
+
+
+class PostgreSQLDatabase(DatabaseInterface):
+    """PostgreSQL database implementation with enterprise features and connection pooling"""
+    
+    def __init__(self, config: DatabaseConfig):
+        self.config = config
+        self.connection_pool = ConnectionPool(config)
         self.console = Console()
         self.logger = logging.getLogger(__name__)
+        self.query_cache = {}
+        self.cache_hits = 0
+        self.cache_misses = 0
         
     async def initialize(self) -> None:
         """Initialize PostgreSQL connection pool"""

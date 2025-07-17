@@ -33,10 +33,9 @@ router = APIRouter()
 @router.post("/humans/register", response_model=HumanResponse)
 async def register_human(
     request: HumanRegistrationRequest,
-    db: aiosqlite.Connection = Depends(get_database),
-    current_user: dict = Depends(get_current_user)
+    db: aiosqlite.Connection = Depends(get_database)
 ):
-    """Register a new human in the liberation system with cache invalidation"""
+    """Register a new human in the liberation system with cache invalidation - Trust-by-default: No authentication required"""
     try:
         # Check if human already exists
         if await verify_human_exists(request.human_id, db):
@@ -101,10 +100,9 @@ async def register_human(
 @router.get("/humans/{human_id}", response_model=HumanResponse)
 async def get_human(
     human_id: str,
-    db: aiosqlite.Connection = Depends(get_database),
-    current_user: dict = Depends(get_current_user)
+    db: aiosqlite.Connection = Depends(get_database)
 ):
-    """Get human information by ID with caching"""
+    """Get human information by ID with caching - Trust-by-default: Open access"""
     try:
         # Try to get from cache first
         optimized_db = await get_optimized_database_manager()
@@ -153,10 +151,9 @@ async def list_humans(
     limit: int = 100,
     offset: int = 0,
     status: Optional[str] = None,
-    db: aiosqlite.Connection = Depends(get_database),
-    current_user: dict = Depends(get_current_user)
+    db: aiosqlite.Connection = Depends(get_database)
 ):
-    """List all registered humans with optimized query and caching"""
+    """List all registered humans with optimized query and caching - Trust-by-default: Open access"""
     try:
         # Create cache key based on parameters
         cache_key = f"humans_list_{limit}_{offset}_{status or 'all'}"
