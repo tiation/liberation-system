@@ -1,0 +1,120 @@
+# Core Dependencies
+asyncio-mqtt==0.16.1
+aiohttp==3.9.1
+aiofiles==23.2.1
+uvloop==0.19.0
+pydantic==2.5.2
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+typer==0.9.0
+rich==13.7.0
+click==8.1.7
+
+# Database & Storage
+sqlalchemy==2.0.25
+alembic==1.13.1
+redis==5.0.1
+pymongo==4.6.1
+psycopg2-binary==2.9.9
+
+# Web Framework
+fastapi==0.108.0
+uvicorn==0.25.0
+starlette==0.32.0
+jinja2==3.1.2
+python-multipart==0.0.6
+
+# Security & Authentication
+cryptography==41.0.8
+passlib==1.7.4
+python-jose[cryptography]==3.3.0
+bcrypt==4.1.2
+pyjwt==2.8.0
+
+# Networking & Mesh
+websockets==12.0
+aiodns==3.1.1
+aiohttp-cors==0.7.0
+socket.io==5.10.0
+python-socketio==5.10.0
+
+# Machine Learning & AI
+numpy==1.26.2
+pandas==2.1.4
+scikit-learn==1.3.2
+tensorflow==2.15.0
+torch==2.1.2
+transformers==4.36.2
+
+# Data Processing
+jsonschema==4.20.0
+pyyaml==6.0.1
+toml==0.10.2
+lxml==4.9.4
+beautifulsoup4==4.12.2
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+httpx==0.26.0
+factory-boy==3.3.0
+
+# Development Tools
+black==23.12.0
+isort==5.13.2
+flake8==6.1.0
+mypy==1.8.0
+pre-commit==3.6.0
+
+# Logging & Monitoring
+loguru==0.7.2
+prometheus-client==0.19.0
+grafana-api==1.0.3
+structlog==23.2.0
+
+# Deployment & DevOps
+docker==7.0.0
+kubernetes==28.1.0
+gunicorn==21.2.0
+supervisor==4.2.5
+
+# Utilities
+requests==2.31.0
+httpx==0.26.0
+python-dateutil==2.8.2
+pytz==2023.3
+schedule==1.2.0
+apscheduler==3.10.4
+
+# Mesh Network Dependencies
+netifaces==0.11.0
+psutil==5.9.6
+ping3==4.0.4
+scapy==2.5.0
+
+# Liberation System Core
+e2b-code-interpreter==1.0.4
+websockets==12.0
+aioredis==2.0.1
+motor==3.3.2
+
+# Optional Dependencies for Enhanced Features
+opencv-python==4.8.1.78
+pillow==10.1.0
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Development & Testing
+coverage==7.3.3
+bandit==1.7.5
+safety==2.3.5
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+
+# Environment Management
+python-decouple==3.8
+environs==10.0.0
+dynaconf==3.2.4

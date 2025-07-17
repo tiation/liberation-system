@@ -1,0 +1,29 @@
+{
+  "name": "e2b",
+  "private": true,
+  "scripts": {
+    "version": "changeset version && pnpm run -r postVersion",
+    "publish": "changeset publish && pnpm run -r postPublish",
+    "test": "pnpm test --recursive --if-present",
+    "dev:web": "pnpm --prefix apps/web run dev",
+    "rm-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "pnpm-install-hack": "cd packages/js-sdk && sed -i '' 's/\"version\": \".*\"/\"version\": \"9.9.9\"/g' package.json && cd ../.. && pnpm i && git checkout -- packages/js-sdk/package.json",
+    "generate-sdk-reference": "pnpm --if-present --recursive run generate-sdk-reference"
+  },
+  "packageManager": "pnpm@8.7.6",
+  "dependencies": {
+    "@changesets/cli": "^2.26.2",
+    "@changesets/read": "^0.6.2",
+    "@e2b/code-interpreter": "^1.0.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "changeset": "^0.2.6",
+    "eslint": "^8.49.0",
+    "eslint-plugin-unused-imports": "^3.0.0"
+  },
+  "engines": {
+    "pnpm": ">=9.0.0 <10"
+  }
+}

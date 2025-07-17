@@ -1,0 +1,15 @@
+{
+  "name": "e2b-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@e2b/code-interpreter": "^1.0.4"
+  }
+}

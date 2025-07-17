@@ -1,0 +1,21 @@
+liberation-system/
+├── core/
+│   ├── automation/
+│   │   ├── resource_distribution.py    # Handles the $19T distribution
+│   │   ├── task_scheduler.py          # One person, many tasks
+│   │   └── system_monitor.py          # Keeps everything running
+│   ├── data/
+│   │   ├── resource_tracker.py        # Real-time resource mapping
+│   │   └── impact_analyzer.py         # Shows actual system effects
+│   └── security/
+│       └── trust_default.py           # Minimal security, maximum trust
+├── interface/
+│   ├── mobile/
+│   │   └── simple_access.py           # Basic phone interface
+│   └── web/
+│       └── direct_portal.py           # No login needed
+├── transformation/
+│   ├── billboard_hijack.py            # Replaces ads with truth
+│   ├── media_converter.py             # Transforms marketing channels
+│   └── truth_spreader.py             # Makes big lie visible
+└── README.md                          # Simple but powerful guide
