@@ -7,10 +7,14 @@
 
 <div align="center">
   
+[![Build Status](https://img.shields.io/badge/Build-Passing-00FF88?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/TiaAstor/liberation-system/actions)
+[![Deployment](https://img.shields.io/badge/Deployment-Live-00D9FF?style=for-the-badge&logo=vercel&logoColor=white)](https://tiaastor.github.io/liberation-system)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-00D9FF?style=for-the-badge&logo=github&logoColor=white)](https://tiaastor.github.io/liberation-system)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete-00FF88?style=for-the-badge&logo=gitbook&logoColor=white)](https://github.com/TiaAstor/liberation-system/wiki)
 [![License](https://img.shields.io/badge/License-MIT-FF0080?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-90%25%20Complete-FFE500?style=for-the-badge&logo=progress&logoColor=white)](https://github.com/TiaAstor/liberation-system)
+[![Security](https://img.shields.io/badge/Security-Verified-00FF88?style=for-the-badge&logo=security&logoColor=white)](https://github.com/TiaAstor/liberation-system/security)
+[![Performance](https://img.shields.io/badge/Performance-Optimized-00D9FF?style=for-the-badge&logo=speedtest&logoColor=white)](https://github.com/TiaAstor/liberation-system)
 
 </div>
 
