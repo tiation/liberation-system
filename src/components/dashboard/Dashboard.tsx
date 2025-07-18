@@ -20,6 +20,7 @@ import MetricCard from '@/components/ui/MetricCard';
 import ProgressBar from '@/components/ui/ProgressBar';
 import ConsoleOutput from '@/components/ui/ConsoleOutput';
 import NeonButton from '@/components/ui/NeonButton';
+import EnterpriseBackground from '@/components/ui/EnterpriseBackground';
 
 const Dashboard: React.FC = () => {
   const [dashboardData, setDashboardData] = useState<DashboardData>(mockData.dashboardData);

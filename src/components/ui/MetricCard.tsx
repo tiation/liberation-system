@@ -19,17 +19,17 @@ const MetricCard: React.FC<MetricCardProps> = ({
   const trendIcon = trend ? getTrendIcon(trend) : null;
 
   return (
-    <div className={cn('liberation-card hover:border-primary-500/50', className)}>
+    <div className={cn('liberation-card-glow hover:border-primary-500/50 animate-cyber-glow data-stream', className)}>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           {icon && (
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-200 text-primary-500">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-200 text-primary-500 animate-pulse-neon">
               {icon}
             </div>
           )}
           <div>
             <p className="text-sm font-medium text-white/70">{title}</p>
-            <p className="text-2xl font-bold text-primary-500">{value}</p>
+            <p className="text-2xl font-bold gradient-text-cyan animate-neon-flicker">{value}</p>
             {subtitle && (
               <p className="text-xs text-white/50">{subtitle}</p>
             )}

@@ -19,6 +19,7 @@ const NeonButton: React.FC<NeonButtonProps> = ({
     transition-all duration-300 active:scale-95 disabled:opacity-50
     disabled:cursor-not-allowed focus:outline-none focus:ring-2
     focus:ring-offset-2 focus:ring-offset-dark-200
+    enterprise-glow animate-hologram
   `;
 
   const variantClasses = {

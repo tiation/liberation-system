@@ -1,750 +1,175 @@
+---
+layout: default
+title: "Home"
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberation System</title>
-    <meta name="description" content="A minimal system to flip everything on its head. One person, massive impact.">
-    <meta name="theme-color" content="#00ffff">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+    <title>{{ site.title }}</title>
     <style>
         :root {
-            --electric-blue: #0066ff;
-            --neon-cyan: #00ffff;
-            --electric-purple: #6600ff;
-            --hot-pink: #ff0066;
-            --lime-green: #00ff88;
-            --pure-black: #000000;
-            --ultra-dark: #0d0d0d;
-            --dark-card: #111111;
-            --bright-white: #ffffff;
-            --high-contrast-text: #f0f0f0;
-            --accent-glow: #00ffff;
-            
-            --gradient-primary: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
-            --gradient-secondary: linear-gradient(135deg, var(--electric-purple), var(--hot-pink));
-            --gradient-accent: linear-gradient(135deg, var(--lime-green), var(--neon-cyan));
-            --gradient-bg: radial-gradient(ellipse at top, #0d1117, #000000);
-            --gradient-card: linear-gradient(145deg, #111111, #1a1a1a);
+            --primary-color: #00D9FF;
+            --secondary-color: #00FF88;
+            --accent-color: #FF0080;
+            --background-color: #0A0A0A;
+            --card-background: #1A1A1A;
+            --text-color: #FFFFFF;
         }
-
-        * {
-            box-sizing: border-box;
+        
+        body {
+            background: var(--background-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        body {
-            background: var(--gradient-bg);
-            color: var(--high-contrast-text);
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-            font-weight: 400;
-            letter-spacing: 0.02em;
         }
-
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            opacity: 0.9;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--high-contrast-text);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        nav a:hover::before {
-            left: 0;
-        }
-
-        nav a:hover {
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        main {
-            padding: 3rem 0;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            margin-bottom: 4rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-            animation: glow 2s ease-in-out infinite alternate;
+            padding: 0 2rem;
         }
         
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--neon-cyan);
-            margin-bottom: 2rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
-            to { text-shadow: 0 0 30px rgba(0, 255, 255, 0.8); }
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: rgba(224, 224, 224, 0.9);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--gradient-primary);
-            color: #000;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-            margin: 0.5rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
-        }
-
-        .features-grid {
+        .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
-
+        
         .feature-card {
-            background: rgba(26, 26, 26, 0.9);
+            background: var(--card-background);
+            padding: 2rem;
             border-radius: 10px;
-            padding: 1.5rem;
-            border: 1px solid rgba(102, 0, 255, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+            transition: transform 0.3s ease;
         }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-secondary);
-        }
-
+        
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: var(--electric-purple);
-            box-shadow: 0 10px 30px rgba(102, 0, 255, 0.3);
+            box-shadow: 0 5px 30px rgba(0, 217, 255, 0.2);
         }
-
+        
         .feature-card h3 {
-            color: var(--electric-purple);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-top: 0;
         }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        
+        .cta-buttons {
+            display: flex;
             gap: 1rem;
+            justify-content: center;
             margin: 2rem 0;
+            flex-wrap: wrap;
         }
-
-        .metric-card {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .metric-card:hover {
-            border-color: var(--neon-cyan);
-            transform: scale(1.05);
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
+        
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--background-color);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
             font-weight: bold;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
-        .metric-label {
-            color: rgba(224, 224, 224, 0.7);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3);
         }
-
-        .content-section {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 15px;
+        
+        .footer {
+            background: var(--card-background);
             padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .content-section h2 {
-            color: var(--neon-cyan);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        footer {
-            background: rgba(0, 0, 0, 0.9);
-            border-top: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 2rem 0;
             text-align: center;
             margin-top: 4rem;
+            border-top: 1px solid var(--primary-color);
         }
-
-        .footer-quote {
-            font-style: italic;
-            color: var(--neon-cyan);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--neon-cyan);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--electric-purple);
-            text-shadow: 0 0 10px currentColor;
-        }
-
+        
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
-            .header-content {
+            .cta-buttons {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: center;
             }
-            
-            nav {
-                justify-content: center;
-            }
-        }
-        
-        /* Additional GitHub Pages enhancements */
-        .screenshot {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            margin: 1rem 0;
-        }
-        
-        .demo-section {
-            background: rgba(13, 13, 13, 0.9);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .demo-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-        }
-
-        .interactive-demo {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .interactive-demo:hover {
-            border-color: var(--neon-cyan);
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-        }
-        
-        .demo-button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--gradient-secondary);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .demo-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 0, 255, 0.4);
-        }
-        
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: pulse 2s infinite;
-        }
-        
-        .status-online {
-            background: #00ff88;
-        }
-        
-        .status-demo {
-            background: #ff0066;
-        }
-        
-        .architecture-preview {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .architecture-preview img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid var(--electric-purple);
-            box-shadow: 0 0 25px rgba(102, 0, 255, 0.3);
-        }
-        
-        .terminal-output {
-            background: #000;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border: 1px solid var(--neon-cyan);
-            overflow-x: auto;
-            font-size: 0.9rem;
-        }
-        
-        .terminal-output::before {
-            content: '$ ';
-            color: var(--neon-cyan);
-            font-weight: bold;
-        }
-        
-        .metric-live {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .metric-live::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .enterprise-badge {
-            background: var(--gradient-secondary);
-            color: #fff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin: 0.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .github-widget {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            text-align: center;
-        }
-        
-        .github-widget h4 {
-            color: var(--neon-cyan);
-            margin-bottom: 0.5rem;
-        }
-        
-        .github-stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 1rem 0;
-        }
-        
-        .github-stat {
-            text-align: center;
-        }
-        
-        .github-stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--neon-cyan);
-        }
-        
-        .github-stat-label {
-            font-size: 0.8rem;
-            color: rgba(224, 224, 224, 0.7);
-        }
-        
-        .api-demo {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-        
-        .api-endpoint {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.5rem;
-            border-radius: 5px;
-            margin: 0.5rem 0;
-            font-family: 'Courier New', monospace;
-            border-left: 3px solid var(--neon-cyan);
-        }
-        
-        .method-get {
-            color: #00ff88;
-        }
-        
-        .method-post {
-            color: #ff0066;
-        }
-        
-        .roadmap-item {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .roadmap-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-        }
-        
-        .roadmap-item:hover {
-            transform: translateX(5px);
-            border-color: var(--neon-cyan);
-        }
-        
-        .roadmap-status {
-            float: right;
-            padding: 0.2rem 0.5rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .status-complete {
-            background: #00ff88;
-            color: #000;
-        }
-        
-        .status-progress {
-            background: #ff0066;
-            color: #fff;
-        }
-        
-        .status-planned {
-            background: #ffff00;
-            color: #000;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">🌟</div>
-                    <div class="logo-text">Liberation System</div>
-                </div>
-                <nav>
-                    <a href="#features">Features</a>
-                    <a href="#metrics">Metrics</a>
-                    <a href="review.html">Review</a>
-                    <a href="https://github.com/tiation-github/liberation-system">GitHub</a>
-                    <a href="https://github.com/tiation-github/liberation-system/blob/main/CONTRIBUTING.md">Contribute</a>
-                </nav>
+    <div class="hero">
+        <h1>{{ site.title }}</h1>
+        <p>{{ site.description }}</p>
+        <div class="cta-buttons">
+            <a href="#documentation" class="cta-button">
+                📚 Documentation
+            </a>
+            <a href="#demo" class="cta-button">
+                🚀 Live Demo
+            </a>
+            <a href="{{ site.repository }}" class="cta-button">
+                💻 GitHub
+            </a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="features">
+            <div class="feature-card">
+                <h3>🎯 Enterprise Grade</h3>
+                <p>Professional solution built with enterprise standards and best practices in mind.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔒 Secure & Reliable</h3>
+                <p>Security-first approach with comprehensive testing and validation.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ High Performance</h3>
+                <p>Optimized for speed and efficiency with modern development practices.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎨 Dark Neon Theme</h3>
+                <p>Beautiful dark interface with cyan gradient flares for modern aesthetics.</p>
             </div>
         </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <section class="hero">
-                <h1>Liberation System</h1>
-                <p>A minimal system to flip everything on its head. One person, massive impact.</p>
-                <a href="demo.html" class="cta-button">🚀 Live Demo</a>
-                <a href="https://github.com/tiation/liberation-system" class="cta-button">Explore the Code</a>
-                <a href="https://github.com/tiation/liberation-system/blob/main/CONTRIBUTING.md" class="cta-button">Contribute</a>
-            </section>
-
-            <section id="features" class="content-section">
-                <h2>🚀 Revolutionary Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>💰 Resource Distribution</h3>
-                        <p>Theoretical $19T redistribution system with automated wealth flow and universal basic resources.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🌐 Truth Network</h3>
-                        <p>Replace marketing with reality through viral information spread and media transformation.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🔒 Trust-First Security</h3>
-                        <p>Anti-security model that removes artificial barriers and defaults to access.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🤖 Autonomous Operation</h3>
-                        <p>Self-healing systems with minimal human oversight and maximum impact.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🕸️ Mesh Network</h3>
-                        <p>Decentralized communication with self-organizing nodes and perfect synchronization.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>⚡ Direct Action</h3>
-                        <p>Zero bureaucracy, no waiting, no bullshit - just immediate transformation.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="metrics" class="content-section">
-                <h2>📊 System Metrics</h2>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">$19T</div>
-                        <div class="metric-label">Resource Pool</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">1.2M</div>
-                        <div class="metric-label">Truth Channels</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">50K+</div>
-                        <div class="metric-label">Network Nodes</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">99.9%</div>
-                        <div class="metric-label">System Uptime</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">&lt;100ms</div>
-                        <div class="metric-label">Response Time</div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content-section">
-                <h2>🔍 Expert Review</h2>
-                <div style="background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1rem 0;">
-                    <h3 style="color: var(--neon-cyan); margin-bottom: 1rem;">🏆 Overall Rating: 9.2/10 - Exceptional</h3>
-                    <p style="margin-bottom: 1rem;">"The Liberation System represents a remarkably sophisticated and well-architected application that successfully combines <strong>philosophical vision</strong> with <strong>enterprise-grade technical execution</strong>."</p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1rem 0;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: bold; color: var(--neon-cyan);">5,565</div>
-                            <div style="font-size: 0.9rem; color: rgba(224, 224, 224, 0.7);">Lines of Python Code</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: bold; color: var(--neon-cyan);">2,845</div>
-                            <div style="font-size: 0.9rem; color: rgba(224, 224, 224, 0.7);">Lines of React/TypeScript</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: bold; color: var(--neon-cyan);">9.8/10</div>
-                            <div style="font-size: 0.9rem; color: rgba(224, 224, 224, 0.7);">UI/UX Design Score</div>
-                        </div>
-                    </div>
-                    <p style="text-align: center; margin-top: 1rem;">
-                        <a href="review.html" style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--gradient-primary); color: #000; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">Read Full Review</a>
-                    </p>
-                </div>
-            </section>
-
-            <section class="content-section">
-                <h2>🌟 The Vision</h2>
-                <p>We're not building software. We're creating <strong>transformation</strong>.</p>
-                <p>The Liberation System represents a radical reimagining of how society operates—removing artificial barriers, enabling direct access to resources, and fostering genuine human connection.</p>
-                
-                <h3>🎯 Core Principles</h3>
-                <ul>
-                    <li><strong>Trust by Default</strong> - No complex authentication systems. If you're human, you're in.</li>
-                    <li><strong>Zero Bullshit</strong> - Direct action over bureaucracy. Real solutions over complexity.</li>
-                    <li><strong>Maximum Automation</strong> - One person can run the entire system. Self-healing, autonomous operation.</li>
-                    <li><strong>Complete Transformation</strong> - Not incremental change. Complete transformation.</li>
-                </ul>
-
-                <h3>🚀 Get Started</h3>
-                <p>Ready to join the transformation? Here's how:</p>
-                <ul>
-                    <li><strong>Developers:</strong> <code>git clone https://github.com/tiation/liberation-system.git</code></li>
-                    <li><strong>Contributors:</strong> Read our <a href="https://github.com/tiation/liberation-system/blob/main/CONTRIBUTING.md">Contributing Guide</a></li>
-                    <li><strong>Users:</strong> No login required - Trust by default</li>
-                </ul>
-            </section>
+        
+        <div id="documentation">
+            {{ content }}
         </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-quote">"We're not building software. We're creating transformation."</div>
-            <div class="footer-links">
-                <a href="https://github.com/tiation/liberation-system">GitHub</a>
-                <a href="https://github.com/tiation/liberation-system/issues">Issues</a>
-                <a href="https://github.com/tiation/liberation-system/discussions">Discussions</a>
-                <a href="https://github.com/tiation/liberation-system/wiki">Wiki</a>
-            </div>
-            <p>&copy; 2024 Liberation System. Open source under MIT License.</p>
-        </div>
-    </footer>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}. All rights reserved.</p>
+        <p>Built with ❤️ using Jekyll and GitHub Pages</p>
+    </div>
 </body>
 </html>

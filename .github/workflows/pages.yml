@@ -1,35 +1,10 @@
-name: 📖 Deploy GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-    paths:
-      - '*.html'
-      - 'static/**'
-      - 'assets/**'
-      - 'docs/**'
-      - 'src/**'
-      - 'app/**'
-      - 'pages/**'
-      - 'public/**'
-      - 'package.json'
-      - 'next.config.js'
-      - 'tailwind.config.js'
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
-    paths:
-      - '*.html'
-      - 'static/**'
-      - 'assets/**'
-      - 'docs/**'
-      - 'src/**'
-      - 'app/**'
-      - 'pages/**'
-      - 'public/**'
-      - 'package.json'
-      - 'next.config.js'
-      - 'tailwind.config.js'
-  workflow_dispatch:
+    branches: [ main, master ]
 
 permissions:
   contents: read
@@ -38,43 +13,32 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout
+      - name: Checkout
         uses: actions/checkout@v4
         
-      - name: 🔧 Setup Pages
-        uses: actions/configure-pages@v4
-        
-      - name: 🔧 Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          node-version: '18'
-          cache: 'npm'
+          ruby-version: '3.1'
+          bundler-cache: true
           
-      - name: 📦 Install dependencies
-        run: npm ci
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
         
-      - name: 🏗️ Build Next.js app
-        run: |
-          npm run build
-          # Create _site directory and copy Next.js output
-          mkdir -p _site
-          cp -r out/* _site/
-          # Also copy static HTML files if they exist
-          cp *.html _site/ || true
-          cp -r static _site/ || true
-          cp -r assets _site/ || true
-          cp -r docs/* _site/ || true
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
-          GITHUB_ACTIONS: true
+          JEKYLL_ENV: production
           
-      - name: 📤 Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
 
   deploy:
     environment:
@@ -82,8 +46,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     steps:
-      - name: 🚀 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v2

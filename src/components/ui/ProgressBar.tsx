@@ -41,11 +41,12 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           className={cn(
             'progress-fill',
             variantClasses[variant],
-            'relative overflow-hidden'
+            'relative overflow-hidden animate-pulse-neon'
           )}
           style={{ width: `${percentage}%` }}
         >
           <div className="absolute inset-0 bg-white/20 animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
         </div>
       </div>
       {children && (
