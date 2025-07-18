@@ -309,25 +309,30 @@ class ShardingStrategy:
                 self.node_shards[node.id].replica_shards.append(shard_id)
     
     async def remove_node_from_shard(self, node_id: str) -> bool:
-        """Remove a node from all its shards"""
+        """Remove a node from all its shards with enhanced fault tolerance"""
         try:
             if node_id not in self.node_shards:
-                return False
+                self.logger.warning(f"Node {node_id} not found in shard assignments")
+                return True  # Already removed, consider it success
             
             node_shard = self.node_shards[node_id]
+            affected_shards = []
             
-            # Remove from all assigned shards
-            for shard_id in node_shard.assigned_shards:
+            # Remove from all assigned shards with careful error handling
+            for shard_id in list(node_shard.assigned_shards):  # Create copy to avoid modification during iteration
                 if shard_id in self.shards:
                     shard = self.shards[shard_id]
+                    affected_shards.append(shard_id)
                     
                     # Remove from shard's node list
                     if node_id in shard.nodes:
                         shard.nodes.remove(node_id)
                     
-                    # Handle primary node removal
+                    # Handle primary node removal with immediate failover
                     if shard.primary_node == node_id:
                         await self._reassign_primary_node(shard_id)
+                        # Ensure critical shards maintain minimum replicas
+                        await self._ensure_shard_resilience(shard_id)
                     
                     # Remove from replica nodes
                     if node_id in shard.replica_nodes:
@@ -338,15 +343,20 @@ class ShardingStrategy:
             if node_id in self.nodes:
                 del self.nodes[node_id]
             
-            self.logger.info(f"Node {node_id} removed from all shards")
+            # Trigger automatic recovery for affected shards
+            await self._recover_affected_shards(affected_shards)
+            
+            self.logger.info(f"Node {node_id} removed from {len(affected_shards)} shards with fault tolerance recovery")
             return True
             
         except Exception as e:
             self.logger.error(f"Failed to remove node {node_id} from shards: {e}")
+            # Even if removal fails partially, try to maintain system integrity
+            await self._emergency_shard_recovery()
             return False
     
     async def _reassign_primary_node(self, shard_id: str):
-        """Reassign primary node for a shard"""
+        """Reassign primary node for a shard with enhanced fault tolerance"""
         shard = self.shards[shard_id]
         
         if shard.replica_nodes:
@@ -357,7 +367,8 @@ class ShardingStrategy:
             for replica_id in shard.replica_nodes:
                 if replica_id in self.nodes:
                     node = self.nodes[replica_id]
-                    score = node.metrics.calculate_quality_score()
+                    # Enhanced scoring for primary selection
+                    score = self._calculate_primary_suitability_score(node)
                     
                     if score > best_score:
                         best_score = score
@@ -365,6 +376,7 @@ class ShardingStrategy:
             
             if best_replica:
                 # Update primary assignment
+                old_primary = shard.primary_node
                 shard.primary_node = best_replica
                 shard.replica_nodes.remove(best_replica)
                 
@@ -373,8 +385,31 @@ class ShardingStrategy:
                     self.node_shards[best_replica].primary_shards.append(shard_id)
                     if shard_id in self.node_shards[best_replica].replica_shards:
                         self.node_shards[best_replica].replica_shards.remove(shard_id)
+                
+                self.logger.info(f"Primary reassigned for shard {shard_id}: {old_primary} -> {best_replica}")
+            else:
+                # No suitable replica found, mark shard as needs attention
+                shard.primary_node = None
+                self.logger.warning(f"No suitable primary found for shard {shard_id}")
         else:
-            shard.primary_node = None
+            # No replicas available, try to assign from available nodes
+            available_nodes = [node_id for node_id in self.nodes.keys() if node_id not in shard.nodes]
+            if available_nodes:
+                # Find the best available node
+                best_node = max(available_nodes, 
+                              key=lambda n: self._calculate_primary_suitability_score(self.nodes[n]))
+                shard.primary_node = best_node
+                shard.nodes.append(best_node)
+                
+                # Update node assignments
+                if best_node in self.node_shards:
+                    self.node_shards[best_node].assigned_shards.append(shard_id)
+                    self.node_shards[best_node].primary_shards.append(shard_id)
+                    
+                self.logger.info(f"Emergency primary assigned for shard {shard_id}: {best_node}")
+            else:
+                shard.primary_node = None
+                self.logger.error(f"No nodes available for shard {shard_id} - CRITICAL!")
     
     async def rebalance_shards(self) -> bool:
         """Rebalance shards across the network"""
@@ -626,3 +661,209 @@ class ShardingStrategy:
                 output.append(f"  • {node_id}: {load}/{capacity} shards ({utilization:.1f}%)")
         
         return "\n".join(output)
+    
+    def _calculate_primary_suitability_score(self, node: AdvancedMeshNode) -> float:
+        """Calculate how suitable a node is for being a primary"""
+        score = 0.0
+        
+        # Network quality (40%)
+        score += node.metrics.calculate_quality_score() * 0.4
+        
+        # Uptime reliability (30%)
+        if node.metrics.uptime > 99.5:
+            score += 0.3
+        elif node.metrics.uptime > 95.0:
+            score += 0.2
+        elif node.metrics.uptime > 90.0:
+            score += 0.1
+        
+        # Processing power (20%)
+        if node.capabilities.processing_power > 2.0:
+            score += 0.2
+        elif node.capabilities.processing_power > 1.0:
+            score += 0.1
+        
+        # Network stability (10%)
+        if node.metrics.packet_loss < 0.1:
+            score += 0.1
+        elif node.metrics.packet_loss < 0.5:
+            score += 0.05
+        
+        return score
+    
+    async def _ensure_shard_resilience(self, shard_id: str):
+        """Ensure a shard maintains minimum resilience requirements"""
+        if shard_id not in self.shards:
+            return
+        
+        shard = self.shards[shard_id]
+        current_nodes = len(shard.nodes)
+        min_nodes = max(2, self.replication_factor)  # At least 2 nodes, preferably replication_factor
+        
+        if current_nodes < min_nodes:
+            # Find additional nodes to assign
+            available_nodes = [node_id for node_id in self.nodes.keys() if node_id not in shard.nodes]
+            needed_nodes = min_nodes - current_nodes
+            
+            # Sort by suitability
+            available_nodes.sort(key=lambda n: self._calculate_primary_suitability_score(self.nodes[n]), reverse=True)
+            
+            for i in range(min(needed_nodes, len(available_nodes))):
+                node_id = available_nodes[i]
+                node = self.nodes[node_id]
+                
+                # Check compatibility
+                if self._is_node_compatible_with_shard(node, shard):
+                    # Add to shard
+                    shard.nodes.append(node_id)
+                    shard.replica_nodes.append(node_id)
+                    
+                    # Update node assignments
+                    if node_id in self.node_shards:
+                        self.node_shards[node_id].assigned_shards.append(shard_id)
+                        self.node_shards[node_id].replica_shards.append(shard_id)
+                    
+                    self.logger.info(f"Added emergency replica {node_id} to shard {shard_id}")
+    
+    async def _recover_affected_shards(self, affected_shards: List[str]):
+        """Recover shards that were affected by node removal"""
+        for shard_id in affected_shards:
+            if shard_id in self.shards:
+                shard = self.shards[shard_id]
+                
+                # Check if shard has minimum nodes
+                if len(shard.nodes) < self.replication_factor:
+                    await self._ensure_shard_resilience(shard_id)
+                
+                # If no primary, try to assign one
+                if not shard.primary_node:
+                    await self._reassign_primary_node(shard_id)
+                
+                # Update shard health status
+                shard.last_rebalanced = datetime.now()
+                
+                self.logger.info(f"Recovery completed for shard {shard_id}")
+    
+    async def _emergency_shard_recovery(self):
+        """Emergency recovery procedure for the entire sharding system"""
+        self.logger.warning("Initiating emergency shard recovery")
+        
+        # Identify critical shards (those with no primary or insufficient replicas)
+        critical_shards = []
+        for shard_id, shard in self.shards.items():
+            if not shard.primary_node or len(shard.nodes) < 2:
+                critical_shards.append(shard_id)
+        
+        # Prioritize recovery of critical shards
+        for shard_id in critical_shards:
+            try:
+                await self._ensure_shard_resilience(shard_id)
+                if shard_id in self.shards and not self.shards[shard_id].primary_node:
+                    await self._reassign_primary_node(shard_id)
+            except Exception as e:
+                self.logger.error(f"Emergency recovery failed for shard {shard_id}: {e}")
+        
+        # Rebalance if necessary
+        try:
+            await self.rebalance_shards()
+        except Exception as e:
+            self.logger.error(f"Emergency rebalancing failed: {e}")
+        
+        self.logger.info(f"Emergency recovery completed for {len(critical_shards)} critical shards")
+    
+    async def health_check(self) -> Dict[str, Any]:
+        """Perform a comprehensive health check of the sharding system"""
+        health_report = {
+            "overall_health": "healthy",
+            "timestamp": datetime.now().isoformat(),
+            "critical_issues": [],
+            "warnings": [],
+            "metrics": {
+                "total_shards": len(self.shards),
+                "healthy_shards": 0,
+                "degraded_shards": 0,
+                "critical_shards": 0,
+                "total_nodes": len(self.nodes),
+                "active_nodes": 0
+            }
+        }
+        
+        # Check each shard's health
+        for shard_id, shard in self.shards.items():
+            shard_health = self._assess_shard_health(shard)
+            
+            if shard_health == "critical":
+                health_report["metrics"]["critical_shards"] += 1
+                health_report["critical_issues"].append(f"Shard {shard_id} is in critical state")
+            elif shard_health == "degraded":
+                health_report["metrics"]["degraded_shards"] += 1
+                health_report["warnings"].append(f"Shard {shard_id} is degraded")
+            else:
+                health_report["metrics"]["healthy_shards"] += 1
+        
+        # Check node health
+        for node_id, node in self.nodes.items():
+            if node.metrics.uptime > 90.0:  # Consider node active if uptime > 90%
+                health_report["metrics"]["active_nodes"] += 1
+        
+        # Determine overall health
+        if health_report["metrics"]["critical_shards"] > 0:
+            health_report["overall_health"] = "critical"
+        elif health_report["metrics"]["degraded_shards"] > len(self.shards) * 0.2:  # More than 20% degraded
+            health_report["overall_health"] = "degraded"
+        elif health_report["warnings"]:
+            health_report["overall_health"] = "warning"
+        
+        return health_report
+    
+    def _assess_shard_health(self, shard: ShardInfo) -> str:
+        """Assess the health status of a single shard"""
+        # Critical: No primary node or less than 2 nodes
+        if not shard.primary_node or len(shard.nodes) < 2:
+            return "critical"
+        
+        # Degraded: Less than replication factor
+        if len(shard.nodes) < self.replication_factor:
+            return "degraded"
+        
+        # Check if primary node is healthy
+        if shard.primary_node in self.nodes:
+            primary_node = self.nodes[shard.primary_node]
+            if primary_node.metrics.uptime < 95.0:
+                return "degraded"
+        
+        return "healthy"
+    
+    async def auto_heal(self) -> bool:
+        """Automatically heal any detected issues in the sharding system"""
+        try:
+            self.logger.info("Starting auto-heal process")
+            
+            # Run health check
+            health_report = await self.health_check()
+            
+            if health_report["overall_health"] == "healthy":
+                self.logger.info("System is healthy, no healing needed")
+                return True
+            
+            # Fix critical issues first
+            if health_report["critical_issues"]:
+                await self._emergency_shard_recovery()
+            
+            # Address warnings
+            if health_report["warnings"]:
+                await self.rebalance_shards()
+            
+            # Verify healing was successful
+            post_heal_health = await self.health_check()
+            
+            if post_heal_health["overall_health"] in ["healthy", "warning"]:
+                self.logger.info("Auto-heal completed successfully")
+                return True
+            else:
+                self.logger.warning("Auto-heal completed but system still has issues")
+                return False
+                
+        except Exception as e:
+            self.logger.error(f"Auto-heal process failed: {e}")
+            return False
