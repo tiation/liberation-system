@@ -17,7 +17,7 @@
 
 **A minimal system to flip everything on its head. One person, massive impact.**
 
-[📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation.github.io/liberation-system)
+[🚀 Live Demo](https://tiation.github.io/liberation-system/demo.html) • [📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation.github.io/liberation-system)
 
 </div>
 

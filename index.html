@@ -157,6 +157,15 @@
             text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
             animation: glow 2s ease-in-out infinite alternate;
         }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
 
         @keyframes glow {
             from { text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
@@ -330,6 +339,265 @@
                 justify-content: center;
             }
         }
+        
+        /* Additional GitHub Pages enhancements */
+        .screenshot {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            margin: 1rem 0;
+        }
+        
+        .demo-section {
+            background: rgba(13, 13, 13, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+        }
+
+        .interactive-demo {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-demo:hover {
+            border-color: var(--neon-cyan);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+        
+        .demo-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-secondary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 0, 255, 0.4);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-online {
+            background: #00ff88;
+        }
+        
+        .status-demo {
+            background: #ff0066;
+        }
+        
+        .architecture-preview {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .architecture-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid var(--electric-purple);
+            box-shadow: 0 0 25px rgba(102, 0, 255, 0.3);
+        }
+        
+        .terminal-output {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid var(--neon-cyan);
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        
+        .terminal-output::before {
+            content: '$ ';
+            color: var(--neon-cyan);
+            font-weight: bold;
+        }
+        
+        .metric-live {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-live::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .enterprise-badge {
+            background: var(--gradient-secondary);
+            color: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .github-widget {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .github-widget h4 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+        
+        .github-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+        }
+        
+        .github-stat {
+            text-align: center;
+        }
+        
+        .github-stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-cyan);
+        }
+        
+        .github-stat-label {
+            font-size: 0.8rem;
+            color: rgba(224, 224, 224, 0.7);
+        }
+        
+        .api-demo {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .api-endpoint {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            border-left: 3px solid var(--neon-cyan);
+        }
+        
+        .method-get {
+            color: #00ff88;
+        }
+        
+        .method-post {
+            color: #ff0066;
+        }
+        
+        .roadmap-item {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .roadmap-item:hover {
+            transform: translateX(5px);
+            border-color: var(--neon-cyan);
+        }
+        
+        .roadmap-status {
+            float: right;
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-complete {
+            background: #00ff88;
+            color: #000;
+        }
+        
+        .status-progress {
+            background: #ff0066;
+            color: #fff;
+        }
+        
+        .status-planned {
+            background: #ffff00;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -356,6 +624,7 @@
             <section class="hero">
                 <h1>Liberation System</h1>
                 <p>A minimal system to flip everything on its head. One person, massive impact.</p>
+                <a href="demo.html" class="cta-button">🚀 Live Demo</a>
                 <a href="https://github.com/tiation/liberation-system" class="cta-button">Explore the Code</a>
                 <a href="https://github.com/tiation/liberation-system/blob/main/CONTRIBUTING.md" class="cta-button">Contribute</a>
             </section>

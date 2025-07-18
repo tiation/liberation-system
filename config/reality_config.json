@@ -1,0 +1,29 @@
+{
+  "mode": "reality",
+  "resource_distribution": {
+    "enabled": true,
+    "test_mode": true,
+    "weekly_flow": 800,
+    "housing_credit": 104000,
+    "max_participants": 1000
+  },
+  "truth_spreading": {
+    "enabled": true,
+    "channels": [
+      "social_media",
+      "forums",
+      "newsletters"
+    ],
+    "rate_limit": 100
+  },
+  "mesh_network": {
+    "enabled": true,
+    "max_nodes": 100,
+    "auto_discovery": true
+  },
+  "security": {
+    "trust_level": "high",
+    "audit_logging": true,
+    "rate_limiting": true
+  }
+}
