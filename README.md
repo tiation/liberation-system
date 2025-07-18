@@ -18,7 +18,7 @@
 ---
 <!-- Hero Image with Dark Neon Theme -->
 <div align="center">
-  <img src=".screenshots/hero-banner.png" alt="Liberation System - Revolutionary Economic Platform" width="100%">
+  <img src=".screenshots/hero-banner.svg" alt="Liberation System - Revolutionary Economic Platform" width="100%">
 </div>
 
 <div align="center">
@@ -45,7 +45,7 @@
 - **Trust by Default**: No gatekeepers, no verification, maximum accessibility
 
 <div align="center">
-  <img src=".screenshots/demo-overview.png" alt="Project Overview" width="80%">
+  <img src=".screenshots/demo-overview.svg" alt="Project Overview" width="80%">
 </div>
 
 ---
@@ -57,24 +57,24 @@
   <tr>
     <td width="50%">
       <h3>🎨 Dark Neon UI/UX</h3>
-      <img src=".screenshots/dark-neon-interface.png" alt="Dark Neon Interface" width="100%">
+      <img src=".screenshots/dark-neon-interface.svg" alt="Dark Neon Interface" width="100%">
       <p>Enterprise-grade dark theme with cyan gradient flares, holographic effects, and advanced neon animations for maximum visual impact</p>
     </td>
     <td width="50%">
       <h3>💰 Resource Distribution</h3>
-      <img src=".screenshots/resource-distribution.png" alt="Resource Distribution Dashboard" width="100%">
+      <img src=".screenshots/resource-distribution.svg" alt="Resource Distribution Dashboard" width="100%">
       <p>$19 trillion economic transformation system with real-time distribution tracking and community pool management</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
       <h3>🌐 Truth Network</h3>
-      <img src=".screenshots/truth-network.png" alt="Truth Network Interface" width="100%">
+      <img src=".screenshots/truth-network.svg" alt="Truth Network Interface" width="100%">
       <p>Convert marketing channels to reality-based information streams with viral truth propagation and channel conversion tracking</p>
     </td>
     <td width="50%">
       <h3>🔗 Mesh Network</h3>
-      <img src=".screenshots/mesh-network.png" alt="Mesh Network Visualization" width="100%">
+      <img src=".screenshots/mesh-network.svg" alt="Mesh Network Visualization" width="100%">
       <p>Decentralized infrastructure with 50K+ nodes, real-time connectivity monitoring, and enterprise-grade network visualization</p>
     </td>
   </tr>
@@ -95,7 +95,7 @@
 
 <div align="center">
   <a href="https://tiaastor.github.io/liberation-system" target="_blank">
-    <img src=".screenshots/demo-preview.png" alt="Live Demo Preview" width="80%">
+    <img src=".screenshots/demo-preview.svg" alt="Live Demo Preview" width="80%">
   </a>
   <br>
   <a href="https://tiaastor.github.io/liberation-system" target="_blank">
@@ -108,7 +108,7 @@
 ## 🏗️ Architecture
 
 <div align="center">
-  <img src=".screenshots/architecture-diagram.png" alt="Architecture Diagram" width="90%">
+  <img src=".screenshots/architecture-diagram.svg" alt="Architecture Diagram" width="90%">
 </div>
 
 ### System Components
@@ -146,7 +146,7 @@ npm run dev
 ### Development Workflow
 
 <div align="center">
-  <img src=".screenshots/development-workflow.png" alt="Development Workflow" width="70%">
+  <img src=".screenshots/development-workflow.svg" alt="Development Workflow" width="70%">
 </div>
 
 ---
@@ -156,19 +156,19 @@ npm run dev
 ### Desktop Interface
 
 <div align="center">
-  <img src=".screenshots/desktop-interface.png" alt="Desktop Interface" width="100%">
+  <img src=".screenshots/desktop-interface.svg" alt="Desktop Interface" width="100%">
 </div>
 
 ### Mobile Interface
 
 <div align="center">
-  <img src=".screenshots/mobile-interface.png" alt="Mobile Interface" width="60%">
+  <img src=".screenshots/mobile-interface.svg" alt="Mobile Interface" width="60%">
 </div>
 
 ### Dark Theme & Demo
 
 <div align="center">
-  <img src=".screenshots/dark-theme.png" alt="Dark Theme Interface" width="100%">
+  <img src=".screenshots/dark-theme.svg" alt="Dark Theme Interface" width="100%">
 
   <h3>🌟 Experience the Liberation System</h3>
   <a href="https://tiation.github.io/liberation-system" target="_blank">
@@ -181,7 +181,7 @@ npm run dev
 ## 🛠️ Technology Stack
 
 <div align="center">
-  <img src=".screenshots/tech-stack.png" alt="Technology Stack" width="80%">
+  <img src=".screenshots/tech-stack.svg" alt="Technology Stack" width="80%">
 </div>
 
 - **Frontend**: React, TypeScript, Tailwind CSS
@@ -194,7 +194,7 @@ npm run dev
 ## 📊 Performance Metrics
 
 <div align="center">
-  <img src=".screenshots/performance-metrics.png" alt="Performance Metrics" width="90%">
+  <img src=".screenshots/performance-metrics.svg" alt="Performance Metrics" width="90%">
 </div>
 
 ---
@@ -213,7 +213,7 @@ API_KEY=your-api-key-here
 ### Configuration Screenshots
 
 <div align="center">
-  <img src=".screenshots/configuration-setup.png" alt="Configuration Setup" width="70%">
+  <img src=".screenshots/configuration-setup.svg" alt="Configuration Setup" width="70%">
 </div>
 
 ---
@@ -222,7 +222,7 @@ API_KEY=your-api-key-here
 
 <div align="center">
   <a href="https://github.com/TiaAstor/liberation-system/wiki" target="_blank">
-    <img src=".screenshots/documentation-preview.png" alt="Documentation Preview" width="80%">
+    <img src=".screenshots/documentation-preview.svg" alt="Documentation Preview" width="80%">
   </a>
   <br>
   <a href="https://github.com/TiaAstor/liberation-system/wiki" target="_blank">
@@ -244,7 +244,7 @@ API_KEY=your-api-key-here
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 <div align="center">
-  <img src=".screenshots/contribution-workflow.png" alt="Contribution Workflow" width="70%">
+  <img src=".screenshots/contribution-workflow.svg" alt="Contribution Workflow" width="70%">
 </div>
 
 ### Development Setup
@@ -269,7 +269,7 @@ git push origin feature/amazing-feature
 ## 🧪 Testing
 
 <div align="center">
-  <img src=".screenshots/testing-dashboard.png" alt="Testing Dashboard" width="80%">
+  <img src=".screenshots/testing-dashboard.svg" alt="Testing Dashboard" width="80%">
 </div>
 
 ```bash
@@ -288,7 +288,7 @@ npm run test:e2e
 ## 🚀 Deployment
 
 <div align="center">
-  <img src=".screenshots/deployment-pipeline.png" alt="Deployment Pipeline" width="90%">
+  <img src=".screenshots/deployment-pipeline.svg" alt="Deployment Pipeline" width="90%">
 </div>
 
 ### Production Deployment
@@ -306,7 +306,7 @@ npm run deploy
 ## 📈 Roadmap
 
 <div align="center">
-  <img src=".screenshots/roadmap.png" alt="Project Roadmap" width="90%">
+  <img src=".screenshots/roadmap.svg" alt="Project Roadmap" width="90%">
 </div>
 
 - [x] Core functionality
@@ -320,7 +320,7 @@ npm run deploy
 ## 📞 Support
 
 <div align="center">
-  <img src=".screenshots/support-channels.png" alt="Support Channels" width="70%">
+  <img src=".screenshots/support-channels.svg" alt="Support Channels" width="70%">
 </div>
 
 - 📧 **Email**: [support@example.com](mailto:support@example.com)
@@ -339,7 +339,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🌟 Acknowledgments
 
 <div align="center">
-  <img src=".screenshots/acknowledgments.png" alt="Acknowledgments" width="60%">
+  <img src=".screenshots/acknowledgments.svg" alt="Acknowledgments" width="60%">
 </div>
 
 - Thanks to all contributors
@@ -349,7 +349,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <img src=".screenshots/footer-banner.png" alt="Footer Banner" width="100%">
+  <img src=".screenshots/footer-banner.svg" alt="Footer Banner" width="100%">
   
   **⭐ Star this repository if you find it helpful! ⭐**
   
