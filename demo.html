@@ -1,670 +1,367 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberation System - Live Demo</title>
-    <meta name="description" content="Live demo of the Liberation System with dark neon theme">
-    <meta name="theme-color" content="#00ffff">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+    <title>Liberation System - Interactive Demo</title>
     <style>
-        :root {
-            --neon-cyan: #00ffff;
-            --neon-purple: #8b5cf6;
-            --neon-pink: #ff0080;
-            --neon-green: #00ff88;
-            --dark-bg: #0a0a0a;
-            --dark-card: #1a1a1a;
-            --dark-text: #e0e0e0;
-            --gradient-primary: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            --gradient-secondary: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-            --gradient-bg: linear-gradient(135deg, #0a0a0a, #1a0a1a, #0a0a0a);
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-
+        
         body {
-            background: var(--gradient-bg);
-            color: var(--dark-text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1F2937 100%);
+            color: #FFFFFF;
             line-height: 1.6;
-            min-height: 100vh;
             overflow-x: hidden;
         }
-
+        
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 2rem;
         }
-
-        header {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--neon-cyan);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 1rem 0;
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: radial-gradient(circle at center, #00FFFF20 0%, transparent 70%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
         }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .logo-text {
-            font-size: 2rem;
-            font-weight: bold;
-            background: var(--gradient-primary);
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00FFFF, #FF00FF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 1rem;
         }
-
-        .status-bar {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #E5E7EB;
+            margin-bottom: 2rem;
         }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.5rem 1rem;
-            background: rgba(0, 255, 255, 0.1);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--neon-green);
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
-        }
-
-        .dashboard {
-            padding: 2rem 0;
-        }
-
-        .dashboard-grid {
+        
+        .demo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin-bottom: 3rem;
         }
-
-        .dashboard-card {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 15px;
+        
+        .demo-card {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 16px;
             padding: 2rem;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 2px solid #374151;
+            transition: all 0.3s ease;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
-
-        .dashboard-card::before {
+        
+        .demo-card:hover {
+            border-color: #00FFFF;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+        
+        .demo-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
+            height: 4px;
+            background: linear-gradient(90deg, #00FFFF, #FF00FF);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        
+        .demo-card:hover::before {
+            transform: scaleX(1);
         }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        
+        .demo-card h3 {
+            color: #00FFFF;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .demo-card p {
+            color: #D1D5DB;
             margin-bottom: 1rem;
         }
-
-        .card-icon {
-            font-size: 2rem;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--neon-cyan);
-        }
-
-        .metric-display {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .metric-label {
-            color: rgba(224, 224, 224, 0.8);
-            font-size: 0.9rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-primary);
-            transition: width 0.3s ease;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        .control-panel {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            margin: 2rem 0;
-        }
-
-        .control-button {
+        
+        .demo-button {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--gradient-secondary);
-            color: #fff;
+            background: linear-gradient(135deg, #00FFFF, #FF00FF);
+            color: #0A0A0A;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
+            font-weight: 600;
             transition: all 0.3s ease;
-            margin: 0.5rem;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
-
-        .control-button:hover {
+        
+        .demo-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
         }
-
-        .terminal-output {
-            background: #000;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 1px solid var(--neon-cyan);
-            height: 200px;
-            overflow-y: auto;
-            font-size: 0.9rem;
+        
+        .features-section {
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
         }
-
-        .network-visualization {
-            width: 100%;
-            height: 300px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+        
+        .features-section h2 {
+            color: #00FFFF;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
             border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .feature-item h4 {
+            color: #FF00FF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .interactive-demo {
+            background: #1F2937;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid #00FFFF;
+        }
+        
+        .interactive-demo h3 {
+            color: #00FFFF;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .demo-simulator {
+            background: #0A0A0A;
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 400px;
+            border: 1px solid #374151;
             position: relative;
             overflow: hidden;
         }
-
-        .network-node {
+        
+        .demo-simulator::before {
+            content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--neon-cyan);
-            border-radius: 50%;
-            animation: float 3s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%);
+            background-size: 20px 20px;
+            animation: matrix 20s linear infinite;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        
+        @keyframes matrix {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
         }
-
-        .api-status {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .api-endpoint {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            text-align: center;
-        }
-
-        .api-method {
-            font-weight: bold;
-            color: var(--neon-green);
-        }
-
-        .api-path {
-            font-family: 'Courier New', monospace;
-            color: var(--neon-cyan);
-            font-size: 0.9rem;
-        }
-
-        .live-counter {
-            font-size: 3rem;
-            font-weight: bold;
-            text-align: center;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 1rem 0;
-        }
-
+        
         .footer {
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2rem;
+            color: #6B7280;
+            border-top: 1px solid #374151;
         }
-
-        .back-link {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--gradient-primary);
-            color: #000;
+        
+        .footer a {
+            color: #00FFFF;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 1rem;
         }
-
-        .back-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        
+        .footer a:hover {
+            text-decoration: underline;
         }
-
+        
         @media (max-width: 768px) {
-            .dashboard-grid {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .demo-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .status-bar {
-                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">🌟</div>
-                    <div class="logo-text">Liberation System</div>
-                </div>
-                <div class="status-bar">
-                    <div class="status-item">
-                        <div class="status-dot"></div>
-                        <span>System Online</span>
-                    </div>
-                    <div class="status-item">
-                        <div class="status-dot"></div>
-                        <span id="active-users">1,247</span> Active Users
-                    </div>
-                    <div class="status-item">
-                        <div class="status-dot"></div>
-                        <span>Mesh Connected</span>
-                    </div>
-                </div>
+    <div class="container">
+        <header class="hero">
+            <h1>Liberation System</h1>
+            <p>Enterprise-grade Economic Platform - Interactive Demo</p>
+            <a href="https://github.com/tiaastor/liberation-system" class="demo-button">
+                View on GitHub
+            </a>
+        </header>
+        
+        <div class="demo-grid">
+
+            <div class="demo-card" onclick="openDemo('economic_calculator_($19t_solution)')">
+                <h3>Economic Calculator ($19T Solution)</h3>
+                <p>Interactive demonstration of economic calculator ($19t solution) with real-time data and enterprise features.</p>
+                <span class="demo-button">Launch Demo</span>
             </div>
+
+            <div class="demo-card" onclick="openDemo('resource_distribution_simulator')">
+                <h3>Resource Distribution Simulator</h3>
+                <p>Interactive demonstration of resource distribution simulator with real-time data and enterprise features.</p>
+                <span class="demo-button">Launch Demo</span>
+            </div>
+
+            <div class="demo-card" onclick="openDemo('truth_network_visualization')">
+                <h3>Truth Network Visualization</h3>
+                <p>Interactive demonstration of truth network visualization with real-time data and enterprise features.</p>
+                <span class="demo-button">Launch Demo</span>
+            </div>
+
+            <div class="demo-card" onclick="openDemo('mesh_network_status')">
+                <h3>Mesh Network Status</h3>
+                <p>Interactive demonstration of mesh network status with real-time data and enterprise features.</p>
+                <span class="demo-button">Launch Demo</span>
+            </div>
+
+            <div class="demo-card" onclick="openDemo('community_impact_metrics')">
+                <h3>Community Impact Metrics</h3>
+                <p>Interactive demonstration of community impact metrics with real-time data and enterprise features.</p>
+                <span class="demo-button">Launch Demo</span>
+            </div>
+
         </div>
-    </header>
+        
+        <section class="features-section">
+            <h2>Live Features</h2>
+            <div class="features-list">
 
-    <main class="dashboard">
-        <div class="container">
-            <h1 style="text-align: center; font-size: 3rem; margin-bottom: 2rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                Live Demo Dashboard
-            </h1>
-
-            <div class="dashboard-grid">
-                <!-- Resource Distribution -->
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon">💰</div>
-                        <div class="card-title">Resource Distribution</div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value" id="resource-pool">$19.2T</div>
-                            <div class="metric-label">Total Resource Pool</div>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 67%"></div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value" id="weekly-flow">$800</div>
-                            <div class="metric-label">Weekly Flow (per person)</div>
-                        </div>
-                    </div>
+                <div class="feature-item">
+                    <h4>Economic Impact Calculator</h4>
+                    <p>Real-time economic impact calculator with interactive controls and enterprise-grade performance.</p>
                 </div>
 
-                <!-- Network Status -->
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon">🌐</div>
-                        <div class="card-title">Mesh Network</div>
-                    </div>
-                    <div class="network-visualization">
-                        <div class="network-node" style="top: 20%; left: 20%;"></div>
-                        <div class="network-node" style="top: 40%; left: 60%;"></div>
-                        <div class="network-node" style="top: 70%; left: 30%;"></div>
-                        <div class="network-node" style="top: 30%; left: 80%;"></div>
-                        <div class="network-node" style="top: 60%; left: 15%;"></div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value" id="network-nodes">52,341</div>
-                            <div class="metric-label">Active Nodes</div>
-                        </div>
-                    </div>
+                <div class="feature-item">
+                    <h4>Interactive Network Visualization</h4>
+                    <p>Real-time interactive network visualization with interactive controls and enterprise-grade performance.</p>
                 </div>
 
-                <!-- Truth Network -->
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon">📡</div>
-                        <div class="card-title">Truth Spreading</div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value" id="truth-channels">1.2M</div>
-                            <div class="metric-label">Channels Converted</div>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 84%"></div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value">Viral</div>
-                            <div class="metric-label">Propagation Rate</div>
-                        </div>
-                    </div>
+                <div class="feature-item">
+                    <h4>Real-time Statistics Dashboard</h4>
+                    <p>Real-time real-time statistics dashboard with interactive controls and enterprise-grade performance.</p>
                 </div>
 
-                <!-- System Performance -->
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon">⚡</div>
-                        <div class="card-title">System Performance</div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value" id="uptime">99.9%</div>
-                            <div class="metric-label">System Uptime</div>
+                <div class="feature-item">
+                    <h4>Community Engagement Tools</h4>
+                    <p>Real-time community engagement tools with interactive controls and enterprise-grade performance.</p>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="interactive-demo">
+            <h3>Live Demo Environment</h3>
+            <div class="demo-simulator" id="demoSimulator">
+                <div style="color: #00FFFF; text-align: center; padding: 2rem;">
+                    <h4>🔮 Liberation System Interactive Demo</h4>
+                    <p>Click on any demo card above to launch interactive demonstrations</p>
+                    <div style="margin-top: 2rem;">
+                        <div style="display: inline-block; margin: 0 1rem;">
+                            <div style="color: #FF00FF;">Status:</div>
+                            <div id="status">Ready</div>
                         </div>
-                    </div>
-                    <div class="metric-display">
-                        <div>
-                            <div class="metric-value" id="response-time">47ms</div>
-                            <div class="metric-label">Response Time</div>
+                        <div style="display: inline-block; margin: 0 1rem;">
+                            <div style="color: #FF00FF;">Users:</div>
+                            <div id="users">1,337</div>
                         </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 95%"></div>
+                        <div style="display: inline-block; margin: 0 1rem;">
+                            <div style="color: #FF00FF;">Uptime:</div>
+                            <div id="uptime">99.9%</div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Control Panel -->
-            <div class="control-panel">
-                <h3 style="color: var(--neon-cyan); margin-bottom: 1rem;">🎛️ System Controls</h3>
-                <button class="control-button" onclick="simulateResourceFlow()">Trigger Resource Flow</button>
-                <button class="control-button" onclick="expandNetwork()">Expand Network</button>
-                <button class="control-button" onclick="accelerateTruth()">Accelerate Truth Spread</button>
-                <button class="control-button" onclick="optimizeSystem()">Optimize System</button>
-            </div>
-
-            <!-- Live Terminal -->
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div class="card-icon">💻</div>
-                    <div class="card-title">Live System Output</div>
-                </div>
-                <div class="terminal-output" id="terminal">
-                    [2024-07-18 02:52:15] Liberation System initialized successfully
-                    [2024-07-18 02:52:16] Mesh network: 52,341 nodes connected
-                    [2024-07-18 02:52:17] Resource distribution: $19.2T pool active
-                    [2024-07-18 02:52:18] Truth spreading: 1.2M channels converted
-                    [2024-07-18 02:52:19] System status: ALL SYSTEMS OPERATIONAL
-                    [2024-07-18 02:52:20] Reality transformation: 67% complete
-                </div>
-            </div>
-
-            <!-- API Status -->
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div class="card-icon">🔌</div>
-                    <div class="card-title">API Endpoints</div>
-                </div>
-                <div class="api-status">
-                    <div class="api-endpoint">
-                        <div class="api-method">GET</div>
-                        <div class="api-path">/api/v1/humans</div>
-                        <div style="color: var(--neon-green); margin-top: 0.5rem;">✅ Online</div>
-                    </div>
-                    <div class="api-endpoint">
-                        <div class="api-method">POST</div>
-                        <div class="api-path">/api/v1/distribute</div>
-                        <div style="color: var(--neon-green); margin-top: 0.5rem;">✅ Online</div>
-                    </div>
-                    <div class="api-endpoint">
-                        <div class="api-method">GET</div>
-                        <div class="api-path">/api/v1/stats</div>
-                        <div style="color: var(--neon-green); margin-top: 0.5rem;">✅ Online</div>
-                    </div>
-                    <div class="api-endpoint">
-                        <div class="api-method">POST</div>
-                        <div class="api-path">/api/v1/mesh/connect</div>
-                        <div style="color: var(--neon-green); margin-top: 0.5rem;">✅ Online</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Live Counter -->
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div class="card-icon">🔥</div>
-                    <div class="card-title">Transformation Progress</div>
-                </div>
-                <div class="live-counter" id="transformation-counter">67%</div>
-                <div style="text-align: center; color: var(--neon-cyan);">
-                    Critical mass approaching - System ready for global deployment
-                </div>
-            </div>
-        </div>
-    </main>
-
+        </section>
+    </div>
+    
     <footer class="footer">
-        <div class="container">
-            <p style="color: var(--neon-cyan); font-size: 1.2rem; margin-bottom: 1rem;">
-                "We're not building software. We're creating transformation."
-            </p>
-            <a href="index.html" class="back-link">← Back to Main Site</a>
-            <a href="https://github.com/tiation/liberation-system" class="back-link">GitHub Repository</a>
-        </div>
+        <p>Built with ❤️ by <a href="https://github.com/tiaastor">Tiation</a> | 
+        <a href="https://github.com/tiaastor/liberation-system">View Repository</a> | 
+        <a href="https://github.com/tiaastor/liberation-system/wiki">Documentation</a></p>
     </footer>
-
+    
     <script>
-        // Simulate live data updates
-        function updateMetrics() {
-            const resourcePool = document.getElementById('resource-pool');
-            const activeUsers = document.getElementById('active-users');
-            const networkNodes = document.getElementById('network-nodes');
-            const truthChannels = document.getElementById('truth-channels');
-            const transformationCounter = document.getElementById('transformation-counter');
+        function openDemo(demoType) {
+            const simulator = document.getElementById('demoSimulator');
+            const status = document.getElementById('status');
             
-            // Simulate growing numbers
-            if (resourcePool) {
-                const current = parseFloat(resourcePool.textContent.replace('$', '').replace('T', ''));
-                const newValue = (current + Math.random() * 0.1).toFixed(1);
-                resourcePool.textContent = `$${newValue}T`;
-            }
+            status.textContent = 'Loading ' + demoType.replace('_', ' ') + '...';
             
-            if (activeUsers) {
-                const current = parseInt(activeUsers.textContent.replace(',', ''));
-                const newValue = current + Math.floor(Math.random() * 10);
-                activeUsers.textContent = newValue.toLocaleString();
-            }
-            
-            if (networkNodes) {
-                const current = parseInt(networkNodes.textContent.replace(',', ''));
-                const newValue = current + Math.floor(Math.random() * 50);
-                networkNodes.textContent = newValue.toLocaleString();
-            }
-            
-            if (truthChannels) {
-                const current = parseFloat(truthChannels.textContent.replace('M', ''));
-                const newValue = (current + Math.random() * 0.01).toFixed(2);
-                truthChannels.textContent = `${newValue}M`;
-            }
-            
-            if (transformationCounter) {
-                const current = parseInt(transformationCounter.textContent.replace('%', ''));
-                const newValue = Math.min(99, current + Math.floor(Math.random() * 1));
-                transformationCounter.textContent = `${newValue}%`;
-            }
+            setTimeout(() => {
+                simulator.innerHTML = `
+                    <div style="color: #00FFFF; text-align: center; padding: 2rem;">
+                        <h4>🚀 ${demoType.replace('_', ' ').toUpperCase()} Demo</h4>
+                        <p>Interactive demonstration of ${demoType.replace('_', ' ')} functionality</p>
+                        <div style="margin-top: 2rem; background: rgba(0,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <div style="color: #FF00FF; margin-bottom: 1rem;">Demo Features:</div>
+                            <div style="text-align: left; max-width: 400px; margin: 0 auto;">
+                                <div>✓ Real-time data visualization</div>
+                                <div>✓ Interactive controls</div>
+                                <div>✓ Enterprise-grade performance</div>
+                                <div>✓ Dark neon theme</div>
+                            </div>
+                        </div>
+                        <button onclick="resetDemo()" style="margin-top: 1rem; background: linear-gradient(135deg, #00FFFF, #FF00FF); color: #0A0A0A; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">
+                            Reset Demo
+                        </button>
+                    </div>
+                `;
+                status.textContent = 'Demo Active';
+            }, 1000);
         }
         
-        // Add terminal output
-        function addTerminalOutput(message) {
-            const terminal = document.getElementById('terminal');
-            if (terminal) {
-                const now = new Date().toISOString().replace('T', ' ').substr(0, 19);
-                terminal.innerHTML += `\n[${now}] ${message}`;
-                terminal.scrollTop = terminal.scrollHeight;
-            }
+        function resetDemo() {
+            location.reload();
         }
         
-        // Control panel functions
-        function simulateResourceFlow() {
-            addTerminalOutput('Resource flow initiated - $800 distributed to 1,247 users');
-            setTimeout(() => updateMetrics(), 500);
-        }
-        
-        function expandNetwork() {
-            addTerminalOutput('Network expansion protocol activated');
-            setTimeout(() => updateMetrics(), 500);
-        }
-        
-        function accelerateTruth() {
-            addTerminalOutput('Truth spreading acceleration engaged');
-            setTimeout(() => updateMetrics(), 500);
-        }
-        
-        function optimizeSystem() {
-            addTerminalOutput('System optimization cycle initiated');
-            setTimeout(() => updateMetrics(), 500);
-        }
-        
-        // Auto-update metrics every 5 seconds
-        setInterval(updateMetrics, 5000);
-        
-        // Add random terminal messages
-        const systemMessages = [
-            'Mesh network self-healing protocol engaged',
-            'Resource distribution verification complete',
-            'Truth spreading viral threshold reached',
-            'System autonomy level: MAXIMUM',
-            'Global transformation accelerating',
-            'Network nodes auto-discovering new connections',
-            'Resource pool optimization in progress',
-            'Truth channel conversion rate: 98.7%'
-        ];
-        
+        // Simulate real-time updates
         setInterval(() => {
-            const randomMessage = systemMessages[Math.floor(Math.random() * systemMessages.length)];
-            addTerminalOutput(randomMessage);
-        }, 8000);
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            addTerminalOutput('Live demo interface loaded successfully');
-            addTerminalOutput('All systems operational - Liberation System ready');
-        });
+            const users = document.getElementById('users');
+            if (users) {
+                const currentUsers = parseInt(users.textContent.replace(',', ''));
+                const newUsers = currentUsers + Math.floor(Math.random() * 10) - 5;
+                users.textContent = Math.max(1000, newUsers).toLocaleString();
+            }
+        }, 5000);
     </script>
 </body>
 </html>

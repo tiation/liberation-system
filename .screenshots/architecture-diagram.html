@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG to PNG Converter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0A0A0A;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        svg {
+            border: 1px solid #333;
+            background: #0A0A0A;
+        }
+        .instructions {
+            margin: 20px 0;
+            padding: 20px;
+            background: #1F2937;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Architecture Diagram</h1>
+        <div class="instructions">
+            <h3>Instructions to create PNG:</h3>
+            <p>1. Open this HTML file in your browser</p>
+            <p>2. Right-click on the SVG diagram below</p>
+            <p>3. Select "Save image as..." or "Copy image"</p>
+            <p>4. Save as PNG with filename: architecture-diagram.png</p>
+        </div>
+
+        <?xml version="1.0" encoding="UTF-8"?>
+<svg width="700" height="500" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .title { font-family: 'Arial', sans-serif; font-size: 24px; font-weight: bold; fill: #00FFFF; }
+            .subtitle { font-family: 'Arial', sans-serif; font-size: 16px; fill: #FFFFFF; }
+            .component-text { font-family: 'Arial', sans-serif; font-size: 12px; fill: #FFFFFF; text-anchor: middle; }
+            .legend-text { font-family: 'Arial', sans-serif; font-size: 10px; fill: #6B7280; }
+            .glow { filter: drop-shadow(0 0 8px currentColor); }
+        </style>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0A0A0A;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1F2937;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="url(#bgGradient)"/>
+    
+    <!-- Title -->
+    <text x="350" y="30" class="title" text-anchor="middle">Liberation System Architecture</text>
+    <text x="350" y="50" class="subtitle" text-anchor="middle">Economic Platform</text>
+    
+    <!-- Grid background -->
+    <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#6B7280" stroke-width="0.5" opacity="0.3"/>
+        </pattern>
+    </defs>
+    <rect x="0" y="70" width="700" height="360" fill="url(#grid)" opacity="0.3"/>
+    
+    <!-- Connections -->
+    <g id="connections">
+
+        <line x1="150" y1="170" x2="300" y2="270" 
+              stroke="#00FFFF" stroke-width="2" opacity="0.7" class="glow"/>
+        <circle cx="225" cy="220" r="2" 
+                fill="#FF00FF" opacity="0.8"/>
+
+        <line x1="450" y1="170" x2="300" y2="270" 
+              stroke="#00FFFF" stroke-width="2" opacity="0.7" class="glow"/>
+        <circle cx="375" cy="220" r="2" 
+                fill="#FF00FF" opacity="0.8"/>
+
+        <line x1="300" y1="270" x2="550" y2="270" 
+              stroke="#00FFFF" stroke-width="2" opacity="0.7" class="glow"/>
+        <circle cx="425" cy="270" r="2" 
+                fill="#FF00FF" opacity="0.8"/>
+
+        <line x1="300" y1="270" x2="300" y2="370" 
+              stroke="#00FFFF" stroke-width="2" opacity="0.7" class="glow"/>
+        <circle cx="300" cy="320" r="2" 
+                fill="#FF00FF" opacity="0.8"/>
+
+        <line x1="300" y1="370" x2="150" y2="470" 
+              stroke="#00FFFF" stroke-width="2" opacity="0.7" class="glow"/>
+        <circle cx="225" cy="420" r="2" 
+                fill="#FF00FF" opacity="0.8"/>
+
+        <line x1="300" y1="370" x2="450" y2="470" 
+              stroke="#00FFFF" stroke-width="2" opacity="0.7" class="glow"/>
+        <circle cx="375" cy="420" r="2" 
+                fill="#FF00FF" opacity="0.8"/>
+
+    </g>
+    
+    <!-- Components -->
+    <g id="components">
+
+        <g class="component">
+            <rect x="90" y="145" width="120" height="50" rx="8" 
+                  fill="#00FFFF" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="92" y="147" width="116" height="46" rx="6" 
+                  fill="none" stroke="#00FFFF" stroke-width="1" opacity="0.5"/>
+            <text x="150" y="165" class="component-text">🖥️</text>
+            <text x="150" y="178" class="component-text">Truth Network UI</text>
+            <text x="150" y="190" class="component-text" style="font-size: 8px; fill: #6B7280">frontend</text>
+        </g>
+
+        <g class="component">
+            <rect x="390" y="145" width="120" height="50" rx="8" 
+                  fill="#00FFFF" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="392" y="147" width="116" height="46" rx="6" 
+                  fill="none" stroke="#00FFFF" stroke-width="1" opacity="0.5"/>
+            <text x="450" y="165" class="component-text">🖥️</text>
+            <text x="450" y="178" class="component-text">Resource
+Distribution</text>
+            <text x="450" y="190" class="component-text" style="font-size: 8px; fill: #6B7280">frontend</text>
+        </g>
+
+        <g class="component">
+            <rect x="240" y="245" width="120" height="50" rx="8" 
+                  fill="#FF00FF" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="242" y="247" width="116" height="46" rx="6" 
+                  fill="none" stroke="#FF00FF" stroke-width="1" opacity="0.5"/>
+            <text x="300" y="265" class="component-text">⚙️</text>
+            <text x="300" y="278" class="component-text">Economic Engine</text>
+            <text x="300" y="290" class="component-text" style="font-size: 8px; fill: #6B7280">backend</text>
+        </g>
+
+        <g class="component">
+            <rect x="490" y="245" width="120" height="50" rx="8" 
+                  fill="#00FFFF" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="492" y="247" width="116" height="46" rx="6" 
+                  fill="none" stroke="#00FFFF" stroke-width="1" opacity="0.5"/>
+            <text x="550" y="265" class="component-text">🌐</text>
+            <text x="550" y="278" class="component-text">Mesh Network</text>
+            <text x="550" y="290" class="component-text" style="font-size: 8px; fill: #6B7280">network</text>
+        </g>
+
+        <g class="component">
+            <rect x="240" y="345" width="120" height="50" rx="8" 
+                  fill="#14B8A6" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="242" y="347" width="116" height="46" rx="6" 
+                  fill="none" stroke="#14B8A6" stroke-width="1" opacity="0.5"/>
+            <text x="300" y="365" class="component-text">⛓️</text>
+            <text x="300" y="378" class="component-text">Blockchain Layer</text>
+            <text x="300" y="390" class="component-text" style="font-size: 8px; fill: #6B7280">blockchain</text>
+        </g>
+
+        <g class="component">
+            <rect x="90" y="445" width="120" height="50" rx="8" 
+                  fill="#007FFF" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="92" y="447" width="116" height="46" rx="6" 
+                  fill="none" stroke="#007FFF" stroke-width="1" opacity="0.5"/>
+            <text x="150" y="465" class="component-text">📊</text>
+            <text x="150" y="478" class="component-text">Data Analytics</text>
+            <text x="150" y="490" class="component-text" style="font-size: 8px; fill: #6B7280">analytics</text>
+        </g>
+
+        <g class="component">
+            <rect x="390" y="445" width="120" height="50" rx="8" 
+                  fill="#8B5CF6" opacity="0.8" stroke="#FFFFFF" stroke-width="2" class="glow"/>
+            <rect x="392" y="447" width="116" height="46" rx="6" 
+                  fill="none" stroke="#8B5CF6" stroke-width="1" opacity="0.5"/>
+            <text x="450" y="465" class="component-text">📦</text>
+            <text x="450" y="478" class="component-text">Community Pool</text>
+            <text x="450" y="490" class="component-text" style="font-size: 8px; fill: #6B7280">storage</text>
+        </g>
+
+    </g>
+    
+    <!-- Legend -->
+    <g id="legend">
+        <rect x="10" y="420" width="150" height="70" rx="5" 
+              fill="#1F2937" opacity="0.8" stroke="#00FFFF" stroke-width="1"/>
+        <text x="20" y="440" class="legend-text" style="font-size: 12px; fill: #00FFFF">Component Types</text>
+
+        <rect x="20" y="450" width="8" height="8" rx="2" fill="#007FFF" opacity="0.8"/>
+        <text x="32" y="457" class="legend-text">Analytics</text>
+
+        <rect x="20" y="462" width="8" height="8" rx="2" fill="#FF00FF" opacity="0.8"/>
+        <text x="32" y="469" class="legend-text">Backend</text>
+
+        <rect x="20" y="474" width="8" height="8" rx="2" fill="#14B8A6" opacity="0.8"/>
+        <text x="32" y="481" class="legend-text">Blockchain</text>
+
+        <rect x="20" y="486" width="8" height="8" rx="2" fill="#00FFFF" opacity="0.8"/>
+        <text x="32" y="493" class="legend-text">Frontend</text>
+
+    </g>
+    
+    <!-- Footer -->
+    <text x="690" y="490" class="legend-text" text-anchor="end">
+        Built with ❤️ by Tiation | Enterprise Architecture
+    </text>
+</svg>
+    </div>
+</body>
+</html>
