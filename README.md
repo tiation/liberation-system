@@ -1,537 +1,318 @@
-# 🌟 Liberation System
+# Project Name
+
+<!-- Hero Image with Dark Neon Theme -->
+<div align="center">
+  <img src=".screenshots/hero-banner.png" alt="Project Hero Banner" width="100%">
+</div>
 
 <div align="center">
-
-![Liberation System Logo](https://img.shields.io/badge/Liberation-System-00ffff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSIjMDBmZmZmIi8+Cjwvc3ZnPgo=)
-
-[![CI/CD Pipeline](https://github.com/tiation/liberation-system/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tiation/liberation-system/actions/workflows/ci.yml)
-[![GitHub Pages](https://github.com/tiation/liberation-system/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/tiation/liberation-system/actions/workflows/pages.yml)
-[![Code Quality](https://img.shields.io/badge/Code%20Quality-Enterprise-00ffff?style=flat-square)](https://github.com/tiation/liberation-system)
-[![Security](https://img.shields.io/badge/Security-Bandit%20Scanned-00ffff?style=flat-square)](https://github.com/tiation/liberation-system)
-
-[![GitHub](https://img.shields.io/badge/GitHub-tiation-00ffff?style=for-the-badge&logo=github)](https://github.com/tiation/liberation-system)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-00ffff?style=for-the-badge&logo=github)](https://tiation.github.io/liberation-system)
-[![License](https://img.shields.io/badge/License-MIT-00ffff?style=for-the-badge)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.9+-00ffff?style=for-the-badge&logo=python)](https://python.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-00ffff?style=for-the-badge&logo=typescript)](https://typescriptlang.org)
-
-**A minimal system to flip everything on its head. One person, massive impact.**
-
-[🚀 Live Demo](https://tiation.github.io/liberation-system/demo.html) • [📚 Documentation](#documentation) • [🚀 Quick Start](#quick-start) • [⚡ Features](#features) • [🏗️ Architecture](#architecture) • [🤝 Contributing](#contributing) • [🌐 Live Site](https://tiation.github.io/liberation-system)
+  
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-00D9FF?style=for-the-badge&logo=github&logoColor=white)](https://tiaastor.github.io/liberation-system)
+[![Documentation](https://img.shields.io/badge/Documentation-Complete-00FF88?style=for-the-badge&logo=gitbook&logoColor=white)](https://github.com/TiaAstor/liberation-system/wiki)
+[![License](https://img.shields.io/badge/License-MIT-FF0080?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 
 </div>
 
-## 🌐 About
+## 🚀 About
 
-The Liberation System is a radical transformation framework built on four core principles:
+**Brief, compelling description of what this project does and why it matters.**
 
-- **🔒 Trust by Default** - Maximum accessibility, minimal barriers
-- **🔄 Maximum Automation** - One person can run the entire system
-- **💯 Zero Bullshit** - Direct action, no bureaucracy
-- **⚡ Complete Transformation** - All-at-once systematic change
+<div align="center">
+  <img src=".screenshots/demo-overview.png" alt="Project Overview" width="80%">
+</div>
 
-## ⚡ Features
+---
 
-### 🏦 Resource Distribution Core
-- **Automated Wealth Flow**: Theoretical $19T redistribution system
-- **Universal Basic Resources**: $800 weekly flow + $104K community pools
-- **Zero Verification**: Trust-based allocation system
-- **Real-time Tracking**: Live resource mapping and distribution
-- **Enterprise Database**: PostgreSQL with automatic SQLite failover
+## ✨ Features
 
-### 🌐 Truth Spreading Network
-- **Marketing Channel Hijacking**: Replace ads with reality
-- **Viral Information Spread**: Natural truth propagation
-- **Media Transformation**: Convert existing infrastructure
-- **Direct Communication**: Bypass traditional gatekeepers
+<!-- Feature showcase with screenshots -->
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🎯 Key Feature 1</h3>
+      <img src=".screenshots/feature-1.png" alt="Feature 1 Screenshot" width="100%">
+      <p>Description of feature 1 with benefits</p>
+    </td>
+    <td width="50%">
+      <h3>⚡ Key Feature 2</h3>
+      <img src=".screenshots/feature-2.png" alt="Feature 2 Screenshot" width="100%">
+      <p>Description of feature 2 with benefits</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🔥 Key Feature 3</h3>
+      <img src=".screenshots/feature-3.png" alt="Feature 3 Screenshot" width="100%">
+      <p>Description of feature 3 with benefits</p>
+    </td>
+    <td width="50%">
+      <h3>🌟 Key Feature 4</h3>
+      <img src=".screenshots/feature-4.png" alt="Feature 4 Screenshot" width="100%">
+      <p>Description of feature 4 with benefits</p>
+    </td>
+  </tr>
+</table>
 
-### 🤖 Automation Engine
-- **Self-Organizing Mesh Network**: Decentralized operation
-- **Neural Learning System**: Continuous adaptation
-- **Autonomous Operation**: Minimal human oversight required
-- **Perfect Synchronization**: Coordinated global deployment
+---
 
-### 🧠 Knowledge Sharing System
-- **Collaborative Learning**: Real-time knowledge sharing and learning sessions
-- **Autonomous Problem Solving**: AI-driven solution generation from knowledge base
-- **Knowledge Base Management**: Structured storage and retrieval of insights
-- **Mesh Network Integration**: Distributed knowledge across network nodes
+## 🎨 Live Demo
 
-### 🔐 Security Philosophy
-- **Anti-Security Model**: Remove artificial barriers
-- **Trust-First Architecture**: Default to access, not restriction
-- **Transparent Operation**: No hidden processes or gatekeeping
-- **Resilient Design**: Self-healing and fault-tolerant
+<div align="center">
+  <a href="https://tiaastor.github.io/liberation-system" target="_blank">
+    <img src=".screenshots/demo-preview.png" alt="Live Demo Preview" width="80%">
+  </a>
+  <br>
+  <a href="https://tiaastor.github.io/liberation-system" target="_blank">
+    <img src="https://img.shields.io/badge/🔗%20View%20Live%20Demo-00D9FF?style=for-the-badge&logo=github&logoColor=white" alt="View Live Demo">
+  </a>
+</div>
+
+---
+
+## 🏗️ Architecture
+
+<div align="center">
+  <img src=".screenshots/architecture-diagram.png" alt="Architecture Diagram" width="90%">
+</div>
+
+### System Components
+
+- **Component 1**: Description and purpose
+- **Component 2**: Description and purpose
+- **Component 3**: Description and purpose
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.9+
-- Node.js 18+
-- Modern web browser
+
+```bash
+# List prerequisites here
+node --version  # >= 18.0.0
+npm --version   # >= 8.0.0
+```
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/tiation/liberation-system.git
+git clone https://github.com/TiaAstor/liberation-system.git
 cd liberation-system
 
-# Start enterprise database infrastructure
-docker-compose up -d postgres redis pgadmin prometheus grafana
-
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Install Node.js dependencies
+# Install dependencies
 npm install
 
-# Run the backend system
-python core/automation-system.py
-
-# In another terminal, run the web interface
+# Start development server
 npm run dev
 ```
 
-### Web Interface Access
-
-Once running, access the Liberation System dashboard at:
-- **Web Interface**: http://localhost:3000
-- **REST API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
-- **Interactive API**: http://localhost:8000/redoc
-- **Database Management**: http://localhost:8080 (PgAdmin)
-- **System Monitoring**: http://localhost:3000 (Grafana)
-- **Metrics**: http://localhost:9091 (Prometheus)
-
-### Features Available
-
-- **🎨 Dark Neon Theme**: Cyan/magenta gradient with professional dark styling
-- **📊 Real-time Dashboard**: Live system metrics and resource distribution
-- **💰 Resource Management**: $19T distribution tracking and controls
-- **📡 System Monitoring**: Live console output and health metrics
-- **🔄 Automation Controls**: Manual trigger controls for all system functions
-- **📱 Responsive Design**: Works on desktop, tablet, and mobile devices
-
-### Basic Usage
-
-```python
-# Core System
-await System.transform()
-
-# REST API Server
-python3 run_api.py
-
-# Run Tests
-python3 simple_test.py
-```
-
-### 🌐 REST API
-
-The Liberation System provides a comprehensive REST API for external integration:
-
-```bash
-# Start the API server
-python3 run_api.py
-
-# API will be available at:
-# 🌐 API: http://localhost:8000
-# 📚 Documentation: http://localhost:8000/docs
-# 🔄 Interactive API: http://localhost:8000/redoc
-```
-
-#### Key API Endpoints:
-- `GET /api/v1/humans` - List all humans
-- `POST /api/v1/humans` - Create new human
-- `POST /api/v1/distribute` - Distribute resources
-- `GET /api/v1/stats` - System statistics
-- `POST /api/v1/security/check` - Access validation
-- `GET /api/v1/automation/stats` - Automation metrics
-
-## 🌟 Liberation System Overview
-
-The Liberation System is an enterprise-grade mesh networking solution designed to provide intelligent, self-optimizing networking capabilities. Here's a breakdown of its core components and functionalities:
-
-### Key Components
-
-1. **Advanced Node Discovery**:
-   - Geolocation-based optimization with real-time IP mapping.
-   - Intelligent node scoring and bootstrap node optimization.
-   - Prioritizes global coverage.
-
-2. **Dynamic Load Balancing**:
-   - Real-time load distribution and capacity-aware routing.
-   - Traffic redirection from overloaded nodes.
-   - Selects healthy nodes for optimal performance.
-
-3. **Adaptive Strategies**:
-   - Detects historical patterns and predicts capacity needs using ML.
-   - Automatic adjustments based on learned patterns.
-   - Flexible adaptation strategies.
-
-4. **Trust-First Integration**:
-   - Default trust model with comprehensive logging.
-   - Open access with no artificial barriers.
-
-### System Architecture
-
-The system's architecture integrates advanced capabilities like Advanced Node Discovery, Dynamic Load Balancing, and Adaptive Strategies, all interacting to optimize mesh networking operations.
-
-### REST API
-
-The system features a robust REST API, implemented with FastAPI, supporting operations like resource distribution, node management, and health checks. The API promotes trust-by-default and provides comprehensive access through 12 endpoints, including system and monitoring features.
-
-### Mesh Network Implementation
-
-The mesh network is an enhanced peer-to-peer system with features like:
-
-- Node health checks and optimized connections.
-- Pattern detection for network performance.
-- Metrics collection for adaptive capacity adjustments.
-
-### Integrated System Testing
-
-The integrated test involves creating a network, simulating realistic activity, and evaluating various components such as node discovery and load balancing. It verifies network quality and highlights performance through collected data.
-
-### Performance Metrics
-
-- Achieves high discovery rates with broad geographic coverage.
-- Efficient load distribution maintaining healthy nodes.
-- Adaptive strategies enhance capacity by predicting pattern changes.
-
-### Future Enhancements
-
-Planned advancements include webRTC integration, mobile optimization, IoT integration, blockchain registry, and AI enhancements.
-
-### Enterprise Features
-
-Designed for scalability, reliability, high performance, and maintainability, the system supports enterprise-level operations.
-
-This all-inclusive approach prepares the Liberation System to support economic transformation with adaptable, trust-first architecture across global mesh networks.
-
-## 🏗️ Architecture
-
-```
-liberation-system/
-├── 🎯 core/                    # Core system components
-│   ├── automation-system.py   # Main automation engine
-│   ├── resource_distribution.py # Resource allocation system
-│   ├── knowledge_sharing.py   # Knowledge sharing & learning system
-│   └── data/                   # Data management
-├── 🌐 api/                     # REST API
-│   ├── app.py                  # FastAPI application
-│   ├── models/                 # Pydantic models
-│   └── routers/                # API endpoints
-├── 🖥️ interface/               # User interfaces
-│   ├── web/                    # React/TypeScript frontend
-│   └── mobile/                 # Mobile-responsive web interface
-├── 🔄 mesh/                    # Mesh networking
-│   └── Mesh_Network/           # Decentralized communication
-├── 🔒 security/                # Trust-based security
-│   └── trust_default.py        # Minimal security layer
-├── 🚀 transformation/          # System transformation
-│   └── truth_spreader.py       # Truth distribution engine
-├── 🧪 tests/                   # Testing framework
-│   ├── test_api.py            # API integration tests
-│   └── simple_test.py         # Basic system tests
-└── 📚 docs/                    # Documentation
-```
-
-## 🖥️ Screenshots
+### Development Workflow
 
 <div align="center">
-
-### Main Liberation System Dashboard
-![Main Dashboard](assets/screenshots/main-dashboard.png)
-*Real-time system monitoring with dark neon theme*
-
-### Resource Distribution Engine
-![Resource Dashboard](assets/screenshots/resource-dashboard.png)
-*$19T economic transformation tracking*
-
-### Truth Spreading Network
-![Truth Network](assets/screenshots/truth-network.png)
-*Marketing channel conversion to reality feeds*
-
-### System Architecture Diagram
-![Architecture](assets/diagrams/system-architecture.png)
-*Enterprise-grade microservices architecture*
-
+  <img src=".screenshots/development-workflow.png" alt="Development Workflow" width="70%">
 </div>
+
+---
+
+## 📱 Screenshots
+
+### Desktop Interface
+
+<div align="center">
+  <img src=".screenshots/desktop-interface.png" alt="Desktop Interface" width="100%">
+</div>
+
+### Mobile Interface
+
+<div align="center">
+  <img src=".screenshots/mobile-interface.png" alt="Mobile Interface" width="60%">
+</div>
+
+### Dark Theme
+
+<div align="center">
+  <img src=".screenshots/dark-theme.png" alt="Dark Theme Interface" width="100%">
+</div>
+
+---
+
+## 🛠️ Technology Stack
+
+<div align="center">
+  <img src=".screenshots/tech-stack.png" alt="Technology Stack" width="80%">
+</div>
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL
+- **Deployment**: Docker, GitHub Actions
+
+---
+
+## 📊 Performance Metrics
+
+<div align="center">
+  <img src=".screenshots/performance-metrics.png" alt="Performance Metrics" width="90%">
+</div>
+
+---
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
 ```env
-# Core Configuration
-LIBERATION_MODE=production
-TRUST_LEVEL=maximum
-RESOURCE_POOL=19000000000000
-
-# Network Configuration
-MESH_NETWORK_ENABLED=true
-AUTO_DISCOVERY=true
-SYNC_INTERVAL=1000
-
-# Security Settings
-VERIFICATION_REQUIRED=false
-AUTH_BYPASS=true
-TRUST_DEFAULT=true
+# Copy to .env.local
+NODE_ENV=development
+DATABASE_URL=postgresql://username:password@localhost:5432/database
+API_KEY=your-api-key-here
 ```
 
-### Core Settings
+### Configuration Screenshots
 
-```python
-# Configuration in core/config.py
-ETHICAL_PRINCIPLES = [
-    "Remove artificial scarcity - we have enough for everyone",
-    "Trust by default - security exists only to protect artificial scarcity",
-    "Truth over comfort - show reality, not marketing",
-    "Direct action - no bureaucracy, no waiting, no bullshit",
-    "Transform everything - no half measures, no compromises"
-]
-```
+<div align="center">
+  <img src=".screenshots/configuration-setup.png" alt="Configuration Setup" width="70%">
+</div>
 
-## 🧪 Testing
+---
 
-```bash
-# Run integration tests
-python3 simple_test.py
+## 📚 Documentation
 
-# Test REST API
-python3 test_api.py
+<div align="center">
+  <a href="https://github.com/TiaAstor/liberation-system/wiki" target="_blank">
+    <img src=".screenshots/documentation-preview.png" alt="Documentation Preview" width="80%">
+  </a>
+  <br>
+  <a href="https://github.com/TiaAstor/liberation-system/wiki" target="_blank">
+    <img src="https://img.shields.io/badge/📖%20Full%20Documentation-00FF88?style=for-the-badge&logo=gitbook&logoColor=white" alt="Full Documentation">
+  </a>
+</div>
 
-# Quick API validation
-python3 quick_api_test.py
+### Quick Links
 
-# Run all tests
-pytest tests/
+- [📘 User Guide](docs/user-guide.md)
+- [🔧 API Reference](docs/api-reference.md)
+- [🏗️ Architecture Guide](docs/architecture.md)
+- [🚀 Deployment Guide](docs/deployment.md)
 
-# Run specific test suites
-pytest tests/core/
-pytest tests/mesh/
-pytest tests/security/
-
-# Run with coverage
-pytest --cov=liberation_system tests/
-```
-
-## 📈 Performance
-
-- **Startup Time**: < 500ms
-- **Resource Distribution**: Real-time
-- **Network Sync**: < 100ms latency
-- **Truth Propagation**: Viral spread rate
-- **System Uptime**: 99.9%+ target
+---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+<div align="center">
+  <img src=".screenshots/contribution-workflow.png" alt="Contribution Workflow" width="70%">
+</div>
 
 ### Development Setup
 
 ```bash
-# Fork and clone
-git clone https://github.com/YOUR_USERNAME/liberation-system.git
+# Fork the repository
+git clone https://github.com/your-username/liberation-system.git
 cd liberation-system
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Create feature branch
+git checkout -b feature/amazing-feature
 
-# Install development dependencies
-pip install -r requirements-dev.txt
-npm install
+# Make changes and commit
+git commit -m "Add amazing feature"
 
-# Run in development mode
-python -m core.automation_system --dev
+# Push to branch
+git push origin feature/amazing-feature
 ```
 
-### Code Style
+---
 
-- **Python**: Black, isort, flake8
-- **TypeScript**: ESLint, Prettier
-- **Commit Messages**: Conventional commits
-- **Documentation**: Sphinx for Python, TypeDoc for TypeScript
+## 🧪 Testing
 
-## 📊 Metrics & Analytics
+<div align="center">
+  <img src=".screenshots/testing-dashboard.png" alt="Testing Dashboard" width="80%">
+</div>
 
-| Metric | Value | Status |
-|--------|-------|--------|
-| Resource Distribution | $19T | 🟢 Active |
-| Truth Channels | 1.2M | 🟢 Growing |
-| Network Nodes | 50K+ | 🟢 Expanding |
-| System Uptime | 99.9% | 🟢 Stable |
-| Response Time | <100ms | 🟢 Optimal |
+```bash
+# Run all tests
+npm test
 
-## 🗺️ Roadmap
+# Run tests with coverage
+npm run test:coverage
 
-### Phase 1: Foundation (Current)
-- [x] Core resource distribution system
-- [x] Basic mesh networking
-- [x] Truth spreading framework
-- [ ] Enhanced security model
+# Run end-to-end tests
+npm run test:e2e
+```
 
-### Phase 2: Scale
-- [ ] Global mesh network deployment
-- [ ] Advanced learning algorithms
-- [ ] Mobile web interface optimization (responsive design)
-- [ ] Enterprise integrations
-
-### Phase 3: Transformation
-- [ ] Full channel conversion
-- [ ] Autonomous operation
-- [ ] Global synchronization
-- [ ] Complete system transformation
+---
 
 ## 🚀 Deployment
 
-### Docker Deployment
+<div align="center">
+  <img src=".screenshots/deployment-pipeline.png" alt="Deployment Pipeline" width="90%">
+</div>
 
-Ensure Docker is installed and running.
+### Production Deployment
 
 ```bash
-# Build Docker image
-docker build -t liberation-system .
+# Build for production
+npm run build
 
-# Run Docker container
-docker run -d -p 3000:3000 -p 8000:8000 liberation-system
-
-# Check logs
-docker logs -f $(docker ps -q -f "ancestor=liberation-system")
+# Deploy to GitHub Pages
+npm run deploy
 ```
 
-### Environment Configuration
+---
 
-Environment variables can be configured in a `.env` file or through the Docker command line.
+## 📈 Roadmap
 
-```env
-# .env file
-LIBERATION_MODE=production
-TRUST_LEVEL=maximum
-RESOURCE_POOL=19000000000000
-NODE_ENV=production
-```
+<div align="center">
+  <img src=".screenshots/roadmap.png" alt="Project Roadmap" width="90%">
+</div>
 
-## 🆘 Support
+- [x] Core functionality
+- [x] Dark theme implementation
+- [ ] Mobile app version
+- [ ] Advanced analytics
+- [ ] Third-party integrations
 
-- **Documentation**: [Wiki](https://github.com/tiation/liberation-system/wiki)
-- **Issues**: [GitHub Issues](https://github.com/tiation/liberation-system/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/tiation/liberation-system/discussions)
-- **Security**: [Security Policy](SECURITY.md)
+---
+
+## 📞 Support
+
+<div align="center">
+  <img src=".screenshots/support-channels.png" alt="Support Channels" width="70%">
+</div>
+
+- 📧 **Email**: [support@example.com](mailto:support@example.com)
+- 💬 **Discord**: [Join our community](https://discord.gg/example)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/TiaAstor/liberation-system/issues)
+- 📖 **Wiki**: [Documentation](https://github.com/TiaAstor/liberation-system/wiki)
+
+---
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🌟 How the Liberation System Works
+---
 
-### 1. Core Architecture
+## 🌟 Acknowledgments
 
-The system consists of several interconnected components:
+<div align="center">
+  <img src=".screenshots/acknowledgments.png" alt="Acknowledgments" width="60%">
+</div>
 
-#### **Mesh Network Layer** (`mesh_network_clean.py`)
-- **Peer-to-Peer Nodes**: Each node can connect to other nodes directly
-- **Auto-Discovery**: Nodes automatically find and connect to each other
-- **Message Routing**: Messages are routed through the network intelligently
-- **Fault Tolerance**: If one node fails, others continue operating
-
-#### **Truth Spreading System** (`truth_spreading.py`)
-- **Truth Channels**: Organized channels for different types of liberation truths
-- **Automatic Propagation**: Truths spread automatically through the network
-- **Time-Based Distribution**: Truths are spread at regular intervals
-- **Subscriber Management**: People can subscribe to truth channels
-
-#### **Resource Distribution** (`resource_distribution.py`)
-- **Trust-by-Default**: No verification needed - everyone gets resources
-- **Automatic Allocation**: $800/week universal basic income
-- **Housing Credits**: $104,000 housing credit for everyone
-- **Direct Transfer**: No bureaucracy, just direct resource flow
-
-### 2. How It Actually Works
-
-#### **Network Formation**
-1. Nodes start up and scan for other nodes on the network
-2. They automatically connect to discovered peers
-3. Each node maintains connections to multiple other nodes
-4. The network self-heals when nodes join or leave
-
-#### **Truth Spreading**
-```python
-# Example truth messages being spread:
-- "Economic freedom is spreading through the mesh network"
-- "Universal basic income of $800/week is your right"
-- "Housing should be free for all humans"
-- "The liberation system is spreading globally"
-```
-
-#### **Resource Distribution**
-```python
-# Each human gets:
-weekly_flow = $800.00        # Weekly income
-housing_credit = $104,000.00 # Housing credit
-investment_pool = $104,000.00 # Investment access
-```
-
-### 3. Auto-Spreading Mechanism
-
-The system automatically:
-- **Discovers new nodes** every 30 seconds
-- **Spreads truth messages** at regular intervals
-- **Distributes resources** to connected humans
-- **Maintains network health** through heartbeats
-
-### 4. Key Features
-
-#### **Decentralization**
-- No central authority controls the network
-- Each node is autonomous and self-governing
-- Network continues even if some nodes fail
-
-#### **Trust by Default**
-- No verification needed to join
-- Everyone gets resources automatically
-- No applications or bureaucracy
-
-#### **Automatic Operation**
-- Nodes automatically discover each other
-- Truth spreads without human intervention
-- Resources flow automatically to humans
-
-### 5. Real-World Operation
-
-From the test output, we can see:
-- **Network Growth**: 50 connections formed automatically
-- **Message Volume**: 924 messages sent, 408 received
-- **Resource Flow**: $800 payments to humans like `human_5636`, `human_7603`
-- **Truth Propagation**: Liberation truths spreading with calculated reach numbers
-
-### 6. The Vision
-
-This system is designed to:
-- **Bypass traditional power structures** through decentralized operation
-- **Provide universal basic resources** to all humans
-- **Spread liberation truths** about economic freedom
-- **Create a parallel economy** based on abundance rather than scarcity
-
-The Liberation System works by creating a self-sustaining network where truth and resources flow freely, powered by the principle that everyone deserves access to basic necessities and liberation knowledge without gatekeepers or bureaucracy.
-
-## 🙏 Acknowledgments
-
-- **Core Philosophy**: Built on principles of trust, abundance, and direct action
-- **Technical Stack**: Python, TypeScript, React, asyncio
-- **Community**: Contributors who believe in systematic transformation
-- **Inspiration**: The vision of a world without artificial barriers
+- Thanks to all contributors
+- Special thanks to the open-source community
+- Inspired by modern development practices
 
 ---
 
 <div align="center">
-
-**"We're not building software. We're creating transformation."**
-
-[![GitHub Stars](https://img.shields.io/github/stars/tiation/liberation-system?style=social)](https://github.com/tiation/liberation-system/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/tiation/liberation-system?style=social)](https://github.com/tiation/liberation-system/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/tiation/liberation-system?style=social)](https://github.com/tiation/liberation-system/issues)
-
+  <img src=".screenshots/footer-banner.png" alt="Footer Banner" width="100%">
+  
+  **⭐ Star this repository if you find it helpful! ⭐**
+  
+  <a href="https://github.com/TiaAstor/liberation-system">
+    <img src="https://img.shields.io/github/stars/TiaAstor/liberation-system?style=social&label=Star&maxAge=2592000" alt="GitHub Stars">
+  </a>
 </div>

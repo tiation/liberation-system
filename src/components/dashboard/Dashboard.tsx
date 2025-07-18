@@ -68,13 +68,13 @@ const Dashboard: React.FC = () => {
     <Layout title="Liberation System Dashboard">
       <div className="space-y-6">
         {/* Hero Section */}
-        <div className="liberation-card">
+        <div className="liberation-card-enterprise animate-enterprise-pulse cyber-grid">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold gradient-text mb-2">
+              <h1 className="text-4xl font-bold gradient-text-flare mb-2 text-shadow-neon">
                 🌟 Liberation System
               </h1>
-              <p className="text-white/70 text-lg">
+              <p className="text-white/70 text-lg animate-hologram">
                 One person, massive impact. Transform everything.
               </p>
               <div className="flex items-center space-x-4 mt-4">
