@@ -373,3 +373,34 @@ This repository is part of the Tiation ecosystem. Explore related projects:
 
 ---
 *Built with 💜 by the Tiation team*
+---
+
+## 📞 Support & Contact
+
+- 📧 **Enterprise Support**: [tiatheone@protonmail.com](mailto:tiatheone@protonmail.com)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/tiaastor/liberation-system/issues)
+- 📖 **Documentation**: [Wiki](https://github.com/tiaastor/liberation-system/wiki)
+- 🔗 **GitHub**: [Repository](https://github.com/tiaastor/liberation-system)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🔗 Related Projects
+
+- [Tiation Terminal Workflows](https://github.com/tiaastor/tiation-terminal-workflows)
+- [Tiation Docker Debian](https://github.com/tiaastor/tiation-docker-debian)
+- [Tiation AI Platform](https://github.com/tiaastor/tiation-ai-platform)
+- [Tiation CMS](https://github.com/tiaastor/tiation-cms)
+
+---
+
+<div align="center">
+  **⭐ Star this repository if you find it helpful! ⭐**
+  
+  <p><strong>Built with ❤️ and enterprise-grade standards by <a href="https://github.com/tiaastor">Tiation</a></strong></p>
+</div>
