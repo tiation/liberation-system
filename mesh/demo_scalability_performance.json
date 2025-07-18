@@ -3,51 +3,51 @@
     {
       "total_nodes": 3,
       "active_nodes": 3,
-      "average_cpu": 65.82875588422962,
-      "average_memory": 53.5921784682393,
-      "average_network": 79.61395623497927,
+      "average_cpu": 72.13957847970156,
+      "average_memory": 56.747589765975256,
+      "average_network": 85.92477883045119,
       "total_connections": 0,
-      "system_health": 0.48090928447263476,
+      "system_health": 0.43988893760206715,
       "prediction_accuracy": 0.5
     },
     {
       "total_nodes": 3,
       "active_nodes": 3,
-      "average_cpu": 66.82875588422962,
-      "average_memory": 54.5921784682393,
-      "average_network": 80.61395623497927,
+      "average_cpu": 73.13957847970156,
+      "average_memory": 57.747589765975256,
+      "average_network": 86.92477883045119,
       "total_connections": 0,
-      "system_health": 0.47290928447263475,
+      "system_health": 0.4318889376020672,
       "prediction_accuracy": 0.5
     },
     {
       "total_nodes": 3,
       "active_nodes": 3,
-      "average_cpu": 67.82875588422962,
-      "average_memory": 55.5921784682393,
-      "average_network": 81.61395623497927,
+      "average_cpu": 74.13957847970156,
+      "average_memory": 58.747589765975256,
+      "average_network": 87.92477883045119,
       "total_connections": 0,
-      "system_health": 0.46490928447263474,
+      "system_health": 0.4238889376020672,
       "prediction_accuracy": 0.5
     },
     {
       "total_nodes": 3,
       "active_nodes": 3,
-      "average_cpu": 67.82875588422962,
-      "average_memory": 55.5921784682393,
-      "average_network": 81.61395623497927,
+      "average_cpu": 74.13957847970156,
+      "average_memory": 58.747589765975256,
+      "average_network": 87.92477883045119,
       "total_connections": 0,
-      "system_health": 0.46490928447263474,
+      "system_health": 0.4238889376020672,
       "prediction_accuracy": 0.5
     },
     {
       "total_nodes": 3,
       "active_nodes": 3,
-      "average_cpu": 68.82875588422962,
-      "average_memory": 56.5921784682393,
-      "average_network": 82.61395623497927,
+      "average_cpu": 75.13957847970156,
+      "average_memory": 59.747589765975256,
+      "average_network": 88.92477883045119,
       "total_connections": 0,
-      "system_health": 0.4569092844726347,
+      "system_health": 0.4158889376020672,
       "prediction_accuracy": 0.95
     }
   ],
@@ -58,17 +58,17 @@
       "target_capacity": 100.0,
       "current_capacity": 100.0,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (63.0%) - maintaining",
-      "timestamp": "2025-07-18T00:50:29.864977"
+      "rationale": "Optimal load predicted (62.8%) - maintaining",
+      "timestamp": "2025-07-18T09:34:13.529798"
     },
     {
       "node_id": "demo_node_2",
       "action": "maintain",
-      "target_capacity": 101.37964409839736,
-      "current_capacity": 101.37964409839736,
+      "target_capacity": 100.0,
+      "current_capacity": 100.0,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (63.3%) - maintaining",
-      "timestamp": "2025-07-18T00:50:29.865392"
+      "rationale": "Optimal load predicted (64.5%) - maintaining",
+      "timestamp": "2025-07-18T09:34:13.530352"
     },
     {
       "node_id": "demo_node_3",
@@ -76,68 +76,68 @@
       "target_capacity": 100.0,
       "current_capacity": 100.0,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (62.5%) - maintaining",
-      "timestamp": "2025-07-18T00:50:29.866196"
+      "rationale": "Optimal load predicted (64.2%) - maintaining",
+      "timestamp": "2025-07-18T09:34:13.530869"
     },
     {
       "node_id": "demo_node_1",
       "action": "maintain",
-      "target_capacity": 108.82878961066922,
-      "current_capacity": 108.82878961066922,
+      "target_capacity": 113.47057486624631,
+      "current_capacity": 113.47057486624631,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (63.3%) - maintaining",
-      "timestamp": "2025-07-18T00:50:35.871198"
+      "rationale": "Optimal load predicted (63.0%) - maintaining",
+      "timestamp": "2025-07-18T09:34:19.538175"
     },
     {
       "node_id": "demo_node_2",
       "action": "maintain",
-      "target_capacity": 113.16550897771437,
-      "current_capacity": 113.16550897771437,
+      "target_capacity": 100.96446506634732,
+      "current_capacity": 100.96446506634732,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (63.2%) - maintaining",
-      "timestamp": "2025-07-18T00:50:35.873299"
+      "rationale": "Optimal load predicted (65.5%) - maintaining",
+      "timestamp": "2025-07-18T09:34:19.540735"
     },
     {
       "node_id": "demo_node_3",
       "action": "maintain",
-      "target_capacity": 113.61358831831807,
-      "current_capacity": 113.61358831831807,
+      "target_capacity": 110.72050024141193,
+      "current_capacity": 110.72050024141193,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (63.4%) - maintaining",
-      "timestamp": "2025-07-18T00:50:35.875195"
+      "rationale": "Optimal load predicted (65.2%) - maintaining",
+      "timestamp": "2025-07-18T09:34:19.543358"
     },
     {
       "node_id": "demo_node_1",
       "action": "maintain",
-      "target_capacity": 108.82185133117935,
-      "current_capacity": 108.82185133117935,
+      "target_capacity": 113.11731507010666,
+      "current_capacity": 113.11731507010666,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (71.8%) - maintaining",
-      "timestamp": "2025-07-18T00:50:41.882624"
+      "rationale": "Optimal load predicted (69.6%) - maintaining",
+      "timestamp": "2025-07-18T09:34:25.552039"
     },
     {
       "node_id": "demo_node_2",
       "action": "maintain",
-      "target_capacity": 112.6508033666654,
-      "current_capacity": 112.6508033666654,
+      "target_capacity": 101.92763054174765,
+      "current_capacity": 101.92763054174765,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (67.7%) - maintaining",
-      "timestamp": "2025-07-18T00:50:41.889107"
+      "rationale": "Optimal load predicted (79.2%) - maintaining",
+      "timestamp": "2025-07-18T09:34:25.557127"
     },
     {
       "node_id": "demo_node_3",
       "action": "maintain",
-      "target_capacity": 114.75988860005089,
-      "current_capacity": 114.75988860005089,
+      "target_capacity": 111.1914091652094,
+      "current_capacity": 111.1914091652094,
       "confidence": 0.8,
-      "rationale": "Optimal load predicted (75.5%) - maintaining",
-      "timestamp": "2025-07-18T00:50:41.894695"
+      "rationale": "Optimal load predicted (77.7%) - maintaining",
+      "timestamp": "2025-07-18T09:34:25.561639"
     }
   ],
   "prediction_accuracy_history": [
     0.95
   ],
   "scaling_effectiveness_history": [
-    0.4702403393520798
+    0.4216955501561419
   ]
 }

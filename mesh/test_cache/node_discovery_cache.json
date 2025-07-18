@@ -1,0 +1,356 @@
+{
+  "cache": {
+    "test_node_1": {
+      "node_id": "test_node_1",
+      "host": "127.0.0.1",
+      "port": 8001,
+      "node_type": "standard",
+      "location": {
+        "latitude": 40.7128,
+        "longitude": -74.006,
+        "country": "USA",
+        "city": "New York",
+        "region": "NY"
+      },
+      "metrics": {
+        "latency": 51.0,
+        "bandwidth": 100.0,
+        "uptime": 99.0
+      },
+      "capabilities": {},
+      "discovered_at": 1752802548.5633721,
+      "last_updated": 1752802548.56345,
+      "last_seen": 1752802548.56344,
+      "last_successful_connection": 1752802548.56344,
+      "probe_count": 6,
+      "connection_attempts": 6,
+      "successful_connections": 5,
+      "failed_connections": 1,
+      "average_latency": 48.7008,
+      "best_latency": 45.0,
+      "worst_latency": 55.0,
+      "reliability_score": 1.0,
+      "discovery_method": "test",
+      "discovery_source": "unknown",
+      "tags": [
+        "active",
+        "test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "active"
+    },
+    "test_node_2": {
+      "node_id": "test_node_2",
+      "host": "127.0.0.1",
+      "port": 8002,
+      "node_type": "standard",
+      "location": {
+        "latitude": 40.7128,
+        "longitude": -74.006,
+        "country": "USA",
+        "city": "New York",
+        "region": "NY"
+      },
+      "metrics": {
+        "latency": 52.0,
+        "bandwidth": 100.0,
+        "uptime": 99.0
+      },
+      "capabilities": {},
+      "discovered_at": 1752802548.563385,
+      "last_updated": 1752802548.563385,
+      "last_seen": 1752802548.563385,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "test",
+      "discovery_source": "unknown",
+      "tags": [
+        "active",
+        "test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "test_node_3": {
+      "node_id": "test_node_3",
+      "host": "192.168.1.10",
+      "port": 8003,
+      "node_type": "standard",
+      "location": {
+        "latitude": 40.7128,
+        "longitude": -74.006,
+        "country": "USA",
+        "city": "New York",
+        "region": "NY"
+      },
+      "metrics": {
+        "latency": 53.0,
+        "bandwidth": 100.0,
+        "uptime": 99.0
+      },
+      "capabilities": {},
+      "discovered_at": 1752802548.563391,
+      "last_updated": 1752802548.563391,
+      "last_seen": 1752802548.563391,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "test",
+      "discovery_source": "unknown",
+      "tags": [
+        "active",
+        "test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "geo_node_4": {
+      "node_id": "geo_node_4",
+      "host": "127.0.0.1",
+      "port": 8004,
+      "node_type": "standard",
+      "location": {
+        "country": "USA",
+        "region": "NY",
+        "city": "New York"
+      },
+      "metrics": {},
+      "capabilities": {},
+      "discovered_at": 1752802548.563458,
+      "last_updated": 1752802548.563458,
+      "last_seen": 1752802548.563458,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "unknown",
+      "discovery_source": "unknown",
+      "tags": [
+        "region_NY",
+        "geo_test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "geo_node_5": {
+      "node_id": "geo_node_5",
+      "host": "127.0.0.1",
+      "port": 8005,
+      "node_type": "standard",
+      "location": {
+        "country": "USA",
+        "region": "CA",
+        "city": "San Francisco"
+      },
+      "metrics": {},
+      "capabilities": {},
+      "discovered_at": 1752802548.5634618,
+      "last_updated": 1752802548.5634618,
+      "last_seen": 1752802548.5634618,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "unknown",
+      "discovery_source": "unknown",
+      "tags": [
+        "geo_test",
+        "region_CA"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "geo_node_6": {
+      "node_id": "geo_node_6",
+      "host": "127.0.0.1",
+      "port": 8006,
+      "node_type": "standard",
+      "location": {
+        "country": "UK",
+        "region": "England",
+        "city": "London"
+      },
+      "metrics": {},
+      "capabilities": {},
+      "discovered_at": 1752802548.5634649,
+      "last_updated": 1752802548.5634649,
+      "last_seen": 1752802548.5634649,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "unknown",
+      "discovery_source": "unknown",
+      "tags": [
+        "geo_test",
+        "region_England"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "mock_gateway_us": {
+      "node_id": "mock_gateway_us",
+      "host": "127.0.0.1",
+      "port": 8100,
+      "node_type": "standard",
+      "location": {
+        "latitude": 40.0,
+        "longitude": -74.0,
+        "country": "MockCountry",
+        "city": "MockCity",
+        "region": "MockRegion"
+      },
+      "metrics": {
+        "latency": 50.0,
+        "bandwidth": 100.0,
+        "uptime": 99.0
+      },
+      "capabilities": {},
+      "discovered_at": 1752802551.569401,
+      "last_updated": 1752802551.569401,
+      "last_seen": 1752802551.569401,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "integrated_test",
+      "discovery_source": "unknown",
+      "tags": [
+        "discovered",
+        "integration_test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "mock_storage_eu": {
+      "node_id": "mock_storage_eu",
+      "host": "127.0.0.1",
+      "port": 8101,
+      "node_type": "standard",
+      "location": {
+        "latitude": 41.0,
+        "longitude": -74.0,
+        "country": "MockCountry",
+        "city": "MockCity",
+        "region": "MockRegion"
+      },
+      "metrics": {
+        "latency": 60.0,
+        "bandwidth": 100.0,
+        "uptime": 99.0
+      },
+      "capabilities": {},
+      "discovered_at": 1752802551.5694149,
+      "last_updated": 1752802551.5694149,
+      "last_seen": 1752802551.5694149,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "integrated_test",
+      "discovery_source": "unknown",
+      "tags": [
+        "discovered",
+        "integration_test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    },
+    "mock_compute_as": {
+      "node_id": "mock_compute_as",
+      "host": "127.0.0.1",
+      "port": 8102,
+      "node_type": "standard",
+      "location": {
+        "latitude": 42.0,
+        "longitude": -74.0,
+        "country": "MockCountry",
+        "city": "MockCity",
+        "region": "MockRegion"
+      },
+      "metrics": {
+        "latency": 70.0,
+        "bandwidth": 100.0,
+        "uptime": 99.0
+      },
+      "capabilities": {},
+      "discovered_at": 1752802551.569419,
+      "last_updated": 1752802551.569419,
+      "last_seen": 1752802551.569419,
+      "last_successful_connection": null,
+      "probe_count": 0,
+      "connection_attempts": 0,
+      "successful_connections": 0,
+      "failed_connections": 0,
+      "average_latency": 0.0,
+      "best_latency": Infinity,
+      "worst_latency": 0.0,
+      "reliability_score": 1.0,
+      "discovery_method": "integrated_test",
+      "discovery_source": "unknown",
+      "tags": [
+        "discovered",
+        "integration_test"
+      ],
+      "ttl": 300,
+      "priority": 1,
+      "status": "unknown"
+    }
+  },
+  "stats": {
+    "cache_adds": 10,
+    "cache_hits": 25,
+    "cache_misses": 1,
+    "metrics_updates": 6,
+    "cache_removes": 1,
+    "cache_expired": 1
+  },
+  "last_saved": 1752802551.570514,
+  "version": "1.0"
+}
