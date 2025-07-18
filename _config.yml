@@ -1,11 +1,31 @@
-title: liberation-system
-description: Enterprise-grade solution with dark neon theme
-url: "https://tiaastor.github.io"
-baseurl: "/liberation-system"
+# GitHub Pages Configuration
+title: "liberation-system"
+description: "Enterprise-grade solution in the Tiation ecosystem"
+url: "https://tiation.github.io/liberation-system"
+baseurl: ""
+
+# Theme
 theme: minima
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-author: Tiation
-github_username: tiaastor
+
+# Dark neon theme
+custom_css: |
+  :root {
+    --primary-color: #00ffff;
+    --secondary-color: #ff00ff;
+    --background-color: #0a0a0a;
+    --text-color: #ffffff;
+    --accent-color: #00ff88;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    color: var(--text-color);
+  }
